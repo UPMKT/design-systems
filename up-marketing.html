@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="UP Marketing & Comunicação — Design System, Brandbook, Showcase & Motion Guidelines">
+  <meta name="theme-color" content="#476FEF">
+  <title>UP Marketing — Design System | Brandbook | Showcase | Motion</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ════════════════════════════════════
+       @FONT-FACE — Accurate ICG Fill / Quicksans
+       Fonte oficial do logo e headings UP Marketing
+    ════════════════════════════════════ */
+    @font-face {
+      font-family: 'Accurate ICG Fill';
+      src: url('up-marketing-ds-assets/quicksans-accurate-icg-fill.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* ════════════════════════════════════
+       DESIGN TOKENS — UP MARKETING OFICIAL
+       Paleta: #476FEF | #303DF0 | #150C2B | #F2F2F2
+       Tipografia: Accurate ICG Fill (display) + Montserrat (body)
+    ════════════════════════════════════ */
+    :root {
+      /* Core Brand */
+      --up-blue: #476FEF;
+      --up-blue-deep: #303DF0;
+      --up-dark: #150C2B;
+      --up-light: #F2F2F2;
+
+      /* Backgrounds */
+      --bg: #0D0820;
+      --bg2: #120A28;
+      --bg3: #1A1035;
+      --surface: rgba(255, 255, 255, 0.03);
+      --surface-hover: rgba(255, 255, 255, 0.06);
+
+      /* Text */
+      --text: #FFFFFF;
+      --sub: #B0B8D0;
+      --dim: #7B82A0;
+      --muted: #4E5475;
+
+      /* Brand Colors */
+      --blue: var(--up-blue);
+      --blue2: var(--up-blue-deep);
+      --blue-soft: rgba(71, 111, 239, 0.12);
+      --blue-glow: rgba(71, 111, 239, 0.25);
+
+      /* Semantic */
+      --green: #46d369;
+      --orange: #ff8c42;
+      --red: #ff4757;
+      --purple: #a855f7;
+      --cyan: #22d3ee;
+
+      /* Lines */
+      --line: rgba(255, 255, 255, 0.06);
+      --line-strong: rgba(255, 255, 255, 0.12);
+
+      /* Typography */
+      --font-display: 'Accurate ICG Fill', 'Quicksand', sans-serif;
+      --font-body: 'Montserrat', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      /* Easing */
+      --ease-out: cubic-bezier(0.17, 0.67, 0.35, 1.05);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+      /* Radius */
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 100px;
+
+      /* Shadows */
+      --shadow-sm: 0 2px 8px rgba(21, 12, 43, 0.3);
+      --shadow-md: 0 4px 16px rgba(21, 12, 43, 0.4);
+      --shadow-lg: 0 8px 32px rgba(21, 12, 43, 0.5);
+      --shadow-glow: 0 0 40px rgba(71, 111, 239, 0.18);
+
+      --container-side: 64px;
+      scroll-behavior: smooth;
+    }
+
+    /* ════════════════════════════════════
+       RESET & BASE
+    ════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      cursor: none;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background: rgba(71, 111, 239, 0.4);
+      color: #fff;
+    }
+
+    /* ════════════════════════════════════
+       CUSTOM CURSOR
+    ════════════════════════════════════ */
+    #cursor-dot {
+      position: fixed; width: 8px; height: 8px;
+      background: var(--blue); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: screen; transition: width 0.15s, height 0.15s;
+    }
+    #cursor-ring {
+      position: fixed; width: 36px; height: 36px;
+      border: 1.5px solid rgba(71, 111, 239, 0.4);
+      border-radius: 50%; pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, border-color 0.2s;
+    }
+    body.cursor-hover #cursor-ring { width: 52px; height: 52px; border-color: rgba(71, 111, 239, 0.7); }
+    body.cursor-hover #cursor-dot { width: 4px; height: 4px; }
+
+    /* ════════════════════════════════════
+       CANVAS BACKGROUND
+    ════════════════════════════════════ */
+    #canvas-bg {
+      position: fixed; inset: 0; z-index: 0;
+      opacity: 0.2; pointer-events: none;
+    }
+
+    /* ════════════════════════════════════
+       NAVIGATION
+    ════════════════════════════════════ */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      padding: 20px var(--container-side);
+      display: flex; align-items: center; justify-content: space-between;
+      transition: all 0.3s var(--ease-smooth);
+    }
+    .nav.scrolled {
+      background: rgba(13, 8, 32, 0.92);
+      backdrop-filter: blur(24px) saturate(1.2);
+      padding: 14px var(--container-side);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav__logo {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none; color: var(--text);
+    }
+    .nav__logo img { height: 36px; }
+    .nav__logo-text {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 14px; letter-spacing: 0.5px;
+    }
+    .nav__links { display: flex; gap: 4px; list-style: none; }
+    .nav__links a {
+      color: var(--sub); text-decoration: none;
+      font-size: 13px; font-weight: 500;
+      padding: 6px 14px; border-radius: var(--radius-full);
+      transition: all 0.2s;
+    }
+    .nav__links a:hover, .nav__links a.active {
+      color: var(--text); background: var(--surface-hover);
+    }
+
+    /* ════════════════════════════════════
+       HERO
+    ════════════════════════════════════ */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center;
+      z-index: 2; overflow: hidden;
+    }
+    .hero__grid-bg {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(71, 111, 239, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(71, 111, 239, 0.035) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero__glow {
+      position: absolute; right: 5%; top: 15%;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(71, 111, 239, 0.12) 0%, rgba(48, 61, 240, 0.05) 40%, transparent 65%);
+      animation: pulse-glow 6s ease-in-out infinite;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.08); }
+    }
+    .hero__content {
+      position: relative; z-index: 2;
+      padding: 0 var(--container-side);
+      max-width: 820px;
+    }
+    .hero__badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--blue-soft);
+      border: 1px solid rgba(71, 111, 239, 0.25);
+      color: var(--blue); font-size: 11px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 6px 14px; border-radius: var(--radius-full);
+      margin-bottom: 28px;
+      animation: fadeUp 0.7s ease both;
+    }
+    .hero__badge::before {
+      content: ''; width: 6px; height: 6px;
+      background: var(--blue); border-radius: 50%;
+      animation: blink 2s infinite;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 6vw, 82px);
+      font-weight: 700; letter-spacing: -1px;
+      line-height: 1.05; margin-bottom: 24px;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+    .hero__title .accent { color: var(--blue); }
+    .hero__title .outline {
+      -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.2);
+      color: transparent;
+    }
+    .hero__desc {
+      color: var(--sub); font-size: 17px; font-weight: 400;
+      line-height: 1.8; max-width: 520px; margin-bottom: 36px;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+    .hero__nav-pills {
+      display: flex; gap: 10px; flex-wrap: wrap;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+    .hero__pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 22px; border-radius: var(--radius-full);
+      font-family: var(--font-display); font-weight: 700; font-size: 13px;
+      text-decoration: none; transition: all 0.25s var(--ease-out);
+      border: 1px solid var(--line); color: var(--sub); background: var(--surface);
+    }
+    .hero__pill:hover {
+      color: var(--text); border-color: rgba(71, 111, 239, 0.3);
+      background: rgba(71, 111, 239, 0.08); transform: translateY(-2px);
+    }
+    .hero__pill--active {
+      background: var(--blue); color: #fff; border-color: var(--blue);
+    }
+    .hero__pill--active:hover {
+      background: var(--blue2); border-color: var(--blue2); color: #fff;
+    }
+
+    /* Hero Logo Float */
+    .hero__logo-float {
+      position: absolute; right: 8%; top: 50%;
+      transform: translateY(-50%); z-index: 1;
+      animation: float 6s ease-in-out infinite;
+    }
+    .hero__logo-float img {
+      width: 280px; opacity: 0.12;
+      filter: drop-shadow(0 0 60px rgba(71, 111, 239, 0.3));
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(-50%); }
+      50% { transform: translateY(calc(-50% - 20px)); }
+    }
+
+    /* ════════════════════════════════════
+       SECTION SYSTEM
+    ════════════════════════════════════ */
+    .section {
+      position: relative; z-index: 2;
+      padding: 120px var(--container-side);
+      scroll-margin-top: 80px;
+    }
+    .section--alt {
+      background: var(--bg2);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .section__label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 12px;
+    }
+    .section__label::before {
+      content: ''; width: 20px; height: 2px;
+      background: var(--blue); border-radius: 1px;
+    }
+    .section__title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 4.5vw, 56px);
+      font-weight: 700; letter-spacing: -0.5px;
+      line-height: 1.1; margin-bottom: 16px;
+    }
+    .section__title .accent { color: var(--blue); }
+    .section__desc {
+      color: var(--sub); font-size: 16px;
+      max-width: 580px; line-height: 1.7;
+    }
+    .section__header { margin-bottom: 72px; }
+    .container { max-width: 1300px; margin: 0 auto; }
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--line-strong), transparent);
+      margin: 0 var(--container-side);
+      position: relative; z-index: 2;
+    }
+
+    /* ════════════════════════════════════
+       01. BRANDBOOK
+    ════════════════════════════════════ */
+    .brand__grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+    }
+    .brand__card {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: var(--radius-xl); padding: 44px;
+      transition: all 0.3s var(--ease-out);
+      position: relative; overflow: hidden;
+    }
+    .brand__card:hover {
+      border-color: rgba(71, 111, 239, 0.2);
+      transform: translateY(-3px);
+    }
+    .brand__card--full { grid-column: 1 / -1; }
+    .brand__card-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 20px;
+    }
+    .brand__card-title {
+      font-family: var(--font-display);
+      font-size: 26px; font-weight: 700; margin-bottom: 14px;
+    }
+    .brand__card-text {
+      color: var(--sub); line-height: 1.7; font-size: 14px;
+    }
+
+    /* Logo Display */
+    .logo-display {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 20px; padding: 40px 0 16px;
+    }
+    .logo-variant {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 14px;
+    }
+    .logo-box {
+      width: 100%; aspect-ratio: 16/10;
+      border-radius: var(--radius-lg);
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.3s var(--ease-spring);
+      padding: 20px;
+    }
+    .logo-box:hover { transform: scale(1.04); }
+    .logo-box img { max-height: 60px; max-width: 80%; object-fit: contain; }
+    .logo-box--dark { background: var(--up-dark); }
+    .logo-box--light { background: var(--up-light); }
+    .logo-box--blue { background: var(--up-blue); }
+    .logo-box--white { background: #FFFFFF; }
+    .logo-variant__label {
+      font-size: 11px; color: var(--dim); font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
+
+    /* Concept */
+    .concept__grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;
+      text-align: center; margin-top: 24px;
+    }
+    .concept__item {
+      padding: 28px; border-radius: var(--radius-lg);
+      border: 1px solid var(--line); background: var(--surface);
+    }
+    .concept__icon { font-size: 36px; margin-bottom: 12px; display: block; }
+    .concept__name {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 15px; margin-bottom: 6px;
+    }
+    .concept__desc { font-size: 12px; color: var(--dim); line-height: 1.5; }
+
+    /* Values */
+    .values__grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 20px; margin-top: 40px;
+    }
+    .value-item {
+      text-align: center; padding: 28px 16px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line); background: var(--surface);
+      transition: all 0.3s var(--ease-out);
+    }
+    .value-item:hover {
+      border-color: rgba(71, 111, 239, 0.3);
+      transform: translateY(-4px);
+      background: rgba(71, 111, 239, 0.05);
+    }
+    .value-item__icon { font-size: 28px; margin-bottom: 14px; display: block; }
+    .value-item__name {
+      font-family: var(--font-display); font-size: 16px;
+      font-weight: 700; margin-bottom: 6px;
+    }
+    .value-item__desc { color: var(--dim); font-size: 12px; line-height: 1.4; }
+
+    /* ════════════════════════════════════
+       02. COLORS
+    ════════════════════════════════════ */
+    .colors__row { margin-bottom: 48px; }
+    .colors__row-title {
+      font-family: var(--font-display); font-size: 18px;
+      font-weight: 700; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .colors__row-title::before {
+      content: ''; width: 4px; height: 18px;
+      background: var(--blue); border-radius: 2px;
+    }
+    .colors__grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .color-swatch {
+      border-radius: var(--radius-md); overflow: hidden;
+      border: 1px solid var(--line);
+      transition: all 0.25s var(--ease-out); cursor: pointer;
+    }
+    .color-swatch:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: var(--shadow-lg);
+    }
+    .color-swatch__preview {
+      height: 110px; position: relative;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 4px;
+    }
+    .color-swatch__copy {
+      opacity: 0; font-family: var(--font-mono);
+      font-size: 11px; font-weight: 600;
+      background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(8px);
+      padding: 4px 10px; border-radius: var(--radius-sm);
+      color: #fff; transition: opacity 0.2s;
+    }
+    .color-swatch:hover .color-swatch__copy { opacity: 1; }
+    .color-swatch__info { padding: 14px 16px; background: var(--bg2); }
+    .color-swatch__name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .color-swatch__value { font-family: var(--font-mono); font-size: 11px; color: var(--dim); }
+    .color-swatch__rgb { font-family: var(--font-mono); font-size: 10px; color: var(--muted); }
+
+    /* ════════════════════════════════════
+       03. TYPOGRAPHY
+    ════════════════════════════════════ */
+    .type__showcase { display: flex; flex-direction: column; gap: 40px; }
+    .type__item {
+      padding: 40px; border: 1px solid var(--line);
+      border-radius: var(--radius-xl); background: var(--surface);
+    }
+    .type__item-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 24px; padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+    .type__item-name {
+      font-family: var(--font-display); font-size: 14px;
+      font-weight: 700; color: var(--blue);
+      text-transform: uppercase; letter-spacing: 0.1em;
+    }
+    .type__item-spec {
+      font-family: var(--font-mono); font-size: 12px; color: var(--dim);
+    }
+    .type__scale { display: grid; gap: 14px; margin-top: 24px; }
+    .type__scale-item {
+      display: flex; align-items: baseline; gap: 24px;
+      padding: 10px 0; border-bottom: 1px solid var(--line);
+    }
+    .type__scale-label {
+      font-family: var(--font-mono); font-size: 11px;
+      color: var(--dim); min-width: 50px;
+    }
+
+    /* ════════════════════════════════════
+       04. COMPONENTS
+    ════════════════════════════════════ */
+    .components__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+    .comp-card {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: var(--radius-xl); overflow: hidden;
+    }
+    .comp-card--full { grid-column: 1 / -1; }
+    .comp-card__header {
+      padding: 18px 24px; border-bottom: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .comp-card__title { font-family: var(--font-display); font-size: 15px; font-weight: 700; }
+    .comp-card__tag {
+      font-family: var(--font-mono); font-size: 10px; color: var(--dim);
+      background: var(--surface); padding: 3px 8px;
+      border-radius: var(--radius-sm); border: 1px solid var(--line);
+    }
+    .comp-card__body {
+      padding: 28px; display: flex; flex-wrap: wrap;
+      gap: 14px; align-items: center;
+    }
+    .comp-card__body--col { flex-direction: column; align-items: stretch; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-body); font-weight: 700; font-size: 13px;
+      padding: 12px 22px; border-radius: 10px;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: all 0.25s var(--ease-out); white-space: nowrap;
+    }
+    .btn--primary { background: var(--blue); color: #fff; }
+    .btn--primary:hover {
+      background: var(--blue2); transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(71, 111, 239, 0.35);
+    }
+    .btn--ghost {
+      color: var(--sub); border: 1px solid var(--line-strong);
+      background: var(--surface);
+    }
+    .btn--ghost:hover {
+      color: var(--text); background: var(--surface-hover);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    .btn--accent { background: var(--green); color: #000; }
+    .btn--danger { background: var(--red); color: #fff; }
+    .btn--sm { font-size: 11px; padding: 8px 14px; border-radius: 8px; }
+    .btn--lg { font-size: 15px; padding: 16px 30px; border-radius: 12px; }
+
+    /* Badges */
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 12px; border-radius: var(--radius-full);
+      font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
+    }
+    .badge--blue { background: var(--blue-soft); color: var(--blue); border: 1px solid rgba(71, 111, 239, 0.25); }
+    .badge--green { background: rgba(70, 211, 105, 0.1); color: var(--green); border: 1px solid rgba(70, 211, 105, 0.25); }
+    .badge--orange { background: rgba(255, 140, 66, 0.1); color: var(--orange); border: 1px solid rgba(255, 140, 66, 0.25); }
+    .badge--red { background: rgba(255, 71, 87, 0.1); color: var(--red); border: 1px solid rgba(255, 71, 87, 0.25); }
+    .badge--purple { background: rgba(168, 85, 247, 0.1); color: var(--purple); border: 1px solid rgba(168, 85, 247, 0.25); }
+
+    /* Inputs */
+    .input {
+      width: 100%; padding: 12px 16px;
+      background: var(--bg); border: 1px solid var(--line-strong);
+      border-radius: var(--radius-md); color: var(--text);
+      font-family: var(--font-body); font-size: 14px;
+      outline: none; transition: all 0.2s;
+    }
+    .input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(71, 111, 239, 0.15); }
+    .input::placeholder { color: var(--muted); }
+    .input--error { border-color: var(--red); }
+    .input-group { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+    .input-label { font-size: 13px; font-weight: 600; color: var(--sub); }
+    .input-hint { font-size: 12px; color: var(--dim); }
+    .input-error { font-size: 12px; color: var(--red); }
+
+    /* ════════════════════════════════════
+       05. SPACING
+    ════════════════════════════════════ */
+    .spacing__visual { display: flex; flex-direction: column; gap: 10px; margin-top: 28px; }
+    .spacing__item { display: flex; align-items: center; gap: 20px; }
+    .spacing__bar {
+      height: 28px;
+      background: linear-gradient(90deg, var(--blue-soft), rgba(71, 111, 239, 0.03));
+      border: 1px solid rgba(71, 111, 239, 0.18);
+      border-radius: var(--radius-sm); transition: all 0.3s;
+    }
+    .spacing__item:hover .spacing__bar {
+      background: linear-gradient(90deg, rgba(71, 111, 239, 0.25), rgba(71, 111, 239, 0.05));
+    }
+    .spacing__meta { display: flex; align-items: center; gap: 12px; min-width: 120px; }
+    .spacing__token { font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--blue); min-width: 36px; }
+    .spacing__px { font-family: var(--font-mono); font-size: 11px; color: var(--dim); }
+
+    /* ════════════════════════════════════
+       06. MOTION
+    ════════════════════════════════════ */
+    .motion__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .motion-card {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: var(--radius-xl); padding: 28px;
+      text-align: center; cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .motion-card:hover { border-color: rgba(71, 111, 239, 0.3); }
+    .motion-card__demo {
+      width: 56px; height: 56px; background: var(--blue);
+      border-radius: var(--radius-md); margin: 0 auto 20px;
+    }
+    .motion-card:hover .demo--fadeup { animation: demo-fadeUp 0.7s var(--ease-out) both; }
+    .motion-card:hover .demo--scale { animation: demo-scale 0.5s var(--ease-spring) both; }
+    .motion-card:hover .demo--slide { animation: demo-slide 0.6s var(--ease-out) both; }
+    .motion-card:hover .demo--rotate { animation: demo-rotate 0.8s var(--ease-out) both; }
+    .motion-card:hover .demo--glow { animation: demo-glow 1s ease both; }
+    .motion-card:hover .demo--bounce { animation: demo-bounce 0.6s var(--ease-spring) both; }
+
+    @keyframes demo-fadeUp { 0% { opacity: 0.3; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+    @keyframes demo-scale { 0% { transform: scale(0.5); } 100% { transform: scale(1); } }
+    @keyframes demo-slide { 0% { transform: translateX(-30px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
+    @keyframes demo-rotate { 0% { transform: rotate(-180deg) scale(0.5); opacity: 0; } 100% { transform: rotate(0deg) scale(1); opacity: 1; } }
+    @keyframes demo-glow { 0% { box-shadow: 0 0 0 0 rgba(71, 111, 239, 0); } 50% { box-shadow: 0 0 40px 10px rgba(71, 111, 239, 0.4); } 100% { box-shadow: 0 0 0 0 rgba(71, 111, 239, 0); } }
+    @keyframes demo-bounce { 0% { transform: translateY(0); } 30% { transform: translateY(-25px); } 50% { transform: translateY(0); } 70% { transform: translateY(-10px); } 100% { transform: translateY(0); } }
+
+    .motion-card__name { font-family: var(--font-display); font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .motion-card__timing { font-family: var(--font-mono); font-size: 11px; color: var(--blue); margin-bottom: 6px; }
+    .motion-card__desc { font-size: 12px; color: var(--dim); line-height: 1.5; }
+
+    /* Easing curves */
+    .easing__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+    .easing-card {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: var(--radius-lg); padding: 24px;
+    }
+    .easing-card__curve { width: 100%; height: 90px; margin-bottom: 14px; }
+    .easing-card__name { font-family: var(--font-display); font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .easing-card__value { font-family: var(--font-mono); font-size: 10px; color: var(--dim); }
+
+    /* ════════════════════════════════════
+       07. SHOWCASE
+    ════════════════════════════════════ */
+    .showcase__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .showcase__item {
+      border-radius: var(--radius-xl); overflow: hidden;
+      position: relative; cursor: pointer;
+      border: 1px solid var(--line);
+      transition: all 0.4s var(--ease-out);
+    }
+    .showcase__item:hover {
+      transform: translateY(-8px);
+      border-color: rgba(71, 111, 239, 0.3);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), var(--shadow-glow);
+    }
+    .showcase__item--featured { grid-column: span 2; grid-row: span 2; }
+    .showcase__cover { width: 100%; aspect-ratio: 16 / 10; position: relative; overflow: hidden; }
+    .showcase__item--featured .showcase__cover { aspect-ratio: auto; height: 100%; min-height: 380px; }
+    .showcase__cover-bg { position: absolute; inset: 0; transition: transform 0.6s var(--ease-smooth); }
+    .showcase__item:hover .showcase__cover-bg { transform: scale(1.05); }
+    .showcase__cover-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(13, 8, 32, 0.95) 0%, rgba(13, 8, 32, 0.3) 50%, transparent 100%);
+      z-index: 1;
+    }
+    .showcase__cover-icon {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -55%); font-size: 52px;
+      z-index: 2; transition: all 0.3s;
+    }
+    .showcase__item:hover .showcase__cover-icon { transform: translate(-50%, -55%) scale(1.15); }
+    .showcase__info { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px; z-index: 3; }
+    .showcase__sector {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 4px;
+    }
+    .showcase__name {
+      font-family: var(--font-display); font-size: 20px;
+      font-weight: 700; margin-bottom: 6px;
+    }
+    .showcase__item--featured .showcase__name { font-size: 30px; }
+    .showcase__desc-text {
+      color: var(--sub); font-size: 13px; line-height: 1.5;
+      opacity: 0; transform: translateY(8px);
+      transition: all 0.3s 0.1s;
+    }
+    .showcase__item:hover .showcase__desc-text { opacity: 1; transform: translateY(0); }
+    .showcase__tags { display: flex; gap: 5px; margin-top: 8px; opacity: 0; transition: opacity 0.3s 0.15s; }
+    .showcase__item:hover .showcase__tags { opacity: 1; }
+    .showcase__tag {
+      font-size: 10px; font-weight: 600; padding: 3px 8px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--line); color: var(--sub);
+    }
+
+    /* ════════════════════════════════════
+       08. VOICE & TONE
+    ════════════════════════════════════ */
+    .voice__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .voice-card {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: var(--radius-xl); padding: 32px;
+    }
+    .voice-card--do { border-color: rgba(70, 211, 105, 0.2); }
+    .voice-card--dont { border-color: rgba(255, 71, 87, 0.2); }
+    .voice-card__header { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+    .voice-card__icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 800;
+    }
+    .voice-card--do .voice-card__icon { background: rgba(70, 211, 105, 0.15); color: var(--green); }
+    .voice-card--dont .voice-card__icon { background: rgba(255, 71, 87, 0.15); color: var(--red); }
+    .voice-card__label { font-family: var(--font-display); font-size: 15px; font-weight: 700; }
+    .voice-card--do .voice-card__label { color: var(--green); }
+    .voice-card--dont .voice-card__label { color: var(--red); }
+    .voice-card__examples { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .voice-card__examples li {
+      padding: 10px 14px; border-radius: var(--radius-md);
+      font-size: 13px; line-height: 1.6; color: var(--sub);
+    }
+    .voice-card--do .voice-card__examples li { background: rgba(70, 211, 105, 0.04); border-left: 3px solid rgba(70, 211, 105, 0.3); }
+    .voice-card--dont .voice-card__examples li { background: rgba(255, 71, 87, 0.04); border-left: 3px solid rgba(255, 71, 87, 0.3); }
+
+    /* ════════════════════════════════════
+       CODE BLOCK
+    ════════════════════════════════════ */
+    .code-block { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; margin-top: 32px; }
+    .code-block__header { padding: 10px 18px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 7px; }
+    .code-block__dot { width: 10px; height: 10px; border-radius: 50%; }
+    .code-block__dot--red { background: #ff5f57; }
+    .code-block__dot--yellow { background: #febc2e; }
+    .code-block__dot--green { background: #28c840; }
+    .code-block__title { font-family: var(--font-mono); font-size: 11px; color: var(--dim); margin-left: 8px; }
+    .code-block__body { padding: 18px 22px; font-family: var(--font-mono); font-size: 12px; line-height: 1.8; color: var(--sub); overflow-x: auto; }
+    .code-block__body .key { color: var(--purple); }
+    .code-block__body .str { color: var(--green); }
+    .code-block__body .num { color: var(--orange); }
+    .code-block__body .comment { color: var(--muted); }
+
+    /* ════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════ */
+    .footer {
+      position: relative; z-index: 2;
+      padding: 44px var(--container-side) 28px;
+      border-top: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer__copy { color: var(--dim); font-size: 13px; }
+    .footer__social { display: flex; align-items: center; gap: 12px; }
+    .footer__social-link {
+      display: flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--surface); border: 1px solid var(--line);
+      color: var(--sub); transition: all 0.25s var(--ease);
+      text-decoration: none;
+    }
+    .footer__social-link:hover {
+      background: var(--blue); border-color: var(--blue);
+      color: #fff; transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(71, 111, 239, 0.35);
+    }
+    .footer__social-link svg { width: 18px; height: 18px; fill: currentColor; }
+    .footer__version {
+      font-family: var(--font-mono); font-size: 11px; color: var(--muted);
+      background: var(--surface); border: 1px solid var(--line);
+      padding: 4px 10px; border-radius: var(--radius-full);
+    }
+
+    /* ════════════════════════════════════
+       REVEAL, SCROLLBAR, TOAST
+    ════════════════════════════════════ */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(71, 111, 239, 0.3); border-radius: 3px; }
+    .toast {
+      position: fixed; bottom: 32px; left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--blue); color: #fff;
+      font-family: var(--font-display); font-weight: 700; font-size: 13px;
+      padding: 10px 24px; border-radius: var(--radius-full);
+      z-index: 9999; pointer-events: none;
+      transition: transform 0.35s var(--ease-spring), opacity 0.35s;
+      opacity: 0;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+    /* ════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .brand__grid, .components__grid, .voice__grid { grid-template-columns: 1fr; }
+      .motion__grid, .easing__grid { grid-template-columns: repeat(2, 1fr); }
+      .showcase__grid { grid-template-columns: 1fr 1fr; }
+      .showcase__item--featured { grid-column: span 2; grid-row: span 1; }
+      .logo-display { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      :root { --container-side: 24px; }
+      .nav__links { display: none; }
+      .hero__logo-float { display: none; }
+      .values__grid { grid-template-columns: repeat(2, 1fr); }
+      .colors__grid { grid-template-columns: repeat(2, 1fr); }
+      .motion__grid, .easing__grid { grid-template-columns: 1fr; }
+      .showcase__grid { grid-template-columns: 1fr; }
+      .showcase__item--featured { grid-column: span 1; }
+      .concept__grid { grid-template-columns: 1fr; }
+      .section { padding: 80px var(--container-side); }
+      .footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+  <canvas id="canvas-bg"></canvas>
+  <div class="toast" id="toast">Copiado!</div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a href="#" class="nav__logo">
+      <img src="up-marketing-ds-assets/logo-primary.png" alt="UP Marketing">
+      <span class="nav__logo-text">Design System</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="#brandbook">Brandbook</a></li>
+      <li><a href="#tokens">Tokens</a></li>
+      <li><a href="#typography">Tipografia</a></li>
+      <li><a href="#components">Componentes</a></li>
+      <li><a href="#motion">Motion</a></li>
+      <li><a href="#showcase">Showcase</a></li>
+      <li><a href="#voice">Voz & Tom</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="hero__grid-bg"></div>
+    <div class="hero__glow"></div>
+    <div class="hero__logo-float">
+      <img src="up-marketing-ds-assets/symbol-blue.png" alt="">
+    </div>
+    <div class="hero__content">
+      <div class="hero__badge">Design System v2.0 &middot; Marca Oficial</div>
+      <h1 class="hero__title">
+        Design<br>
+        <span class="accent">System</span><br>
+        UP Marketing
+      </h1>
+      <p class="hero__desc">
+        Identidade visual oficial, componentes, motion guidelines e showcase. A linguagem visual completa da UP Marketing & Comunicação.
+      </p>
+      <div class="hero__nav-pills">
+        <a href="#brandbook" class="hero__pill hero__pill--active">01 Brandbook</a>
+        <a href="#tokens" class="hero__pill">02 Tokens</a>
+        <a href="#typography" class="hero__pill">03 Tipografia</a>
+        <a href="#components" class="hero__pill">04 Componentes</a>
+        <a href="#motion" class="hero__pill">05 Motion</a>
+        <a href="#showcase" class="hero__pill">06 Showcase</a>
+        <a href="#voice" class="hero__pill">07 Voz & Tom</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ 01. BRANDBOOK ═══ -->
+  <section id="brandbook" class="section">
+    <div class="container">
+      <div class="section__header reveal">
+        <div class="section__label">01 &mdash; Brandbook</div>
+        <h2 class="section__title">Escolha a<br><span class="accent">diferença.</span></h2>
+        <p class="section__desc">
+          UP Marketing & Comunicação. O símbolo é uma seta para cima — representando crescimento, progresso e evolução constante. UP = pra cima, sempre.
+        </p>
+      </div>
+
+      <div class="brand__grid">
+        <!-- Logo Variations -->
+        <div class="brand__card brand__card--full reveal">
+          <div class="brand__card-label">Logo UP</div>
+          <div class="brand__card-title">Variações Oficiais</div>
+          <div class="brand__card-text">O logo combina "UP" com o símbolo da seta ascendente. Sempre respeitar as proporções e espaçamento mínimo.</div>
+          <div class="logo-display">
+            <div class="logo-variant">
+              <div class="logo-box logo-box--dark"><img src="up-marketing-ds-assets/logo-white.png" alt="Logo branco"></div>
+              <span class="logo-variant__label">Sobre Dark</span>
+            </div>
+            <div class="logo-variant">
+              <div class="logo-box logo-box--white"><img src="up-marketing-ds-assets/logo-primary.png" alt="Logo primário"></div>
+              <span class="logo-variant__label">Primário</span>
+            </div>
+            <div class="logo-variant">
+              <div class="logo-box logo-box--blue"><img src="up-marketing-ds-assets/logo-white.png" alt="Logo sobre azul"></div>
+              <span class="logo-variant__label">Sobre Azul</span>
+            </div>
+            <div class="logo-variant">
+              <div class="logo-box logo-box--white"><img src="up-marketing-ds-assets/logo-black.png" alt="Logo monocromático"></div>
+              <span class="logo-variant__label">Monocromático</span>
+            </div>
+          </div>
+          <!-- Symbol Mark -->
+          <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--line);">
+            <div class="brand__card-label">Símbolo / Marca d'água</div>
+            <div class="logo-display" style="padding-bottom: 0;">
+              <div class="logo-variant">
+                <div class="logo-box logo-box--dark" style="aspect-ratio: 1;"><img src="up-marketing-ds-assets/symbol-blue.png" alt="Símbolo azul" style="max-height: 70px;"></div>
+                <span class="logo-variant__label">Azul</span>
+              </div>
+              <div class="logo-variant">
+                <div class="logo-box logo-box--light" style="aspect-ratio: 1;"><img src="up-marketing-ds-assets/symbol-black.png" alt="Símbolo preto" style="max-height: 70px;"></div>
+                <span class="logo-variant__label">Preto</span>
+              </div>
+              <div class="logo-variant">
+                <div class="logo-box logo-box--dark" style="aspect-ratio: 1;"><img src="up-marketing-ds-assets/symbol-white.png" alt="Símbolo branco" style="max-height: 70px;"></div>
+                <span class="logo-variant__label">Branco</span>
+              </div>
+              <div class="logo-variant">
+                <div class="logo-box logo-box--light" style="aspect-ratio: 1;"><img src="up-marketing-ds-assets/symbol-outline.png" alt="Símbolo outline" style="max-height: 70px;"></div>
+                <span class="logo-variant__label">Outline</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conceito -->
+        <div class="brand__card reveal">
+          <div class="brand__card-label">Conceito</div>
+          <div class="brand__card-title">UP = Pra Cima</div>
+          <div class="brand__card-text">
+            O símbolo é uma <strong style="color: var(--text);">seta ascendente</strong> — a representação visual do próprio nome da marca. UP significa ir pra cima, crescer, evoluir.<br><br>
+            A seta comunica <strong style="color: var(--text);">movimento, progresso e direção clara</strong>. Cada cliente que trabalha com a UP está em trajetória de crescimento.<br><br>
+            O design confere modernidade à marca, refletindo inovação, criatividade e execução de excelência.
+          </div>
+          <div class="concept__grid" style="margin-top: 20px;">
+            <div class="concept__item">
+              <span class="concept__icon">&uarr;</span>
+              <div class="concept__name">Seta UP</div>
+              <div class="concept__desc">Crescimento, evolução</div>
+            </div>
+            <div class="concept__item">
+              <span class="concept__icon">&nearr;</span>
+              <div class="concept__name">Direção</div>
+              <div class="concept__desc">Progresso constante</div>
+            </div>
+            <div class="concept__item">
+              <span class="concept__icon" style="color: var(--blue);">&midast;</span>
+              <div class="concept__name">Modernidade</div>
+              <div class="concept__desc">Inovação e criatividade</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Personalidade -->
+        <div class="brand__card reveal">
+          <div class="brand__card-label">Personalidade</div>
+          <div class="brand__card-title">Atributos da Marca</div>
+          <div class="brand__card-text">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px;">
+              <div style="padding: 12px; background: var(--surface); border-radius: 8px; border-left: 3px solid var(--up-blue);">
+                <strong style="color: var(--text)">Inteligente</strong><br>
+                <span style="font-size: 12px;">Dados, não achismo</span>
+              </div>
+              <div style="padding: 12px; background: var(--surface); border-radius: 8px; border-left: 3px solid var(--up-blue-deep);">
+                <strong style="color: var(--text)">Criativa</strong><br>
+                <span style="font-size: 12px;">Inovação como padrão</span>
+              </div>
+              <div style="padding: 12px; background: var(--surface); border-radius: 8px; border-left: 3px solid var(--cyan);">
+                <strong style="color: var(--text)">Estratégica</strong><br>
+                <span style="font-size: 12px;">Processo + resultado</span>
+              </div>
+              <div style="padding: 12px; background: var(--surface); border-radius: 8px; border-left: 3px solid var(--green);">
+                <strong style="color: var(--text)">Focada no Cliente</strong><br>
+                <span style="font-size: 12px;">Ombro a ombro</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="values__grid">
+        <div class="value-item reveal">
+          <span class="value-item__icon">&#10024;</span>
+          <div class="value-item__name">Criatividade</div>
+          <div class="value-item__desc">Soluções originais para cada desafio</div>
+        </div>
+        <div class="value-item reveal">
+          <span class="value-item__icon">&#128640;</span>
+          <div class="value-item__name">Inovação</div>
+          <div class="value-item__desc">IA e automação como diferencial</div>
+        </div>
+        <div class="value-item reveal">
+          <span class="value-item__icon">&#127919;</span>
+          <div class="value-item__name">Estratégia</div>
+          <div class="value-item__desc">Planejamento que gera ROI</div>
+        </div>
+        <div class="value-item reveal">
+          <span class="value-item__icon">&#129309;</span>
+          <div class="value-item__name">Foco no Cliente</div>
+          <div class="value-item__desc">Parceria real, resultado real</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ 02. TOKENS ═══ -->
+  <section id="tokens" class="section section--alt">
+    <div class="container">
+      <div class="section__header reveal">
+        <div class="section__label">02 &mdash; Design Tokens</div>
+        <h2 class="section__title">Paleta<br><span class="accent">oficial.</span></h2>
+        <p class="section__desc">Cores extraídas do brandbook oficial. Background purple-dark, azul vibrante como cor primária.</p>
+      </div>
+
+      <div class="colors__row reveal">
+        <div class="colors__row-title">Paleta Oficial UP</div>
+        <div class="colors__grid">
+          <div class="color-swatch" onclick="copyColor('#476FEF')">
+            <div class="color-swatch__preview" style="background: #476FEF"><span class="color-swatch__copy">Copiar</span></div>
+            <div class="color-swatch__info">
+              <div class="color-swatch__name">UP Blue</div>
+              <div class="color-swatch__value">#476FEF</div>
+              <div class="color-swatch__rgb">RGB: 71, 111, 239</div>
+            </div>
+          </div>
+          <div class="color-swatch" onclick="copyColor('#303DF0')">
+            <div class="color-swatch__preview" style="background: #303DF0"><span class="color-swatch__copy">Copiar</span></div>
+            <div class="color-swatch__info">
+              <div class="color-swatch__name">UP Blue Deep</div>
+              <div class="color-swatch__value">#303DF0</div>
+              <div class="color-swatch__rgb">RGB: 49, 60, 240</div>
+            </div>
+          </div>
+          <div class="color-swatch" onclick="copyColor('#150C2B')">
+            <div class="color-swatch__preview" style="background: #150C2B"><span class="color-swatch__copy">Copiar</span></div>
+            <div class="color-swatch__info">
+              <div class="color-swatch__name">UP Dark</div>
+              <div class="color-swatch__value">#150C2B</div>
+              <div class="color-swatch__rgb">RGB: 21, 12, 43</div>
+            </div>
+          </div>
+          <div class="color-swatch" onclick="copyColor('#F2F2F2')">
+            <div class="color-swatch__preview" style="background: #F2F2F2"><span class="color-swatch__copy" style="color:#000">Copiar</span></div>
+            <div class="color-swatch__info">
+              <div class="color-swatch__name">UP Light</div>
+              <div class="color-swatch__value">#F2F2F2</div>
+              <div class="color-swatch__rgb">RGB: 242, 242, 242</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="colors__row reveal">
+        <div class="colors__row-title">Texto & Neutros</div>
+        <div class="colors__grid">
+          <div class="color-swatch" onclick="copyColor('#FFFFFF')">
+            <div class="color-swatch__preview" style="background: #FFFFFF"><span class="color-swatch__copy" style="color:#000">Copiar</span></div>
+            <div class="color-swatch__info"><div class="color-swatch__name">White</div><div class="color-swatch__value">#FFFFFF</div></div>
+          </div>
+          <div class="color-swatch" onclick="copyColor('#B0B8D0')">
+            <div class="color-swatch__preview" style="background: #B0B8D0"><span class="color-swatch__copy" style="color:#000">Copiar</span></div>
+            <div class="color-swatch__info"><div class="color-swatch__name">Text Sub</div><div class="color-swatch__value">#B0B8D0</div></div>
+          </div>
+          <div class="color-swatch" onclick="copyColor('#7B82A0')">
+            <div class="color-swatch__preview" style="background: #7B82A0"><span class="color-swatch__copy">Copiar</span></div>
+            <div class="color-swatch__info"><div class="color-swatch__name">Text Dim</div><div class="color-swatch__value">#7B82A0</div></div>
+          </div>
+          <div class="color-swatch" onclick="copyColor('#0D0820')">
+            <div class="color-swatch__preview" style="background: #0D0820"><span class="color-swatch__copy">Copiar</span></div>
+            <div class="color-swatch__info"><div class="color-swatch__name">Background</div><div class="color-swatch__value">#0D0820</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="colors__row reveal">
+        <div class="colors__row-title">Semânticas</div>
+        <div class="colors__grid">
+          <div class="color-swatch" onclick="copyColor('#46D369')">
+            <div class="color-swatch__preview" style="background: #46D369"><span class="color-swatch__copy" style="color:#000">Copiar</span></div>
+            <div class="color-swatch__info"><div class="color-swatch__name">Success</div><div class="color-swatch__value">#46D369</div></div>
+          </div>
+          <div class="color-swatch" onclick="copyColor('#FF8C42')">
+            <div class="color-swatch__preview" style="background: #FF8C42"><span class="color-swatch__copy" style="color:#000">Copiar</span></div>
+            <div class="color-swatch__info"><div class="color-swatch__name">Warning</div><div class="color-swatch__value">#FF8C42</div></div>
+          </div>
+          <div class="color-swatch" onclick="copyColor('#FF4757')">
+            <div class="color-swatch__preview" style="background: #FF4757"><span class="color-swatch__copy">Copiar</span></div>
+            <div class="color-swatch__info"><div class="color-swatch__name">Error</div><div class="color-swatch__value">#FF4757</div></div>
+          </div>
+          <div class="color-swatch" onclick="copyColor('#A855F7')">
+            <div class="color-swatch__preview" style="background: #A855F7"><span class="color-swatch__copy">Copiar</span></div>
+            <div class="color-swatch__info"><div class="color-swatch__name">Purple</div><div class="color-swatch__value">#A855F7</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Spacing -->
+      <div style="margin-top: 60px;" class="reveal">
+        <div class="colors__row-title">Espaçamento (base 8px)</div>
+        <div class="spacing__visual">
+          <div class="spacing__item"><div class="spacing__meta"><span class="spacing__token">4px</span><span class="spacing__px">xs</span></div><div class="spacing__bar" style="width: 4px;"></div></div>
+          <div class="spacing__item"><div class="spacing__meta"><span class="spacing__token">8px</span><span class="spacing__px">sm</span></div><div class="spacing__bar" style="width: 32px;"></div></div>
+          <div class="spacing__item"><div class="spacing__meta"><span class="spacing__token">16px</span><span class="spacing__px">md</span></div><div class="spacing__bar" style="width: 64px;"></div></div>
+          <div class="spacing__item"><div class="spacing__meta"><span class="spacing__token">24px</span><span class="spacing__px">lg</span></div><div class="spacing__bar" style="width: 96px;"></div></div>
+          <div class="spacing__item"><div class="spacing__meta"><span class="spacing__token">32px</span><span class="spacing__px">xl</span></div><div class="spacing__bar" style="width: 128px;"></div></div>
+          <div class="spacing__item"><div class="spacing__meta"><span class="spacing__token">48px</span><span class="spacing__px">2xl</span></div><div class="spacing__bar" style="width: 192px;"></div></div>
+          <div class="spacing__item"><div class="spacing__meta"><span class="spacing__token">64px</span><span class="spacing__px">3xl</span></div><div class="spacing__bar" style="width: 256px;"></div></div>
+        </div>
+      </div>
+
+      <div class="code-block reveal" style="margin-top: 40px;">
+        <div class="code-block__header">
+          <span class="code-block__dot code-block__dot--red"></span><span class="code-block__dot code-block__dot--yellow"></span><span class="code-block__dot code-block__dot--green"></span>
+          <span class="code-block__title">up-tokens.css</span>
+        </div>
+        <div class="code-block__body"><pre><span class="comment">/* UP Marketing — Official Design Tokens */</span>
+<span class="key">:root</span> {
+  <span class="key">--up-blue</span>: <span class="str">#476FEF</span>;        <span class="comment">/* Primary */</span>
+  <span class="key">--up-blue-deep</span>: <span class="str">#303DF0</span>;   <span class="comment">/* Secondary */</span>
+  <span class="key">--up-dark</span>: <span class="str">#150C2B</span>;        <span class="comment">/* Dark */</span>
+  <span class="key">--up-light</span>: <span class="str">#F2F2F2</span>;       <span class="comment">/* Light */</span>
+
+  <span class="key">--font-display</span>: <span class="str">'Accurate ICG Fill'</span>, sans-serif;
+  <span class="key">--font-body</span>: <span class="str">'Montserrat'</span>, sans-serif;
+}</pre></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ 03. TYPOGRAPHY ═══ -->
+  <section id="typography" class="section">
+    <div class="container">
+      <div class="section__header reveal">
+        <div class="section__label">03 &mdash; Tipografia</div>
+        <h2 class="section__title">Accurate ICG Fill +<br><span class="accent">Montserrat.</span></h2>
+        <p class="section__desc">Accurate ICG Fill (Quicksans) para display e impacto. Montserrat para corpo de texto e legibilidade. JetBrains Mono para dados técnicos.</p>
+      </div>
+
+      <div class="type__showcase">
+        <div class="type__item reveal">
+          <div class="type__item-header">
+            <span class="type__item-name">Accurate ICG Fill &mdash; Display</span>
+            <span class="type__item-spec">quicksans-accurate-icg-fill.ttf | rounded geometric</span>
+          </div>
+          <div style="font-family: var(--font-display); font-weight: 700; font-size: 64px; line-height: 1.05; margin-bottom: 16px;">
+            Escolha a<br><span class="accent">diferença.</span>
+          </div>
+          <div class="type__scale">
+            <div class="type__scale-item"><span class="type__scale-label">H1</span><span style="font-family: var(--font-display); font-weight: 700; font-size: 52px;">Título principal</span></div>
+            <div class="type__scale-item"><span class="type__scale-label">H2</span><span style="font-family: var(--font-display); font-weight: 700; font-size: 40px;">Seção principal</span></div>
+            <div class="type__scale-item"><span class="type__scale-label">H3</span><span style="font-family: var(--font-display); font-weight: 700; font-size: 28px;">Subtítulo</span></div>
+            <div class="type__scale-item"><span class="type__scale-label">H4</span><span style="font-family: var(--font-display); font-weight: 700; font-size: 20px;">Card title</span></div>
+          </div>
+        </div>
+
+        <div class="type__item reveal">
+          <div class="type__item-header">
+            <span class="type__item-name">Montserrat &mdash; Body</span>
+            <span class="type__item-spec">weight: 300-800 | line-height: 1.6</span>
+          </div>
+          <div style="font-family: var(--font-body); font-size: 17px; color: var(--sub); line-height: 1.8; margin-bottom: 16px;">
+            Combinamos estratégia, tráfego pago e inteligência artificial para transformar marcas em máquinas de vendas. Cada campanha é desenhada com <strong style="color: var(--text);">dados reais</strong>, não achismo.
+          </div>
+          <div style="font-family: var(--font-body); font-size: 14px; color: var(--sub); line-height: 1.7; margin-bottom: 12px;">
+            <strong style="color: var(--text); font-weight: 800;">Montserrat Black (800)</strong> &middot; <strong style="color: var(--text); font-weight: 700;">Bold (700)</strong> &middot; <span style="font-weight: 600;">SemiBold (600)</span> &middot; <span style="font-weight: 400;">Regular (400)</span> &middot; <span style="font-weight: 300;">Light (300)</span>
+          </div>
+          <div style="font-family: var(--font-body); font-size: 12px; color: var(--dim);">
+            ABCDEFGHIJKLMNOPQRSTUVWXYZ &middot; abcdefghijklmnopqrstuvwxyz &middot; 0123456789
+          </div>
+        </div>
+
+        <div class="type__item reveal">
+          <div class="type__item-header">
+            <span class="type__item-name">JetBrains Mono &mdash; Code</span>
+            <span class="type__item-spec">weight: 400-600</span>
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 13px; line-height: 1.8; color: var(--green); background: rgba(70, 211, 105, 0.05); padding: 20px; border-radius: 10px; border: 1px solid rgba(70, 211, 105, 0.1);">
+const campaign = await upMarketing.create({<br>
+&nbsp;&nbsp;type: "meta_ads",<br>
+&nbsp;&nbsp;budget: 5000,<br>
+&nbsp;&nbsp;ai_optimization: true<br>
+});
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ 04. COMPONENTS ═══ -->
+  <section id="components" class="section section--alt">
+    <div class="container">
+      <div class="section__header reveal">
+        <div class="section__label">04 &mdash; Componentes</div>
+        <h2 class="section__title">Blocos de<br><span class="accent">construção.</span></h2>
+        <p class="section__desc">Componentes reutilizáveis para todos os produtos e materiais.</p>
+      </div>
+      <div class="components__grid">
+        <div class="comp-card reveal">
+          <div class="comp-card__header"><span class="comp-card__title">Buttons</span><span class="comp-card__tag">.btn</span></div>
+          <div class="comp-card__body">
+            <button class="btn btn--primary">Primary</button>
+            <button class="btn btn--ghost">Ghost</button>
+            <button class="btn btn--accent">Success</button>
+            <button class="btn btn--danger">Danger</button>
+          </div>
+        </div>
+        <div class="comp-card reveal">
+          <div class="comp-card__header"><span class="comp-card__title">Sizes</span><span class="comp-card__tag">.btn--sm/lg</span></div>
+          <div class="comp-card__body">
+            <button class="btn btn--primary btn--sm">Small</button>
+            <button class="btn btn--primary">Default</button>
+            <button class="btn btn--primary btn--lg">Large</button>
+          </div>
+        </div>
+        <div class="comp-card reveal">
+          <div class="comp-card__header"><span class="comp-card__title">Badges</span><span class="comp-card__tag">.badge</span></div>
+          <div class="comp-card__body">
+            <span class="badge badge--blue">Meta Ads</span>
+            <span class="badge badge--green">Ativo</span>
+            <span class="badge badge--orange">Pendente</span>
+            <span class="badge badge--red">Urgente</span>
+            <span class="badge badge--purple">IA</span>
+          </div>
+        </div>
+        <div class="comp-card reveal">
+          <div class="comp-card__header"><span class="comp-card__title">Inputs</span><span class="comp-card__tag">.input</span></div>
+          <div class="comp-card__body comp-card__body--col">
+            <div class="input-group">
+              <label class="input-label">Nome da campanha</label>
+              <input class="input" type="text" placeholder="Ex: Black Friday 2026">
+              <span class="input-hint">Identificador interno</span>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Orçamento</label>
+              <input class="input input--error" type="text" value="abc">
+              <span class="input-error">Valor inválido.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ 05. MOTION ═══ -->
+  <section id="motion" class="section">
+    <div class="container">
+      <div class="section__header reveal">
+        <div class="section__label">05 &mdash; Motion</div>
+        <h2 class="section__title">Movimento com<br><span class="accent">propósito.</span></h2>
+        <p class="section__desc">Hover nos cards abaixo para ver cada animação ao vivo.</p>
+      </div>
+      <div class="motion__grid">
+        <div class="motion-card reveal"><div class="motion-card__demo demo--fadeup"></div><div class="motion-card__name">Fade Up</div><div class="motion-card__timing">0.7s ease-out</div><div class="motion-card__desc">Entrada de seções ao scroll</div></div>
+        <div class="motion-card reveal"><div class="motion-card__demo demo--scale"></div><div class="motion-card__name">Scale In</div><div class="motion-card__timing">0.5s spring</div><div class="motion-card__desc">Modais e tooltips</div></div>
+        <div class="motion-card reveal"><div class="motion-card__demo demo--slide"></div><div class="motion-card__name">Slide In</div><div class="motion-card__timing">0.6s ease-out</div><div class="motion-card__desc">Painéis laterais</div></div>
+        <div class="motion-card reveal"><div class="motion-card__demo demo--rotate"></div><div class="motion-card__name">Rotate</div><div class="motion-card__timing">0.8s ease-out</div><div class="motion-card__desc">Ícones e loaders</div></div>
+        <div class="motion-card reveal"><div class="motion-card__demo demo--glow"></div><div class="motion-card__name">Glow</div><div class="motion-card__timing">1.0s ease</div><div class="motion-card__desc">CTAs e status</div></div>
+        <div class="motion-card reveal"><div class="motion-card__demo demo--bounce"></div><div class="motion-card__name">Bounce</div><div class="motion-card__timing">0.6s spring</div><div class="motion-card__desc">Confirmações</div></div>
+      </div>
+      <div class="reveal"><div class="colors__row-title" style="margin-top: 60px;">Curvas de Easing</div>
+        <div class="easing__grid">
+          <div class="easing-card">
+            <svg class="easing-card__curve" viewBox="0 0 200 100"><path d="M 0 100 C 34 134 70 35 200 0" fill="none" stroke="#476FEF" stroke-width="2.5"/><path d="M 0 100 L 200 0" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4"/></svg>
+            <div class="easing-card__name">Ease Out</div><div class="easing-card__value">cubic-bezier(0.17, 0.67, 0.35, 1.05)</div>
+          </div>
+          <div class="easing-card">
+            <svg class="easing-card__curve" viewBox="0 0 200 100"><path d="M 0 100 C 68 -56 128 100 200 0" fill="none" stroke="#A855F7" stroke-width="2.5"/><path d="M 0 100 L 200 0" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4"/></svg>
+            <div class="easing-card__name">Spring</div><div class="easing-card__value">cubic-bezier(0.34, 1.56, 0.64, 1)</div>
+          </div>
+          <div class="easing-card">
+            <svg class="easing-card__curve" viewBox="0 0 200 100"><path d="M 0 100 C 80 100 40 0 200 0" fill="none" stroke="#22D3EE" stroke-width="2.5"/><path d="M 0 100 L 200 0" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4"/></svg>
+            <div class="easing-card__name">Smooth</div><div class="easing-card__value">cubic-bezier(0.4, 0, 0.2, 1)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ 06. SHOWCASE ═══ -->
+  <section id="showcase" class="section section--alt">
+    <div class="container">
+      <div class="section__header reveal">
+        <div class="section__label">06 &mdash; Showcase</div>
+        <h2 class="section__title">Cases que<br><span class="accent">provam.</span></h2>
+        <p class="section__desc">Cada projeto é uma história de transformação.</p>
+      </div>
+      <div class="showcase__grid">
+        <div class="showcase__item showcase__item--featured reveal">
+          <div class="showcase__cover"><div class="showcase__cover-bg" style="background: url('up-marketing-ds-assets/bellator-feed.png') center/cover no-repeat;"></div><div class="showcase__cover-overlay"></div></div>
+          <div class="showcase__info"><div class="showcase__sector">Imobiliário de Alto Padrão</div><div class="showcase__name">Bellator Imóveis</div><div class="showcase__desc-text">Social media, Meta Ads, fotografia lifestyle. +340% leads qualificados.</div><div class="showcase__tags"><span class="showcase__tag">Meta Ads</span><span class="showcase__tag">Social</span><span class="showcase__tag">Foto</span></div></div>
+        </div>
+        <div class="showcase__item reveal">
+          <div class="showcase__cover"><div class="showcase__cover-bg" style="background: url('up-marketing-ds-assets/sebraci-capa.png') center/cover no-repeat;"></div><div class="showcase__cover-overlay"></div></div>
+          <div class="showcase__info"><div class="showcase__sector">Educação Corporativa</div><div class="showcase__name">SEBRACI</div><div class="showcase__desc-text">Identidade visual, Design System e Landing Pages PAI360.</div><div class="showcase__tags"><span class="showcase__tag">Branding</span><span class="showcase__tag">Design System</span><span class="showcase__tag">Web</span></div></div>
+        </div>
+        <div class="showcase__item reveal">
+          <div class="showcase__cover"><div class="showcase__cover-bg" style="background: url('up-marketing-ds-assets/primeiralinha-croissants.jpg') center/cover no-repeat;"></div><div class="showcase__cover-overlay"></div></div>
+          <div class="showcase__info"><div class="showcase__sector">Padaria & Cafeteria</div><div class="showcase__name">Primeira Linha</div><div class="showcase__desc-text">Social media, fotografia gastronômica e gestão de tráfego.</div><div class="showcase__tags"><span class="showcase__tag">Social</span><span class="showcase__tag">Foto</span><span class="showcase__tag">Tráfego</span></div></div>
+        </div>
+        <div class="showcase__item reveal">
+          <div class="showcase__cover"><div class="showcase__cover-bg" style="background: url('up-marketing-ds-assets/ladolce-convite.png') center/cover no-repeat;"></div><div class="showcase__cover-overlay"></div></div>
+          <div class="showcase__info"><div class="showcase__sector">Gastronomia Premium</div><div class="showcase__name">La Dolce Fina</div><div class="showcase__desc-text">Landing page + estratégia de lançamento.</div><div class="showcase__tags"><span class="showcase__tag">Landing Page</span><span class="showcase__tag">Estratégia</span></div></div>
+        </div>
+        <div class="showcase__item reveal">
+          <div class="showcase__cover"><div class="showcase__cover-bg" style="background: url('up-marketing-ds-assets/motoforte-16anos.png') center/cover no-repeat;"></div><div class="showcase__cover-overlay"></div></div>
+          <div class="showcase__info"><div class="showcase__sector">Automotivo & Acessórios</div><div class="showcase__name">Moto Forte</div><div class="showcase__desc-text">Social media, captação audiovisual e campanha 16 anos.</div><div class="showcase__tags"><span class="showcase__tag">Social</span><span class="showcase__tag">Vídeo</span><span class="showcase__tag">Campanha</span></div></div>
+        </div>
+        <div class="showcase__item reveal">
+          <div class="showcase__cover"><div class="showcase__cover-bg" style="background: url('up-marketing-ds-assets/up-assinatura.png') center/cover no-repeat;"></div><div class="showcase__cover-overlay"></div></div>
+          <div class="showcase__info"><div class="showcase__sector">Tecnologia & IA</div><div class="showcase__name">UpScale CRM</div><div class="showcase__desc-text">CRM com IA, automações N8N e agentes.</div><div class="showcase__tags"><span class="showcase__tag">SaaS</span><span class="showcase__tag">IA</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ 07. VOICE ═══ -->
+  <section id="voice" class="section">
+    <div class="container">
+      <div class="section__header reveal">
+        <div class="section__label">07 &mdash; Voz & Tom</div>
+        <h2 class="section__title">Como a UP<br><span class="accent">fala.</span></h2>
+        <p class="section__desc">Inteligente sem arrogância. Técnica sem frieza. Direta sem rudeza.</p>
+      </div>
+      <div class="voice__grid">
+        <div class="voice-card voice-card--do reveal">
+          <div class="voice-card__header"><div class="voice-card__icon">&#10003;</div><div class="voice-card__label">Assim sim</div></div>
+          <ul class="voice-card__examples">
+            <li>"Sua campanha gerou 47 leads qualificados com CPA de R$12,30 — 3x abaixo da meta."</li>
+            <li>"O público 25-34 responde 62% melhor a criativos com prova social."</li>
+            <li>"Vamos resolver isso. Aqui está o plano em 3 etapas."</li>
+          </ul>
+        </div>
+        <div class="voice-card voice-card--dont reveal">
+          <div class="voice-card__header"><div class="voice-card__icon">&#10007;</div><div class="voice-card__label">Assim não</div></div>
+          <ul class="voice-card__examples">
+            <li>"Estamos BOMBANDO nas redes! Vários likes!!!"</li>
+            <li>"Talvez seja possível que os resultados melhorem em algum momento."</li>
+            <li>"Somos os melhores do Ceará em marketing digital!"</li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top: 40px;" class="reveal">
+        <div class="colors__row-title">Pilares da Comunicação</div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 20px;">
+          <div style="padding: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); text-align: center;">
+            <div style="font-size: 24px; margin-bottom: 10px;">&#128640;</div>
+            <div style="font-family: var(--font-display); font-weight: 700; font-size: 14px; margin-bottom: 4px;">Direto</div>
+            <div style="font-size: 11px; color: var(--dim);">Sem rodeios</div>
+          </div>
+          <div style="padding: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); text-align: center;">
+            <div style="font-size: 24px; margin-bottom: 10px;">&#128202;</div>
+            <div style="font-family: var(--font-display); font-weight: 700; font-size: 14px; margin-bottom: 4px;">Técnico</div>
+            <div style="font-size: 11px; color: var(--dim);">Dados reais</div>
+          </div>
+          <div style="padding: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); text-align: center;">
+            <div style="font-size: 24px; margin-bottom: 10px;">&#129309;</div>
+            <div style="font-family: var(--font-display); font-weight: 700; font-size: 14px; margin-bottom: 4px;">Parceiro</div>
+            <div style="font-size: 11px; color: var(--dim);">Ombro a ombro</div>
+          </div>
+          <div style="padding: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); text-align: center;">
+            <div style="font-size: 24px; margin-bottom: 10px;">&#128161;</div>
+            <div style="font-family: var(--font-display); font-weight: 700; font-size: 14px; margin-bottom: 4px;">Inovador</div>
+            <div style="font-size: 11px; color: var(--dim);">IA como diferencial</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__copy">&copy; 2026 UP Marketing & Comunicação. Design System oficial.</div>
+    <div class="footer__social">
+      <a href="https://www.instagram.com/upmarketingecomunicacao/" target="_blank" rel="noopener" class="footer__social-link" title="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
+      <a href="https://www.facebook.com/upmarketingecomunicacao" target="_blank" rel="noopener" class="footer__social-link" title="Facebook">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/company/upmarketingecomunicacao/" target="_blank" rel="noopener" class="footer__social-link" title="LinkedIn">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+    </div>
+    <div class="footer__version">v2.0.0 &middot; Março 2026</div>
+  </footer>
+
+  <script>
+    const dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
+    let mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+    (function a(){rx+=(mx-rx)*0.15;ry+=(my-ry)*0.15;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a)})();
+    document.querySelectorAll('a,button,.color-swatch,.motion-card,.showcase__item,.btn,.hero__pill').forEach(el=>{
+      el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));
+    });
+
+    const canvas=document.getElementById('canvas-bg'),ctx=canvas.getContext('2d');
+    function rc(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
+    rc();window.addEventListener('resize',rc);
+    const pts=Array.from({length:50},()=>({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,r:Math.random()*1.5+0.5}));
+    function dp(){ctx.clearRect(0,0,canvas.width,canvas.height);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(71,111,239,0.35)';ctx.fill()});for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<110){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(71,111,239,${0.07*(1-d/110)})`;ctx.lineWidth=0.5;ctx.stroke()}}requestAnimationFrame(dp)}dp();
+
+    const nav=document.getElementById('nav');
+    window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60)});
+    const secs=document.querySelectorAll('.section,.hero'),nls=document.querySelectorAll('.nav__links a');
+    window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-200)c=s.id});nls.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c)})});
+
+    const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('active')})},{threshold:0.15});
+    document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+    function copyColor(h){navigator.clipboard.writeText(h).then(()=>{const t=document.getElementById('toast');t.textContent='Copiado: '+h;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000)})}
+
+    if('ontouchstart'in window){document.body.style.cursor='auto';dot.style.display='none';ring.style.display='none'}
+  </script>
+</body>
+</html>
