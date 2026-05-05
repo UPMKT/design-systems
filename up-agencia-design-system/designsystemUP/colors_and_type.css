@@ -1,0 +1,314 @@
+/* ========================================================================
+   UP Agência — Core Design Tokens
+   Colors + Typography
+   ======================================================================== */
+
+/* ---- Fonts ----
+   Primary display face: Space Grotesk — a bold, geometric, slightly-rounded
+   sans with the same wide-aperture, quirky-but-confident energy as the UP
+   wordmark. Used for headlines, numbers, nav.
+   Body / UI face: Inter — neutral, highly-legible sans for running text.
+   Mono face: JetBrains Mono — for code, tabular, and "raw data" moments.
+
+   NOTE: No original font files were provided. Space Grotesk is our best
+   Google-Fonts match for the logo's lettering (bold geometric sans with
+   the characteristic rounded joins visible on the "U" and "P"). Flag this
+   to the brand team and swap in the authentic file at `fonts/` when available. */
+
+/* Type system v3 — Brandcast-inspired, UP blue palette.
+   Display:   Inter (headlines, nav, CTAs)
+   Body:      DM Sans (parágrafos, subtítulos)
+   Condensed: Anton (impacto / funnels)
+   Mono:      JetBrains Mono                                          */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Anton&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* ================================================================
+     COLOR — Raw palette
+     The brand is built around one electric ultramarine blue pulled
+     directly from the logo (R49 G60 B240), paired with dense black
+     and clean white. Everything else is neutrals.
+     ================================================================ */
+
+  /* Brand */
+  --up-blue:         #313CF0;   /* The one. Primary brand color. */
+  --up-blue-hover:   #2730D0;   /* Press / hover darker */
+  --up-blue-press:   #1E25A8;
+  --up-blue-tint:    #EDEEFF;   /* 8% blue on white, for backgrounds */
+  --up-blue-soft:    #C8CCFB;   /* Decorative tint */
+
+  /* Neutrals — a tight, high-contrast scale */
+  --black:           #000000;
+  --ink:             #0A0A0F;   /* Default text */
+  --graphite:        #1A1A22;   /* Surfaces that aren't pure black */
+  --slate:           #3D3D47;
+  --steel:           #6B6B75;
+  --mute:            #9A9AA3;
+  --line:            #E4E4E9;   /* Borders, dividers */
+  --paper:           #F4F4F6;   /* Off-white surfaces */
+  --bone:            #FAFAFB;
+  --white:           #FFFFFF;
+
+  /* Semantic */
+  --ok:              #0F9D58;
+  --warn:            #E8A317;
+  --danger:          #E0352B;
+  --info:            var(--up-blue);
+
+  /* ================================================================
+     COLOR — Semantic tokens
+     Use THESE in components, not the raw names above.
+     ================================================================ */
+
+  --fg-1:            var(--ink);      /* Primary text */
+  --fg-2:            var(--slate);    /* Secondary text */
+  --fg-3:            var(--steel);    /* Tertiary / meta */
+  --fg-mute:         var(--mute);
+  --fg-on-brand:     var(--white);
+  --fg-on-dark:      var(--white);
+  --fg-link:         var(--up-blue);
+
+  --bg-1:            var(--white);    /* Page */
+  --bg-2:            var(--bone);     /* Card / elevated */
+  --bg-3:            var(--paper);    /* Sunken / input */
+  --bg-inverse:      var(--ink);      /* Dark hero sections */
+  --bg-brand:        var(--up-blue);
+  --bg-brand-tint:   var(--up-blue-tint);
+
+  --border-1:        var(--line);
+  --border-2:        #CFCFD5;
+  --border-strong:   var(--ink);
+
+  --accent:          var(--up-blue);
+
+  /* ================================================================
+     DARK / NEON variant
+     For funnel/webinar/event landing pages — deep-space background
+     with neon-blue radial glows. Headlines in Barlow Condensed 900.
+     ================================================================ */
+  --dark-bg:         #05050F;   /* Deep-space page background */
+  --dark-bg-2:       #080818;   /* Elevated surface on dark */
+  --dark-bg-3:       #0C0C22;
+  --dark-fg-1:       #F0F0F8;   /* Off-white primary text */
+  --dark-fg-2:       rgba(240,240,248,0.70);
+  --dark-fg-3:       rgba(240,240,248,0.48);
+  --dark-border:     rgba(49,60,240,0.22);    /* Blue-tinted hairline */
+  --dark-border-2:   rgba(240,240,248,0.08);  /* Neutral hairline */
+
+  --glow-soft:       rgba(49,60,240,0.12);
+  --glow-mid:        rgba(49,60,240,0.24);
+  --glow-strong:     rgba(49,60,240,0.42);
+  --glow-halo:       0 0 40px rgba(49,60,240,0.35), 0 0 120px rgba(49,60,240,0.18);
+
+  /* ================================================================
+     BRANDCAST-STYLE tokens (mapped to UP palette)
+     For dark agency homepage with ticker, pill nav, services cards.
+     ================================================================ */
+  --bc-bg:           #000000;       /* page bg */
+  --bc-bg-1:         #020202;       /* hero */
+  --bc-bg-2:         #0C0D17;       /* services cards */
+  --bc-bg-3:         #101010;       /* alt sections */
+  --bc-bg-4:         #0D0D0D;
+  --bc-bg-5:         #141414;       /* footer */
+  --bc-card:         #222222;       /* blog cards */
+  --bc-text:         #DDDDDD;
+  --bc-muted:        #7A7A7A;
+  --bc-subtle:       #B9B9B9;
+  --bc-card-title:   #C7C7C7;
+  --bc-hover:        #5A82FF;       /* hover azul (era roxo claro) */
+  --bc-ghost:        rgba(255,255,255,0.07);
+  --bc-shadow:       rgba(0,0,0,0.89) 0px 16px 54px -8px;
+
+  /* ================================================================
+     SPACING & RADII — 4px base grid
+     ================================================================ */
+
+  --s-0:  0;
+  --s-1:  4px;
+  --s-2:  8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  20px;
+  --s-6:  24px;
+  --s-8:  32px;
+  --s-10: 40px;
+  --s-12: 48px;
+  --s-16: 64px;
+  --s-20: 80px;
+  --s-24: 96px;
+  --s-32: 128px;
+
+  /* Radii — modest, never pill-on-everything. Brand reads as "sharp
+     geometry softened only at key joints" (look at the "U" in the logo). */
+  --r-0:  0;
+  --r-1:  2px;
+  --r-2:  4px;
+  --r-3:  8px;
+  --r-4:  12px;
+  --r-5:  16px;
+  --r-pill: 999px;
+
+  /* ================================================================
+     SHADOWS — used sparingly. Brand is flat-first.
+     ================================================================ */
+  --shadow-0: none;
+  --shadow-1: 0 1px 2px rgba(10, 10, 15, 0.06), 0 1px 1px rgba(10, 10, 15, 0.04);
+  --shadow-2: 0 4px 12px rgba(10, 10, 15, 0.08), 0 1px 2px rgba(10, 10, 15, 0.05);
+  --shadow-3: 0 16px 40px rgba(10, 10, 15, 0.12), 0 2px 6px rgba(10, 10, 15, 0.06);
+  --shadow-brand: 0 12px 32px rgba(49, 60, 240, 0.28);
+  --shadow-inset: inset 0 0 0 1px var(--border-1);
+
+  /* ================================================================
+     TYPOGRAPHY — families
+     ================================================================ */
+  --font-display:   'Inter', system-ui, -apple-system, sans-serif;
+  --font-body:      'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-mono:      'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-condensed: 'Anton', 'Impact', 'Haettenschweiler', sans-serif;
+
+  /* Scale — bold and editorial. Headlines are big. */
+  --fs-display-1: clamp(64px, 9vw, 128px);   /* "Hero" — big statement */
+  --fs-display-2: clamp(48px, 6vw, 88px);
+  --fs-h1:        clamp(40px, 4.5vw, 64px);
+  --fs-h2:        clamp(32px, 3.2vw, 44px);
+  --fs-h3:        28px;
+  --fs-h4:        22px;
+  --fs-h5:        18px;
+  --fs-body-lg:   18px;
+  --fs-body:      16px;
+  --fs-body-sm:   14px;
+  --fs-caption:   12px;
+  --fs-micro:     11px;
+
+  --lh-tight:     1.02;   /* For display */
+  --lh-snug:      1.12;   /* For headlines */
+  --lh-normal:    1.45;   /* Body */
+  --lh-loose:     1.65;   /* Long-form reading */
+
+  --tracking-tight:  -0.03em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.08em;
+  --tracking-cap:    0.14em;   /* For SCREAMING ALLCAPS eyebrows */
+
+  /* Motion */
+  --ease-out:   cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in:    cubic-bezier(0.8, 0.2, 0.8, 0.2);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-1: 120ms;
+  --dur-2: 200ms;
+  --dur-3: 320ms;
+  --dur-4: 480ms;
+}
+
+/* ========================================================================
+   SEMANTIC TYPE STYLES — use these classes / element selectors directly
+   ======================================================================== */
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  color: var(--fg-1);
+  background: var(--bg-1);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.display-1, h1.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-display-1);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  text-wrap: balance;
+}
+
+.display-2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-display-2);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  text-wrap: balance;
+}
+
+h1, .h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-h1);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-tight);
+  text-wrap: balance;
+}
+
+h2, .h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-tight);
+  text-wrap: balance;
+}
+
+h3, .h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-h3);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h4, .h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-h4);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+h5, .h5 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-h5);
+  line-height: 1.3;
+}
+
+p, .body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-loose);
+  color: var(--fg-1);
+  text-wrap: pretty;
+}
+
+.body-lg { font-size: var(--fs-body-lg); line-height: 1.55; }
+.body-sm { font-size: var(--fs-body-sm); }
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--fs-caption);
+  letter-spacing: var(--tracking-cap);
+  text-transform: uppercase;
+  color: var(--fg-2);
+}
+
+.caption { font-size: var(--fs-caption); color: var(--fg-3); }
+.micro   { font-size: var(--fs-micro);   color: var(--fg-3); letter-spacing: 0.02em; }
+
+code, .mono {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  font-feature-settings: 'zero' 1, 'ss01' 1;
+}
+
+a {
+  color: var(--fg-link);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+a:hover { opacity: 0.7; }
+
+/* Selection */
+::selection { background: var(--up-blue); color: var(--white); }

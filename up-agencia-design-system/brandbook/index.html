@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UP Agência · Brandbook 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css?v=5">
+<style>
+  html, body { margin:0; padding:0; background:#000; font-family: var(--font-body); color: var(--text-body); }
+  deck-stage { background:#000; }
+  section { background: var(--bg); color: var(--text-body); position: relative; }
+
+  /* ============================================================
+     SLIDE BASE — fixed 1920×1080, generous padding
+     ============================================================ */
+  .slide { width:1920px; height:1080px; box-sizing:border-box; overflow:hidden; position: relative; padding: 64px 96px; }
+  .slide-bg-2 { background: var(--bg-2); }
+  .slide-bg-3 { background: var(--bg-3); }
+  .slide-bg-brand { background: var(--brand); color: #fff; }
+  .slide-bg-soft  { background: var(--brand-soft); color: #0A0A0F; }
+  .slide-bg-deep  { background: var(--brand-deep); color: #fff; }
+  .slide-bg-ink   { background: #050507; color: #fff; }
+  .slide-bg-paper { background: #F0F0F4; color: #0A0A0F; }
+
+  /* ============================================================
+     EDITORIAL PAGE CHROME — page numbers, running heads
+     ============================================================ */
+  .page-frame {
+    position:absolute; inset: 32px 56px;
+    pointer-events:none;
+    border:none;
+  }
+  .running-head {
+    position:absolute; top: 32px; left: 0; right: 0;
+    display:grid; grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    font-family: var(--font-caption); font-weight: 500;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .running-head .center { text-align:center; }
+  .running-head .right  { text-align:right; }
+  .slide-bg-brand .running-head, .slide-bg-deep .running-head, .slide-bg-ink .running-head { color: rgba(255,255,255,.55); }
+  .slide-bg-soft .running-head, .slide-bg-paper .running-head { color: #5A5A6B; }
+
+  .page-no {
+    position:absolute; bottom: 32px; left: 0; right: 0;
+    display:flex; justify-content: space-between;
+    font-family: var(--font-caption); font-weight: 500;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .slide-bg-brand .page-no, .slide-bg-deep .page-no, .slide-bg-ink .page-no { color: rgba(255,255,255,.55); }
+  .slide-bg-soft .page-no, .slide-bg-paper .page-no { color: #5A5A6B; }
+
+  /* ============================================================
+     TYPE
+     ============================================================ */
+  .display { font-family: var(--font-heading); font-weight: 800; line-height: 0.9; letter-spacing:-0.045em; color: var(--text-strong); }
+  .h1 { font-family: var(--font-heading); font-weight: 800; font-size: 124px; line-height: 0.9; letter-spacing:-0.04em; color: var(--text-strong); margin: 0; }
+  .h2 { font-family: var(--font-heading); font-weight: 700; font-size: 72px; line-height: 0.95; letter-spacing:-0.03em; color: var(--text-strong); margin: 0; }
+  .h3 { font-family: var(--font-heading); font-weight: 700; font-size: 32px; line-height: 1.15; letter-spacing:-0.015em; color: var(--text-strong); margin: 0; }
+  .lead { font-family: var(--font-heading); font-weight: 400; font-size: 26px; line-height: 1.4; color: var(--text-body); }
+  .body { font-family: var(--font-body); font-weight: 400; font-size: 18px; line-height: 1.55; color: var(--text-body); }
+  .small { font-family: var(--font-caption); font-weight: 400; font-size: 13px; line-height: 1.5; color: var(--text-muted); }
+  .mono { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.05em; color: var(--brand-hover); }
+  .eyebrow {
+    font-family: var(--font-mono); font-weight: 500;
+    font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--brand-hover);
+  }
+  .slide-bg-brand .display, .slide-bg-deep .display, .slide-bg-ink .display,
+  .slide-bg-brand .h1, .slide-bg-brand .h2, .slide-bg-brand .h3,
+  .slide-bg-deep .h1, .slide-bg-deep .h2, .slide-bg-deep .h3,
+  .slide-bg-ink .h1, .slide-bg-ink .h2, .slide-bg-ink .h3 { color:#fff; }
+  .slide-bg-brand .lead, .slide-bg-brand .body, .slide-bg-deep .lead, .slide-bg-deep .body, .slide-bg-ink .lead, .slide-bg-ink .body { color: rgba(255,255,255,.92); }
+  .slide-bg-brand .small, .slide-bg-deep .small, .slide-bg-ink .small { color: rgba(255,255,255,.65); }
+  .slide-bg-brand .eyebrow, .slide-bg-deep .eyebrow { color: rgba(255,255,255,.85); }
+  .slide-bg-soft .lead, .slide-bg-soft .body, .slide-bg-paper .lead, .slide-bg-paper .body { color: #2A2A33; }
+  .slide-bg-soft .small, .slide-bg-paper .small { color: #5A5A6B; }
+  .slide-bg-soft .eyebrow, .slide-bg-paper .eyebrow { color: var(--brand); }
+
+  /* ============================================================
+     UP ARROW — vector, used everywhere as graphic device
+     ============================================================ */
+  .up-arrow { display:inline-block; }
+  .up-arrow svg { display:block; width:100%; height:100%; }
+
+  /* ============================================================
+     SHARED COMPONENTS
+     ============================================================ */
+  .pill {
+    display:inline-flex; align-items:center; gap:8px;
+    border:1px solid var(--border-2); border-radius: 999px;
+    padding: 8px 16px; font-family: var(--font-caption); font-size: 13px;
+    color: var(--text-subtle);
+  }
+  .slide-bg-soft .pill, .slide-bg-paper .pill { border-color: rgba(10,10,15,.18); color: #2A2A33; }
+  .slide-bg-brand .pill, .slide-bg-deep .pill, .slide-bg-ink .pill { border-color: rgba(255,255,255,.28); color: #fff; }
+
+  .grid { display:grid; gap: 24px; }
+  .g2 { grid-template-columns: 1fr 1fr; }
+  .g3 { grid-template-columns: repeat(3,1fr); }
+  .g4 { grid-template-columns: repeat(4,1fr); }
+  .g5 { grid-template-columns: repeat(5,1fr); }
+
+  .rule { height:1px; background: currentColor; opacity:.18; }
+  .rule-hard { height:1px; background: var(--text-strong); opacity:.85; }
+
+  /* Number plate */
+  .npl {
+    font-family: var(--font-mono); font-weight: 500;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--brand-hover);
+    display:inline-flex; align-items:center; gap: 8px;
+  }
+  .npl::before { content:''; width: 14px; height:1px; background: currentColor; }
+
+  /* ============================================================
+     ANIMATIONS
+     ============================================================ */
+  @keyframes drift   { 0%,100% { transform: translate(0,0); } 50% { transform: translate(8px,-12px);} }
+  @keyframes ticker  { from { transform: translateX(0);} to { transform: translateX(-50%);} }
+  @keyframes pulse-glow { 0%,100% { box-shadow: 0 0 0 0 rgba(49,60,240,.25);} 50% { box-shadow: 0 0 60px 0 rgba(49,60,240,.55);} }
+  .drift { animation: drift 5s ease-in-out infinite; }
+  .marquee { display:flex; white-space: nowrap; animation: ticker 24s linear infinite; }
+  .pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+
+  /* ============================================================
+     CHIP / PALETTE
+     ============================================================ */
+  .swatch { border-radius: 4px; padding: 32px; display:flex; flex-direction: column; justify-content: space-between; min-height: 240px; position:relative; overflow:hidden; }
+  .swatch .role { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: .75; }
+  .swatch .name { font-family: var(--font-heading); font-weight: 700; font-size: 32px; letter-spacing:-0.02em; line-height: 1; }
+  .swatch .stack { font-family: var(--font-mono); font-size: 11px; line-height: 1.7; opacity: .85; }
+  .swatch .hex  { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; }
+
+  /* ============================================================
+     TICKER / MARQUEE for sectional dividers
+     ============================================================ */
+  .strip {
+    height: 84px; overflow:hidden; display:flex; align-items:center;
+    border-top: 1px solid currentColor; border-bottom: 1px solid currentColor;
+  }
+  .strip .item {
+    font-family: var(--font-heading); font-weight: 800; font-size: 56px; line-height:1;
+    letter-spacing:-0.02em; text-transform: uppercase;
+    padding: 0 32px; display:flex; align-items:center; gap: 32px;
+  }
+  .strip .item::after { content:''; width: 14px; height: 14px; background: currentColor; border-radius: 999px; }
+
+  /* ============================================================
+     APPLICATION MOCKS
+     ============================================================ */
+  .biz-card {
+    width: 100%; aspect-ratio: 1.75/1; padding: 24px; position:relative;
+    box-shadow: 0 30px 60px -30px rgba(0,0,0,.7), 0 1px 0 rgba(255,255,255,.04) inset;
+    display:flex; flex-direction:column; justify-content: space-between;
+    overflow:hidden;
+  }
+  .biz-card .cnm { font-family: var(--font-heading); font-weight: 700; font-size: 18px; letter-spacing:-0.02em; }
+  .biz-card .cro { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; opacity:.6; margin-top: 4px; }
+  .biz-card .cct { font-family: var(--font-mono); font-size: 11px; line-height: 1.6; }
+
+  .ig-post { aspect-ratio: 1/1; padding: 32px; position:relative; overflow:hidden; display:flex; flex-direction: column; justify-content: space-between; }
+  .ig-post .ig-tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; opacity: .7; }
+  .ig-post .ig-tit { font-family: var(--font-heading); font-weight: 800; font-size: 56px; line-height: 0.92; letter-spacing:-0.04em; }
+  .ig-post .ig-sub { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; opacity:.7; }
+
+  /* Browser */
+  .browser { background: var(--bg-2); border-radius: 8px; overflow:hidden; box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); border: 1px solid var(--border-1); }
+  .browser .bar { height: 40px; background:#0E0F1A; display:flex; align-items:center; padding: 0 14px; gap: 6px; border-bottom:1px solid var(--border-1); }
+  .browser .bar i { width:11px; height:11px; border-radius:50%; background:#3a3b48; }
+  .browser .url { flex:1; margin: 0 16px; height: 24px; background: rgba(255,255,255,.04); border-radius: 4px; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); display:flex; align-items:center; padding: 0 12px; }
+
+  /* DO/DONT marker */
+  .mark-yes::after, .mark-no::after {
+    content:''; position:absolute; right:14px; top:14px; width: 28px; height: 28px; border-radius: 999px; z-index:3;
+  }
+  .mark-yes::after { background:#3CCB7F; }
+  .mark-no::after  { background:#FF4F4F; }
+  .mark-yes::before, .mark-no::before { content:''; position:absolute; right:18px; top:18px; width: 20px; height: 20px; background-size: contain; z-index:4; }
+  .mark-yes::before {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='3,8.5 6.5,12 13,4.5'/></svg>");
+  }
+  .mark-no::before {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round'><line x1='4' y1='4' x2='12' y2='12'/><line x1='12' y1='4' x2='4' y2='12'/></svg>");
+  }
+
+  /* Logo tile */
+  .logo-tile { border-radius: 4px; display:flex; align-items:center; justify-content:center; height: 240px; position:relative; overflow:hidden; }
+  .logo-tile img { max-width: 65%; max-height: 55%; object-fit: contain; }
+  .logo-tile .lab {
+    position:absolute; left:18px; bottom:14px;
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,255,255,.6);
+  }
+  .logo-tile.light .lab { color: rgba(10,10,15,.5); }
+
+  /* ============================================================
+     DIAGONAL DECORATION (the UP signature angle)
+     ============================================================ */
+  .diag-bg::before {
+    content:''; position:absolute; inset: 0;
+    background-image: repeating-linear-gradient(45deg, transparent 0 50px, rgba(255,255,255,.03) 50px 51px);
+    pointer-events: none;
+  }
+
+</style>
+<script type="application/json" id="speaker-notes">[]</script>
+</head>
+<body>
+
+<deck-stage width="1920" height="1080">
+
+<!-- ============================================================
+     01 · COVER
+     ============================================================ -->
+<section class="slide slide-bg-ink" data-screen-label="01 Capa">
+  <div class="running-head">
+    <div>UP · Brandbook 2026</div>
+    <div class="center">Manual de Marca · v 1.0</div>
+    <div class="right">Confidencial</div>
+  </div>
+
+  <!-- Massive UP wordmark with arrow on top-right -->
+  <div style="position:absolute; left: 96px; top: 220px; right: 96px; bottom: 200px;">
+    <div style="display:flex; align-items: flex-end; justify-content: space-between; height: 100%;">
+      <div style="position: relative;">
+        <div style="font-family: var(--font-heading); font-weight: 800; font-size: 720px; line-height: 0.78; letter-spacing: -0.06em; color:#fff;">
+          UP
+        </div>
+        <!-- Diagonal arrow tucked into the P negative space -->
+        <div class="up-arrow drift" style="position:absolute; right: -180px; top: 40px; width: 360px; height: 360px;">
+          <svg viewBox="0 0 369 278" preserveAspectRatio="xMidYMid meet">
+            <image href="../assets/arrow-blue.png" x="0" y="0" width="369" height="278"/>
+          </svg>
+        </div>
+      </div>
+      <div style="max-width: 380px; padding-bottom: 40px;">
+        <div class="eyebrow" style="color: var(--brand-hover);">2026</div>
+        <div class="lead" style="color:#fff; margin-top: 16px; font-size: 22px; line-height: 1.4;">
+          O sistema completo da UP — identidade, voz, visualidade, aplicações e governança.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- bottom strip -->
+  <div style="position:absolute; left: 96px; right: 96px; bottom: 96px;">
+    <div class="rule" style="background: rgba(255,255,255,.18);"></div>
+    <div style="display:flex; justify-content: space-between; margin-top: 24px;">
+      <div class="mono" style="color: rgba(255,255,255,.55);">VOL. 01 / 2026</div>
+      <div class="mono" style="color: rgba(255,255,255,.55);">UP AGÊNCIA · BRANDBOOK</div>
+      <div class="mono" style="color: rgba(255,255,255,.55);">22 PÁGINAS</div>
+    </div>
+  </div>
+
+  <div class="page-no"><div>UP / Brandbook</div><div>01 / 22</div></div>
+</section>
+
+<!-- ============================================================
+     02 · TOC
+     ============================================================ -->
+<section class="slide" data-screen-label="02 Sumário">
+  <div class="running-head"><div>UP · Brandbook 2026</div><div class="center">Sumário</div><div class="right">2 / 22</div></div>
+
+  <div style="display:grid; grid-template-columns: 0.4fr 1fr; gap: 80px; padding-top: 120px;">
+    <div>
+      <div class="eyebrow">Sumário</div>
+      <div class="display" style="font-size: 96px; margin-top: 12px;">Guia<br>de<br>uso.</div>
+      <div class="body" style="margin-top: 32px; max-width: 380px;">Brandbook é regra. Mas regra serve quem quer crescer rápido sem perder coerência. Use como referência, não como prisão.</div>
+    </div>
+
+    <div>
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 0 56px;">
+        <div>
+          <div style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brand-hover); margin-bottom: 16px;">Parte 1 · Essência</div>
+          <div class="rule-hard"></div>
+          <div class="toc-item"><span>01</span><span>Manifesto</span><span>03</span></div>
+          <div class="toc-item"><span>02</span><span>Posicionamento</span><span>04</span></div>
+          <div class="toc-item"><span>03</span><span>Voz &amp; tom</span><span>05</span></div>
+
+          <div style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brand-hover); margin: 48px 0 16px;">Parte 2 · Identidade</div>
+          <div class="rule-hard"></div>
+          <div class="toc-item"><span>04</span><span>Logo · construção</span><span>06</span></div>
+          <div class="toc-item"><span>05</span><span>Logo · variações</span><span>07</span></div>
+          <div class="toc-item"><span>06</span><span>Logo · don'ts</span><span>08</span></div>
+          <div class="toc-item"><span>07</span><span>Símbolo / a seta</span><span>09</span></div>
+        </div>
+        <div>
+          <div style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brand-hover); margin-bottom: 16px;">Parte 3 · Sistema</div>
+          <div class="rule-hard"></div>
+          <div class="toc-item"><span>08</span><span>Paleta</span><span>10</span></div>
+          <div class="toc-item"><span>09</span><span>Tipografia</span><span>11</span></div>
+          <div class="toc-item"><span>10</span><span>Grid &amp; ângulo</span><span>12</span></div>
+          <div class="toc-item"><span>11</span><span>Iconografia</span><span>13</span></div>
+
+          <div style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brand-hover); margin: 48px 0 16px;">Parte 4 · Em uso</div>
+          <div class="rule-hard"></div>
+          <div class="toc-item"><span>12</span><span>Papelaria</span><span>14</span></div>
+          <div class="toc-item"><span>13</span><span>Social &amp; campanha</span><span>15</span></div>
+          <div class="toc-item"><span>14</span><span>Web &amp; produto</span><span>16</span></div>
+          <div class="toc-item"><span>15</span><span>OOH &amp; ambiente</span><span>17</span></div>
+          <div class="toc-item"><span>16</span><span>Motion</span><span>18</span></div>
+          <div class="toc-item"><span>17</span><span>Governança</span><span>19</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .toc-item { display: grid; grid-template-columns: 50px 1fr 50px; gap: 16px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--border-1); font-family: var(--font-heading); }
+    .toc-item span:first-child { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; color: var(--brand-hover); }
+    .toc-item span:nth-child(2) { font-weight: 600; font-size: 22px; color: var(--text-strong); letter-spacing:-0.01em; }
+    .toc-item span:last-child { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); text-align: right; }
+  </style>
+
+  <div class="page-no"><div>UP / Brandbook</div><div>02 / 22</div></div>
+</section>
+
+<!-- ============================================================
+     03 · MANIFESTO
+     ============================================================ -->
+<section class="slide slide-bg-ink" data-screen-label="03 Manifesto">
+  <div class="running-head"><div>Parte 1 · Essência</div><div class="center">Manifesto</div><div class="right">3 / 22</div></div>
+  <div style="position:absolute; inset: 0; background-image: repeating-linear-gradient(45deg, transparent 0 100px, rgba(49,60,240,.05) 100px 101px); pointer-events:none;"></div>
+
+  <div style="position: absolute; right: -80px; top: -80px; width: 720px; height: 720px; opacity: .14;">
+    <img src="../assets/arrow-blue.png" alt="" style="width:100%; height:100%; object-fit: contain;">
+  </div>
+
+  <div style="position: relative; padding-top: 100px;">
+    <div class="npl">01 · Manifesto</div>
+    <div class="display" style="font-size: 188px; margin-top: 48px; max-width: 1500px;">
+      Marca <span style="color: var(--brand-hover);">não</span><br>
+      é decoração.
+    </div>
+    <div class="display" style="font-size: 88px; margin-top: 56px; max-width: 1200px; color: rgba(255,255,255,.78); font-weight: 500;">
+      É a primeira alavanca de receita que escala sem vendedor.
+    </div>
+
+    <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 100px; max-width: 1400px;">
+      <div>
+        <div class="eyebrow">Quem somos</div>
+        <p class="body" style="margin-top: 12px;">Operação criativa fim-a-fim. Estratégia, identidade, experiência, mídia.</p>
+      </div>
+      <div>
+        <div class="eyebrow">Pra quem</div>
+        <p class="body" style="margin-top: 12px;">Marcas em fase de tração que querem virar referência — e tem um ano pra isso.</p>
+      </div>
+      <div>
+        <div class="eyebrow">Pra quê</div>
+        <p class="body" style="margin-top: 12px;">Pra construir marca que vende dormindo. Não brand awareness — brand demand.</p>
+      </div>
+      <div>
+        <div class="eyebrow">Como</div>
+        <p class="body" style="margin-top: 12px;">Sem hand-off. Um time, quatro frentes, uma marca por vez.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-no"><div>UP / Brandbook · Manifesto</div><div>03 / 22</div></div>
+</section>
+
+<!-- ============================================================
+     04 · POSICIONAMENTO
+     ============================================================ -->
+<section class="slide" data-screen-label="04 Posicionamento">
+  <div class="running-head"><div>Parte 1 · Essência</div><div class="center">Posicionamento</div><div class="right">4 / 22</div></div>
+
+  <div style="display: grid; grid-template-columns: 0.5fr 1fr; gap: 80px; padding-top: 120px;">
+    <div>
+      <div class="npl">02 · Posicionamento</div>
+      <div class="h1" style="margin-top: 24px;">Onde<br>a UP<br>está.</div>
+      <div class="lead" style="margin-top: 32px; max-width: 420px;">
+        Não somos a agência criativa. Não somos a casa de growth. Somos o ponto onde marca encontra performance — e ninguém mais ocupa esse espaço inteiro.
+      </div>
+    </div>
+
+    <div>
+      <!-- 2x2 perceptual map -->
+      <div style="position:relative; aspect-ratio: 1.4/1; background: var(--bg-2); border: 1px solid var(--border-1); border-radius: 8px; padding: 48px;">
+        <!-- axes -->
+        <div style="position:absolute; left:0; right:0; top:50%; height:1px; background: var(--border-2);"></div>
+        <div style="position:absolute; top:0; bottom:0; left:50%; width:1px; background: var(--border-2);"></div>
+
+        <!-- labels -->
+        <div class="mono" style="position:absolute; top: 24px; left: 50%; transform: translateX(-50%); text-transform: uppercase; letter-spacing: 0.22em; color: var(--text-muted);">↑ Estratégia</div>
+        <div class="mono" style="position:absolute; bottom: 24px; left: 50%; transform: translateX(-50%); text-transform: uppercase; letter-spacing: 0.22em; color: var(--text-muted);">Execução ↓</div>
+        <div class="mono" style="position:absolute; left: 24px; top: 50%; transform: translateY(-50%) rotate(-90deg); text-transform: uppercase; letter-spacing: 0.22em; color: var(--text-muted);">← Marca</div>
+        <div class="mono" style="position:absolute; right: 24px; top: 50%; transform: translateY(-50%) rotate(90deg); text-transform: uppercase; letter-spacing: 0.22em; color: var(--text-muted);">Performance →</div>
+
+        <!-- competitors -->
+        <div style="position:absolute; left: 18%; top: 22%;" class="map-dot"><span class="d"></span><div class="lbl">Studios criativos</div></div>
+        <div style="position:absolute; right: 18%; top: 22%;" class="map-dot"><span class="d"></span><div class="lbl">Consultorias</div></div>
+        <div style="position:absolute; right: 18%; bottom: 22%;" class="map-dot"><span class="d"></span><div class="lbl">Casas de mídia</div></div>
+        <div style="position:absolute; left: 18%; bottom: 22%;" class="map-dot"><span class="d"></span><div class="lbl">Freelancers</div></div>
+
+        <!-- UP itself, off-center quadrant straddler -->
+        <div style="position:absolute; left: 58%; top: 38%; width: 200px; height: 200px;">
+          <div style="position:absolute; inset: 0; background: var(--brand); border-radius: 999px; opacity: .12; filter: blur(20px);"></div>
+          <div style="position:absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); display:flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div style="width: 24px; height: 24px; background: var(--brand); border-radius: 999px; box-shadow: 0 0 0 6px rgba(49,60,240,.22), 0 0 0 14px rgba(49,60,240,.08);"></div>
+            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 24px; letter-spacing:-0.02em; color: var(--text-strong);">UP</div>
+            <div class="mono" style="text-transform: uppercase; letter-spacing: 0.2em; color: var(--brand-hover);">Aqui</div>
+          </div>
+        </div>
+      </div>
+
+      <style>
+        .map-dot { display:flex; align-items:center; gap: 10px; }
+        .map-dot .d { width: 10px; height: 10px; border-radius: 999px; background: var(--text-subtle); }
+        .map-dot .lbl { font-family: var(--font-caption); font-size: 13px; color: var(--text-muted); }
+      </style>
+    </div>
+  </div>
+
+  <!-- bottom rail of distinctions -->
+  <div style="position: absolute; left: 96px; right: 96px; bottom: 96px;">
+    <div class="rule" style="background: var(--text-strong);"></div>
+    <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-top: 24px;">
+      <div>
+        <div class="mono">Não somos</div>
+        <div class="h3" style="margin-top: 8px; color: var(--text-muted); text-decoration: line-through;">Agência full-service tradicional</div>
+      </div>
+      <div>
+        <div class="mono">Somos</div>
+        <div class="h3" style="margin-top: 8px;">Operação de marca + receita</div>
+      </div>
+      <div>
+        <div class="mono">Diferença</div>
+        <div class="h3" style="margin-top: 8px;">Um time. Quatro frentes. Sem hand-off.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-no"><div>UP / Brandbook · Posicionamento</div><div>04 / 22</div></div>
+</section>
+
+<!-- ============================================================
+     05 · VOZ & TOM
+     ============================================================ -->
+<section class="slide slide-bg-2" data-screen-label="05 Voz tom">
+  <div class="running-head"><div>Parte 1 · Essência</div><div class="center">Voz &amp; tom</div><div class="right">5 / 22</div></div>
+
+  <div style="padding-top: 100px;">
+    <div class="npl">03 · Voz &amp; tom</div>
+    <div class="h1" style="margin-top: 16px;">A UP fala reto.</div>
+    <div class="lead" style="margin-top: 16px; max-width: 980px;">Frase curta. Verbo no presente. Argumento, não adjetivo. Quem precisa de muito floreio não tem o que dizer.</div>
+  </div>
+
+  <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 64px;">
+    <!-- Trait card -->
+    <div class="trait-card">
+      <div class="trait-num">A</div>
+      <div class="trait-name">Direta</div>
+      <div class="trait-desc">Sem qualificadores que enfraquecem. Sem "talvez", "basicamente", "meio que".</div>
+      <div class="rule" style="background: currentColor; margin: 24px 0;"></div>
+      <div class="trait-eg yes">Marca move receita.</div>
+      <div class="trait-eg no">Acreditamos que a marca pode, de certa forma, mover receita.</div>
+    </div>
+    <div class="trait-card">
+      <div class="trait-num">B</div>
+      <div class="trait-name">Confiante</div>
+      <div class="trait-desc">A gente sabe o que faz e mostra. Argumento prova autoridade — não adjetivo.</div>
+      <div class="rule" style="background: currentColor; margin: 24px 0;"></div>
+      <div class="trait-eg yes">Construímos +120 marcas em 8 anos.</div>
+      <div class="trait-eg no">Somos considerados uma das melhores agências do Brasil.</div>
+    </div>
+    <div class="trait-card">
+      <div class="trait-num">C</div>
+      <div class="trait-name">Provocadora</div>
+      <div class="trait-desc">Tem opinião. Quando a indústria zigue, a UP zague — desde que tenha razão.</div>
+      <div class="rule" style="background: currentColor; margin: 24px 0;"></div>
+      <div class="trait-eg yes">Site bonito não vende. Sistema de marca, sim.</div>
+      <div class="trait-eg no">Trabalhamos com excelência e qualidade superior.</div>
+    </div>
+  </div>
+
+  <style>
+    .trait-card { background: var(--bg); border-radius: 4px; padding: 32px; border-top: 4px solid var(--brand); position:relative; }
+    .trait-num { position: absolute; right: 32px; top: 32px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.22em; color: var(--brand-hover); }
+    .trait-name { font-family: var(--font-heading); font-weight: 800; font-size: 40px; letter-spacing:-0.02em; color: var(--text-strong); }
+    .trait-desc { font-family: var(--font-body); font-size: 16px; line-height: 1.55; color: var(--text-body); margin-top: 12px; }
+    .trait-eg { font-family: var(--font-heading); font-weight: 500; font-size: 17px; line-height: 1.4; padding: 10px 0 10px 24px; position: relative; }
+    .trait-eg::before { content:''; position: absolute; left: 0; top: 14px; width: 14px; height: 14px; border-radius: 999px; }
+    .trait-eg.yes { color: var(--text-strong); }
+    .trait-eg.yes::before { background: #3CCB7F; }
+    .trait-eg.no { color: var(--text-muted); text-decoration: line-through; }
+    .trait-eg.no::before { background: #FF4F4F; }
+  </style>
+
+  <!-- Lexicon strip -->
+  <div style="position: absolute; left: 96px; right: 96px; bottom: 80px;">
+    <div class="rule" style="background: var(--text-strong);"></div>
+    <div style="display:grid; grid-template-columns: 200px 1fr 1fr; gap: 32px; margin-top: 24px;">
+      <div class="mono">Léxico UP</div>
+      <div>
+        <div class="mono" style="color: #3CCB7F;">USAR</div>
+        <div class="body" style="margin-top: 6px;">construir · crescer · sistema · receita · operar · sair na frente · prova · tração</div>
+      </div>
+      <div>
+        <div class="mono" style="color: #FF4F4F;">EVITAR</div>
+        <div class="body" style="margin-top: 6px;">solução · jornada · sinergia · disrupção · ecossistema · DNA · paixão · transformação</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-no"><div>UP / Brandbook · Voz</div><div>05 / 22</div></div>
+</section>
+
+<!-- ============================================================
+     06 · LOGO CONSTRUÇÃO
+     ============================================================ -->
+<section class="slide" data-screen-label="06 Logo construção">
+  <div class="running-head"><div>Parte 2 · Identidade</div><div class="center">Logo · construção</div><div class="right">6 / 22</div></div>
+
+  <div style="padding-top: 100px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 80px;">
+    <div>
+      <div class="npl">04 · Construção</div>
+      <div class="h1" style="margin-top: 16px;">Letra<br>+ vetor.</div>
+      <div class="body" style="margin-top: 24px; max-width: 460px;">O logo UP é dois sinais que se completam: o wordmark (forma) e a seta (direção). A seta não é decoração — ela carrega o nome da marca. Se você tirar a seta, sobra metade do significado.</div>
+
+      <div style="margin-top: 56px; display:grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+        <div>
+          <div class="eyebrow">Área de respiro</div>
+          <div class="h3" style="margin-top: 8px;">≥ 1× a altura do "U"</div>
+          <div class="small" style="margin-top: 6px;">Distância mínima entre o logo e qualquer outro elemento.</div>
+        </div>
+        <div>
+          <div class="eyebrow">Tamanho mínimo</div>
+          <div class="h3" style="margin-top: 8px;">96px digital · 24mm print</div>
+          <div class="small" style="margin-top: 6px;">Abaixo disso, usar apenas o símbolo.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Construction grid -->
+    <div style="background: var(--bg-2); border: 1px solid var(--border-1); border-radius: 8px; padding: 48px; position: relative; overflow: hidden;">
+      <!-- grid -->
+      <svg viewBox="0 0 600 480" style="position:absolute; inset: 0; width:100%; height:100%;">
+        <defs>
+          <pattern id="cgrid" width="30" height="30" patternUnits="userSpaceOnUse">
+            <path d="M30 0 L0 0 0 30" fill="none" stroke="rgba(49,60,240,.12)" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <rect width="600" height="480" fill="url(#cgrid)"/>
+        <!-- guides -->
+        <line x1="60" y1="120" x2="540" y2="120" stroke="var(--brand-hover)" stroke-dasharray="3 6" stroke-width="1"/>
+        <line x1="60" y1="360" x2="540" y2="360" stroke="var(--brand-hover)" stroke-dasharray="3 6" stroke-width="1"/>
+        <line x1="120" y1="60" x2="120" y2="420" stroke="var(--brand-hover)" stroke-dasharray="3 6" stroke-width="1"/>
+        <line x1="540" y1="60" x2="540" y2="420" stroke="var(--brand-hover)" stroke-dasharray="3 6" stroke-width="1"/>
+      </svg>
+
+      <!-- logo on top of grid -->
+      <div style="position: relative; z-index: 2; height: 380px; display:flex; align-items:center; justify-content:center;">
+        <img src="../assets/logo-allwhite.png" alt="UP" style="width: 84%; height: auto;">
+      </div>
+
+      <!-- measurements -->
+      <div style="position: absolute; left: 0; right: 0; bottom: 16px; display:flex; justify-content: space-around; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brand-hover); padding: 0 48px;">
+        <span>x</span><span>2x</span><span>x · 1.4</span><span>x</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-no"><div>UP / Brandbook · Construção</div><div>06 / 22</div></div>
+</section>
+
+<!-- ============================================================
+     07 · LOGO VARIAÇÕES
+     ============================================================ -->
+<section class="slide slide-bg-2" data-screen-label="07 Logo variações">
+  <div class="running-head"><div>Parte 2 · Identidade</div><div class="center">Logo · variações</div><div class="right">7 / 22</div></div>
+
+  <div style="padding-top: 100px;">
+    <div class="npl">05 · Variações oficiais</div>
+    <div class="h1" style="margin-top: 16px;">Quatro versões. Sem improviso.</div>
+  </div>
+
+  <div class="grid g4" style="margin-top: 48px;">
+    <div>
+      <div class="logo-tile light" style="background:#FFFFFF;">
+        <img src="../assets/logo-primary.png" alt="primary"><div class="lab">01 · Primary</div>
+      </div>
+      <div class="eyebrow" style="margin-top: 16px;">Primary</div>
+      <div class="h3" style="margin-top: 6px; font-size: 22px;">Wordmark preto, seta azul</div>
+      <div class="small" style="margin-top: 8px;">Versão principal. Use em fundos claros: branco, off-white, soft.</div>
+    </div>
+    <div>
+      <div class="logo-tile" style="background:#050507;">
+        <img src="../assets/logo-allwhite.png" alt="white"><div class="lab">02 · All white</div>
+      </div>
+      <div class="eyebrow" style="margin-top: 16px;">All white</div>
+      <div class="h3" style="margin-top: 6px; font-size: 22px;">Logo 100% branco</div>
+      <div class="small" style="margin-top: 8px;">Fundos pretos, fotografia escura, alto contraste.</div>
+    </div>
+    <div>
+      <div class="logo-tile" style="background:var(--brand);">
+        <img src="../assets/logo-allwhite.png" alt="white on brand"><div class="lab">03 · White on brand</div>
+      </div>
+      <div class="eyebrow" style="margin-top: 16px;">White on brand</div>
+      <div class="h3" style="margin-top: 6px; font-size: 22px;">Branco sobre azul UP</div>
+      <div class="small" style="margin-top: 8px;">Sempre branco sobre o brand. Nunca primary.</div>
+    </div>
+    <div>
+      <div class="logo-tile light" style="background:#FFFFFF;">
+        <img src="../assets/logo-allblack.png" alt="all black"><div class="lab">04 · Mono black</div>
+      </div>
+      <div class="eyebrow" style="margin-top: 16px;">Mono black</div>
+      <div class="h3" style="margin-top: 6px; font-size: 22px;">Preto chapado · 1 cor</div>
+      <div class="small" style="margin-top: 8px;">Impressão técnica, gravação, embalagem.</div>
+    </div>
+  </div>
+
+  <!-- bottom: minimum-size scale -->
+  <div style="position: absolute; left: 96px; right: 96px; bottom: 96px;">
+    <div class="rule" style="background: var(--text-strong);"></div>
+    <div style="display:grid; grid-template-columns: 200px 1fr; gap: 48px; margin-top: 24px; align-items: end;">
+      <div class="mono">Escala mínima</div>
+      <div style="display:flex; align-items: flex-end; gap: 64px;">
+        <div style="display:flex; flex-direction: column; align-items: center; gap: 6px;">
+          <img src="../assets/logo-allwhite.png" alt="" style="width: 240px;">
+          <div class="small">240 px</div>
+        </div>
+        <div style="display:flex; flex-direction: column; align-items: center; gap: 6px;">
+          <img src="../assets/logo-allwhite.png" alt="" style="width: 160px;">
+          <div class="small">160 px</div>
+        </div>
+        <div style="display:flex; flex-direction: column; align-items: center; gap: 6px;">
+          <img src="../assets/logo-allwhite.png" alt="" style="width: 96px;">
+          <div class="small" style="color: var(--brand-hover);">96 px · mín.</div>
+        </div>
+        <div style="display:flex; flex-direction: column; align-items: center; gap: 6px; opacity: .35;">
+          <img src="../assets/logo-allwhite.png" alt="" style="width: 64px; filter: blur(.4px);">
+          <div class="small" style="color: #FF4F4F;">64 px · ✗</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-no"><div>UP / Brandbook · Variações</div><div>07 / 22</div></div>
+</section>
+
+<!-- ============================================================
+     08 · LOGO DON'TS
+     ============================================================ -->
+<section class="slide" data-screen-label="08 Logo don'ts">
+  <div class="running-head"><div>Parte 2 · Identidade</div><div class="center">Logo · don'ts</div><div class="right">8 / 22</div></div>
+
+  <div style="padding-top: 100px;">
+    <div class="npl">06 · Don'ts</div>
+    <div class="h1" style="margin-top: 16px;">O que <span style="color: #FF4F4F;">nunca</span> fazer.</div>
+  </div>
+
+  <div class="grid g4" style="margin-top: 48px;">
+    <div>
+      <div class="logo-tile mark-no" style="background:#050507;"><img src="../assets/logo-primary.png" alt=""></div>
+      <div class="small" style="margin-top: 12px;">Primary sobre fundo escuro. Wordmark some.</div>
+    </div>
+    <div>
+      <div class="logo-tile mark-no light" style="background:#FFF;"><img src="../assets/logo-allwhite.png" alt=""></div>
+      <div class="small" style="margin-top: 12px;">Branco sobre branco. Inviável.</div>
+    </div>
+    <div>
+      <div class="logo-tile mark-no" style="background:linear-gradient(135deg,#FF7A00,#E91E63);"><img src="../assets/logo-allwhite.png" alt=""></div>
+      <div class="small" style="margin-top: 12px;">Cores fora da paleta. Não.</div>
+    </div>
+    <div>
+      <div class="logo-tile mark-no" style="background:var(--brand);"><img src="../assets/logo-primary.png" alt=""></div>
+      <div class="small" style="margin-top: 12px;">Primary sobre brand. Anula a seta.</div>
+    </div>
+    <div>
+      <div class="logo-tile mark-no light" style="background:#FFF;"><img src="../assets/logo-allblack.png" alt="" style="transform: rotate(-12deg);"></div>
+      <div class="small" style="margin-top: 12px;">Não rotacionar. Logo é horizontal.</div>
+    </div>
+    <div>
+      <div class="logo-tile mark-no light" style="background:#FFF;"><img src="../assets/logo-allblack.png" alt="" style="transform: scaleX(1.6);"></div>
+      <div class="small" style="margin-top: 12px;">Não distorcer. Proporção é fixa.</div>
+    </div>
+    <div>
+      <div class="logo-tile mark-no light" style="background:#FFF;"><img src="../assets/logo-primary.png" alt="" style="filter: drop-shadow(4px 4px 0 #FF4F4F);"></div>
+      <div class="small" style="margin-top: 12px;">Sem sombras, outline ou efeito.</div>
+    </div>
+    <div>
+      <div class="logo-tile mark-no light" style="background:#FFF;">
+        <div style="display:flex; align-items:center; gap: 12px;">
+          <img src="../assets/logo-allblack.png" alt="" style="width: 60%;">
+          <span style="font-family: 'Comic Sans MS', cursive; font-size: 32px; color:#0A0A0F;">agência!</span>
+        </div>
+      </div>
+      <div class="small" style="margin-top: 12px;">Não acrescentar palavras ou tagline.</div>
+    </div>
+  </div>
+
+  <div class="page-no"><div>UP / Brandbook · Don'ts</div><div>08 / 22</div></div>
+</section>
+
+<!-- ============================================================
+     09 · SÍMBOLO / A SETA
+     ============================================================ -->
+<section class="slide slide-bg-brand" data-screen-label="09 Símbolo">
+  <div class="running-head"><div>Parte 2 · Identidade</div><div class="center">Símbolo · a seta</div><div class="right">9 / 22</div></div>
+
+  <div style="padding-top: 100px;">
+    <div class="npl" style="color:#fff;">07 · Símbolo</div>
+    <div class="h1" style="margin-top: 16px;">A seta vai pra cima e pra direita. Sempre.</div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 56px; align-items: start;">
+    <div style="position: relative;">
+      <!-- big arrow showcase with measurement guides -->
+      <div style="background: rgba(255,255,255,.08); border-radius: 8px; padding: 60px; position: relative; min-height: 540px; display:flex; align-items:center; justify-content:center;">
+        <img src="../assets/arrow-white.png" alt="" style="width: 70%; height: auto; filter: drop-shadow(0 20px 60px rgba(0,0,0,.4));">
+        <!-- 45° dashed line -->
+        <div style="position: absolute; left: 60px; bottom: 60px; right: 60px; top: 60px; pointer-events: none;">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none" style="width:100%; height:100%;">
+            <line x1="10" y1="90" x2="90" y2="10" stroke="#fff" stroke-width="0.4" stroke-dasharray="1.5 1.5" opacity=".5"/>
+          </svg>
+        </div>
+        <div class="mono" style="position: absolute; left: 60px; bottom: 32px; color:#fff; opacity:.7;">↗ 45° · ângulo da marca</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="lead" style="color:#fff;">Quando a UP não cabe inteira, a seta vai sozinha. Ela é assinatura, favicon, ícone de app, watermark, fim de filme.</div>
+
+      <div style="margin-top: 48px; display:flex; gap: 32px; align-items: flex-end;">
+        <div style="background: rgba(255,255,255,.1); border-radius: 4px; padding: 20px; width: 130px; height: 130px; display:flex; align-items:center; justify-content:center;">
+          <img src="../assets/arrow-white.png" alt="" style="width: 70%;">
+        </div>
+        <div style="background: rgba(255,255,255,.1); border-radius: 4px; padding: 16px; width: 90px; height: 90px; display:flex; align-items:center; justify-content:center;">
+          <img src="../assets/arrow-white.png" alt="" style="width: 70%;">
+        </div>
+        <div style="background: rgba(255,255,255,.1); border-radius: 4px; padding: 12px; width: 60px; height: 60px; display:flex; align-items:center; justify-content:center;">
+          <img src="../assets/arrow-white.png" alt="" style="width: 70%;">
+        </div>
+        <div style="background: rgba(255,255,255,.1); border-radius: 4px; padding: 8px; width: 40px; height: 40px; display:flex; align-items:center; justify-content:center;">
+          <img src="../assets/arrow-white.png" alt="" style="width: 70%;">
+        </div>
+        <div class="mono" style="color: rgba(255,255,255,.7); padding-bottom: 8px;">128 · 64 · 48 · 32 · 16 px</div>
+      </div>
+
+      <div class="rule" style="background:#fff; margin: 48px 0;"></div>
+
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+        <div>
+          <div class="eyebrow" style="color:#fff;">Cores oficiais</div>
+          <div style="display:flex; gap: 8px; margin-top: 12px;">
+            <div style="width:48px; height:48px; background: var(--brand); border-radius: 4px; border: 1px solid rgba(255,255,255,.3);"></div>
+            <div style="width:48px; height:48px; background: #fff; border-radius: 4px;"></div>
+            <div style="width:48px; height:48px; background: #050507; border-radius: 4px;"></div>
+          </div>
+        </div>
+        <div>
+          <div class="eyebrow" style="color:#fff;">Uso</div>
+          <ul style="margin: 12px 0 0; padding-left: 18px; font-family: var(--font-body); font-size: 15px; line-height: 1.6; color: rgba(255,255,255,.92);">
+            <li>Favicon &amp; touch icons</li>
+            <li>Watermark de vídeo</li>
+            <li>Padronagens decorativas</li>
+            <li>Selo de fim de campanha</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-no"><div>UP / Brandbook · Símbolo</div><div>09 / 22</div></div>
+</section>
+
+<!-- ============================================================
+     10 · PALETA
+     ============================================================ -->
+<section class="slide" data-screen-label="10 Paleta">
+  <div class="running-head"><div>Parte 3 · Sistema</div><div class="center">Paleta</div><div class="right">10 / 22</div></div>
+
+  <div style="padding-top: 100px;">
+    <div class="npl">08 · Paleta</div>
+    <div class="h1" style="margin-top: 16px;">Azul UP, preto, off-white. Só.</div>
+  </div>
+
+  <!-- Hero swatch -->
+  <div style="display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 16px; margin-top: 48px;">
+    <div class="swatch" style="background:#313CF0; color:#fff; min-height: 360px;">
+      <div>
+        <div class="role">Primary</div>
+        <div class="name" style="font-size: 64px; margin-top: 12px;">Azul UP</div>
+      </div>
+      <div>
+        <div class="hex">#313CF0</div>
+        <div class="stack" style="margin-top: 6px;">RGB 49 · 60 · 240<br>CMYK 92 · 84 · 0 · 0<br>Pantone 2728 C</div>
+      </div>
+    </div>
+    <div class="swatch" style="background:#050507; color:#fff;">
+      <div><div class="role">Ink</div><div class="name" style="margin-top: 8px;">Preto UP</div></div>
+      <div><div class="hex">#050507</div><div class="stack" style="margin-top: 6px;">RGB 5 · 5 · 7</div></div>
+    </div>
+    <div class="swatch" style="background:#F0F0F4; color:#0A0A0F;">
+      <div><div class="role" style="opacity:.6;">Paper</div><div class="name" style="margin-top: 8px;">Off-white</div></div>
+      <div><div class="hex">#F0F0F4</div><div class="stack" style="margin-top: 6px;">RGB 240 · 240 · 244</div></div>
+    </div>
+  </div>
+
+  <!-- Secondary row -->
+  <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 16px;">
+    <div class="swatch" style="background:#5A82FF; color:#fff; min-height: 180px;"><div><div class="role">Hover</div><div class="name" style="font-size: 22px; margin-top: 4px;">UP Light</div></div><div class="hex">#5A82FF</div></div>
+    <div class="swatch" style="background:#1B1F8C; color:#fff; min-height: 180px;"><div><div class="role">Deep</div><div class="name" style="font-size: 22px; margin-top: 4px;">UP Deep</div></div><div class="hex">#1B1F8C</div></div>
+    <div class="swatch" style="background:#E8EBFF; color:#0A0A0F; min-height: 180px;"><div><div class="role" style="opacity:.6;">Soft</div><div class="name" style="font-size: 22px; margin-top: 4px;">UP Soft</div></div><div class="hex">#E8EBFF</div></div>
+    <div class="swatch" style="background:#7A7A7A; color:#fff; min-height: 180px;"><div><div class="role">Muted</div><div class="name" style="font-size: 22px; margin-top: 4px;">Cinza UI</div></div><div class="hex">#7A7A7A</div></div>
+    <div class="swatch" style="background:#3CCB7F; color:#fff; min-height: 180px;"><div><div class="role">Sinal</div><div class="name" style="font-size: 22px; margin-top: 4px;">Verde sinal</div></div><div class="hex">#3CCB7F</div></div>
+  </div>
+
+  <!-- Proportion bar -->
+  <div style="position: absolute; left: 96px; right: 96px; bottom: 96px;">
+    <div class="rule" style="background: var(--text-strong);"></div>
+    <div style="display: grid; grid-template-columns: 200px 1fr 100px; gap: 32px; margin-top: 24px; align-items: center;">
+      <div class="mono">Proporção 60·25·12·3</div>
+      <div style="display:flex; height: 28px; border-radius: 4px; overflow:hidden;">
+        <div style="flex: 60; background:#050507;"></div>
+        <div style="flex: 25; background:#F0F0F4;"></div>
+        <div style="flex: 12; background:#313CF0;"></div>
+        <div style="flex: 3; background:#3CCB7F;"></div>
+      </div>
+      <div class="small" style="text-align:right;">Ink · Paper · Brand · Sinal</div>
+    </div>
+  </div>
+
+  <div class="page-no"><div>UP / Brandbook · Paleta</div><div>10 / 22</div></div>
+</section>
+
+<!-- ============================================================
+     11 · TIPOGRAFIA
+     ============================================================ -->
+<section class="slide slide-bg-2" data-screen-label="11 Tipografia">
+  <div class="running-head"><div>Parte 3 · Sistema</div><div class="center">Tipografia</div><div class="right">11 / 22</div></div>
+
+  <div style="padding-top: 100px;">
+    <div class="npl">09 · Tipografia</div>
+    <div class="h1" style="margin-top: 16px;">Duas famílias. Hierarquia óbvia.</div>
+  </div>
+
+  <!-- Specimen rows -->
+  <div style="margin-top: 56px;">
+    <!-- Montserrat -->
+    <div style="display: grid; grid-template-columns: 0.4fr 1fr 0.3fr; gap: 48px; padding: 32px 0; border-top: 1px solid var(--border-2); align-items: end;">
+      <div>
+        <div class="mono">A · Heading + body</div>
+        <div style="font-family: var(--font-heading); font-weight: 800; font-size: 80px; letter-spacing:-0.04em; color: var(--text-strong); margin-top: 8px;">Montserrat</div>
+        <div class="small" style="margin-top: 4px;">Geometric sans · Google Fonts · livre</div>
+      </div>
+      <div>
+        <div style="font-family: var(--font-heading); font-weight: 800; font-size: 132px; letter-spacing:-0.04em; line-height: 0.92; color: var(--text-strong);">Headline.</div>
+        <div style="font-family: var(--font-heading); font-weight: 500; font-size: 32px; letter-spacing:-0.02em; line-height: 1.2; color: var(--text-strong); margin-top: 16px;">Subtítulo de seção.</div>
+        <div style="font-family: var(--font-body); font-weight: 400; font-size: 18px; line-height: 1.55; color: var(--text-body); margin-top: 12px; max-width: 720px;">Body — texto corrido. Marca não é decoração. É a primeira alavanca de receita que escala sem vendedor.</div>
+      </div>
+      <div>
+        <div class="mono" style="text-align: right; line-height: 1.8;">300 · light<br>400 · regular<br>500 · medium<br>600 · semibold<br>700 · bold<br>800 · extrabold</div>
+      </div>
+    </div>
+
+    <!-- Inter -->
+    <div style="display: grid; grid-template-columns: 0.4fr 1fr 0.3fr; gap: 48px; padding: 32px 0; border-top: 1px solid var(--border-2); border-bottom: 1px solid var(--border-2); align-items: end;">
+      <div>
+        <div class="mono">B · Caption + UI</div>
+        <div style="font-family: var(--font-caption); font-weight: 600; font-size: 80px; letter-spacing:-0.025em; color: var(--text-strong); margin-top: 8px;">Inter</div>
+        <div class="small" style="margin-top: 4px;">Neo-grotesque · Google Fonts · livre</div>
+      </div>
+      <div>
+        <div style="font-family: var(--font-caption); font-weight: 600; font-size: 28px; letter-spacing: 0.04em; color: var(--text-strong);">Eyebrow · metadado · UI label.</div>
+        <div style="font-family: var(--font-caption); font-weight: 400; font-size: 16px; color: var(--text-body); margin-top: 12px;">Caption — usada em legendas, números, microcópia, navegação secundária.</div>
+        <div style="font-family: var(--font-mono); font-weight: 500; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brand-hover); margin-top: 16px;">JetBrains Mono · technical labels</div>
+      </div>
+      <div>
+        <div class="mono" style="text-align: right; line-height: 1.8;">400 · regular<br>500 · medium<br>600 · semibold<br>700 · bold</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- scale chart bottom -->
+  <div style="position: absolute; left: 96px; right: 96px; bottom: 80px;">
+    <div style="display:grid; grid-template-columns: 200px 1fr; gap: 48px; align-items: end;">
+      <div class="mono">Escala tipográfica</div>
+      <div style="display:flex; gap: 32px; align-items: baseline;">
+        <span style="font-family: var(--font-heading); font-weight: 800; font-size: 88px; letter-spacing:-0.03em; color: var(--text-strong);">Aa</span>
+        <span style="font-family: var(--font-heading); font-weight: 700; font-size: 56px; letter-spacing:-0.02em; color: var(--text-strong);">Aa</span>
+        <span style="font-family: var(--font-heading); font-weight: 600; font-size: 36px; letter-spacing:-0.015em; color: var(--text-strong);">Aa</span>
+        <span style="font-family: var(--font-heading); font-weight: 500; font-size: 24px; color: var(--text-strong);">Aa</span>
+        <span style="font-family: var(--font-body); font-weight: 400; font-size: 18px; color: var(--text-body);">Aa</span>
+        <span style="font-family: var(--font-caption); font-weight: 500; font-size: 14px; color: var(--text-muted);">Aa</span>
+        <span class="mono" style="font-size: 11px; color: var(--text-muted); margin-left: auto;">88 · 56 · 36 · 24 · 18 · 14</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-no"><div>UP / Brandbook · Tipografia</div><div>11 / 22</div></div>
+</section>
+
+<!-- ============================================================
+     12 · GRID & ÂNGULO
+     ============================================================ -->
+<section class="slide slide-bg-deep" data-screen-label="12 Grid ângulo">
+  <div class="running-head"><div>Parte 3 · Sistema</div><div class="center">Grid &amp; ângulo</div><div class="right">12 / 22</div></div>
+
+  <div style="padding-top: 100px;">
+    <div class="npl" style="color:#fff;">10 · Grid &amp; ângulo</div>
+    <div class="h1" style="margin-top: 16px;">A UP <span style="color: var(--brand-hover);">↗</span> sobe.</div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 48px; align-items: start;">
+    <div>
+      <div class="lead" style="color:#fff; max-width: 480px;">Tudo na UP tem direção. O grid é ortogonal — mas a energia da marca corre em 45°, do canto inferior esquerdo ao superior direito. Setas, listras, fluxos, transições: sempre subindo.</div>
+
+      <div class="rule" style="background:#fff; opacity:.2; margin: 40px 0;"></div>
+
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+        <div>
+          <div class="eyebrow" style="color:#fff;">Grid base</div>
+          <div class="h3" style="margin-top: 8px;">12 colunas · 96px gutter</div>
+        </div>
+        <div>
+          <div class="eyebrow" style="color:#fff;">Margens</div>
+          <div class="h3" style="margin-top: 8px;">96 px digital · 24 mm print</div>
+        </div>
+        <div>
+          <div class="eyebrow" style="color:#fff;">Ângulo da marca</div>
+          <div class="h3" style="margin-top: 8px;">45° ↗ subindo, sempre</div>
+        </div>
+        <div>
+          <div class="eyebrow" style="color:#fff;">Ritmo vertical</div>
+          <div class="h3" style="margin-top: 8px;">8 px base · escala 8/16/24/32/48/64</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Visual demo: layout with 45° accent -->
+    <div style="aspect-ratio: 1.15/1; background: #050507; border-radius: 8px; padding: 48px; position: relative; overflow: hidden;">
+      <!-- 12 col grid -->
+      <div style="position:absolute; inset: 48px; display: grid; grid-template-columns: repeat(12, 1fr); gap: 8px;">
+        <div style="background: rgba(49,60,240,.05); height: 100%; border-radius: 1px;"></div>
+        <div style="background: rgba(49,60,240,.05); height: 100%; border-radius: 1px;"></div>
+        <div style="background: rgba(49,60,240,.05); height: 100%; border-radius: 1px;"></div>
+        <div style="background: rgba(49,60,240,.05); height: 100%; border-radius: 1px;"></div>
+        <div style="background: rgba(49,60,240,.05); height: 100%; border-radius: 1px;"></div>
+        <div style="background: rgba(49,60,240,.05); height: 100%; border-radius: 1px;"></div>
+        <div style="background: rgba(49,60,240,.05); height: 100%; border-radius: 1px;"></div>
+        <div style="background: rgba(49,60,240,.05); height: 100%; border-radius: 1px;"></div>
+        <div style="background: rgba(49,60,240,.05); height: 100%; border-radius: 1px;"></div>
+        <div style="background: rgba(49,60,240,.05); height: 100%; border-radius: 1px;"></div>
+        <div style="background: rgba(49,60,240,.05); height: 100%; border-radius: 1px;"></div>
+        <div style="background: rgba(49,60,240,.05); height: 100%; border-radius: 1px;"></div>
+      </div>
+
+      <!-- 45° lines from corner -->
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute; inset:0; width:100%; height:100%;">
+        <line x1="0" y1="100" x2="100" y2="0" stroke="rgba(49,60,240,.45)" stroke-width="0.3" stroke-dasharray="1.5 1.5"/>
+        <line x1="20" y1="100" x2="100" y2="20" stroke="rgba(49,60,240,.25)" stroke-width="0.2" stroke-dasharray="1 2"/>
+        <line x1="40" y1="100" x2="100" y2="40" stroke="rgba(49,60,240,.18)" stroke-width="0.2" stroke-dasharray="1 2"/>
+      </svg>
+
+      <!-- Demo content -->
+      <div style="position: relative; z-index: 2; height: 100%; display:flex; flex-direction: column; justify-content: space-between;">
+        <div class="mono" style="color: var(--brand-hover);">↗ 12 col / 45°</div>
+
+        <div>
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 64px; letter-spacing:-0.03em; line-height: 0.95; color:#fff;">Marca<br>move<br>receita.</div>
+          <div style="margin-top: 24px; display:flex; align-items: center; gap: 16px;">
+            <div style="width: 56px; height: 56px;">
+              <img src="../assets/arrow-blue.png" alt="" style="width:100%; height:100%; object-fit: contain;">
+            </div>
+            <div class="mono" style="color: rgba(255,255,255,.7);">Aplicação · web hero</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-no" style="color: rgba(255,255,255,.5);"><div>UP / Brandbook · Grid</div><div>12 / 22</div></div>
+</section>
+
+<!-- ============================================================
+     13 · ICONOGRAFIA
+     ============================================================ -->
+<section class="slide" data-screen-label="13 Iconografia">
+  <div class="running-head"><div>Parte 3 · Sistema</div><div class="center">Iconografia</div><div class="right">13 / 22</div></div>
+
+  <div style="padding-top: 100px;">
+    <div class="npl">11 · Iconografia</div>
+    <div class="h1" style="margin-top: 16px;">Linha 1.5px. Cantos retos. Diagonal viva.</div>
+  </div>
+
+  <div style="display:grid; grid-template-columns: 0.6fr 1fr; gap: 64px; margin-top: 48px;">
+    <div>
+      <div class="lead" style="max-width: 380px;">Ícones são funcionais, não decorativos. Quando precisar de movimento, herde da marca: 45° ↗.</div>
+
+      <div class="rule-hard" style="margin: 32px 0;"></div>
+
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+        <div><div class="eyebrow">Stroke</div><div class="h3" style="margin-top: 6px;">1.5 px</div></div>
+        <div><div class="eyebrow">Tamanhos</div><div class="h3" style="margin-top: 6px;">16 / 24 / 32 / 48</div></div>
+        <div><div class="eyebrow">Cantos</div><div class="h3" style="margin-top: 6px;">Retos · sem radius</div></div>
+        <div><div class="eyebrow">Estilo</div><div class="h3" style="margin-top: 6px;">Outline · 1 tom</div></div>
+      </div>
+    </div>
+
+    <div>
+      <div style="display:grid; grid-template-columns: repeat(6, 1fr); gap: 16px;">
+        <!-- 18 icons -->
+        <div class="icon-tile"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 26 L26 6 M16 6 H26 V16"/></svg><span>Diagonal ↗</span></div>
+        <div class="icon-tile"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="11"/><path d="M11 16l4 4 6-8"/></svg><span>Aprovado</span></div>
+        <div class="icon-tile"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 6 L26 16 H22 V26 H10 V16 H6 Z"/></svg><span>UP / crescer</span></div>
+        <div class="icon-tile"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="8" width="20" height="18" rx="0"/><path d="M6 14h20M11 8V4M21 8V4"/></svg><span>Calendário</span></div>
+        <div class="icon-tile"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="14" cy="14" r="7"/><path d="M19 19l6 6"/></svg><span>Buscar</span></div>
+        <div class="icon-tile"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 26V8h14l6 6v12zM20 8v6h6"/></svg><span>Documento</span></div>
+
+        <div class="icon-tile"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 16L16 6l10 10M9 14v12h6v-7h2v7h6V14"/></svg><span>Casa</span></div>
+        <div class="icon-tile"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="11" r="4"/><path d="M8 26c0-4 3.5-7 8-7s8 3 8 7"/></svg><span>Pessoa</span></div>
+        <div class="icon-tile"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="7" width="22" height="16" rx="0"/><path d="M11 27v-2M21 27v-2"/></svg><span>Apresentação</span></div>
+        <div class="icon-tile"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 26V12l9-4 9 4v14M11 26V18h10v8"/></svg><span>Sede</span></div>
+        <div class="icon-tile"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 8h18M7 16h18M7 24h11"/></svg><span>Lista</span></div>
+        <div class="icon-tile"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 22l6-6 4 4 10-10"/><path d="M16 6h10v10"/></svg><span>Crescimento</span></div>
+
+        <div class="icon-tile"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="11"/><path d="M16 9v7l4 4"/></svg><span>Tempo</span></div>
+        <div class="icon-tile"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 12l10-6 10 6v8l-10 6-10-6z"/></svg><span>Pacote</span></div>
+        <div class="icon-tile"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="11"/><path d="M5 16h22M16 5c3 3 4 7 4 11s-1 8-4 11M16 5c-3 3-4 7-4 11s1 8 4 11"/></svg><span>Web</span></div>
+        <div class="icon-tile"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 4l4 8 8 1-6 6 2 9-8-4-8 4 2-9-6-6 8-1z"/></svg><span>Destaque</span></div>
+        <div class="icon-tile"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 22h20l-3-12H9zM12 22V8h8v14"/></svg><span>Negócio</span></div>
+        <div class="icon-tile"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 6v20M9 13l7-7 7 7"/></svg><span>Subir</span></div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .icon-tile { background: var(--bg-2); border-radius: 4px; padding: 16px; display:flex; flex-direction: column; align-items:center; gap: 10px; aspect-ratio: 1/1; justify-content: center; color: var(--text-strong); }
+    .icon-tile svg { width: 40px; height: 40px; }
+    .icon-tile span { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); text-align:center; }
+  </style>
+
+  <div class="page-no"><div>UP / Brandbook · Iconografia</div><div>13 / 22</div></div>
+</section>
+
+<!-- ============================================================
+     14 · PAPELARIA
+     ============================================================ -->
+<section class="slide slide-bg-paper" data-screen-label="14 Papelaria">
+  <div class="running-head"><div>Parte 4 · Em uso</div><div class="center">Papelaria</div><div class="right">14 / 22</div></div>
+
+  <div style="padding-top: 100px;">
+    <div class="npl" style="color: var(--brand);">12 · Papelaria</div>
+    <div class="h1" style="margin-top: 16px;">A marca em mãos.</div>
+  </div>
+
+  <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 56px;">
+    <div>
+      <!-- card 1: dark -->
+      <div class="biz-card" style="background:#050507; color:#fff;">
+        <div style="display:flex; justify-content: space-between; align-items: flex-start;">
+          <img src="../assets/logo-allwhite.png" alt="" style="width: 88px;">
+          <div style="width: 36px; height: 28px;"><img src="../assets/arrow-white.png" alt="" style="width:100%; height: 100%; object-fit: contain;"></div>
+        </div>
+        <div>
+          <div class="cnm">Henrique Silva</div>
+          <div class="cro">Diretor de criação</div>
+          <div class="cct" style="margin-top: 16px; color: rgba(255,255,255,.65);">henrique@upagencia.com.br<br>+55 11 9 9000 0000</div>
+        </div>
+      </div>
+      <div class="small" style="margin-top: 12px; color: #5A5A6B;">Frente · padrão dark</div>
+    </div>
+
+    <div>
+      <!-- card 2: brand -->
+      <div class="biz-card" style="background: var(--brand); color:#fff;">
+        <div style="display:flex; justify-content: space-between; align-items: flex-start;">
+          <img src="../assets/logo-allwhite.png" alt="" style="width: 88px;">
+        </div>
+        <div style="position:absolute; right: -40px; bottom: -40px; width: 240px; height: 240px; opacity: .25;">
+          <img src="../assets/arrow-white.png" alt="" style="width:100%; height:100%; object-fit: contain;">
+        </div>
+        <div style="position: relative; z-index: 2;">
+          <div class="cnm">Henrique Silva</div>
+          <div class="cro">Diretor de criação</div>
+        </div>
+      </div>
+      <div class="small" style="margin-top: 12px; color: #5A5A6B;">Verso · brand com seta</div>
+    </div>
+
+    <div>
+      <!-- card 3: paper -->
+      <div class="biz-card" style="background:#fff; color:#0A0A0F;">
+        <div style="display:flex; justify-content: space-between; align-items: flex-start;">
+          <img src="../assets/logo-primary.png" alt="" style="width: 88px;">
+          <div class="mono" style="color: #5A5A6B;">N° 0042</div>
+        </div>
+        <div>
+          <div class="cnm">Henrique Silva</div>
+          <div class="cro" style="color: #5A5A6B;">Diretor de criação</div>
+          <div class="cct" style="margin-top: 16px; color: #5A5A6B;">henrique@upagencia.com.br<br>+55 11 9 9000 0000<br>upagencia.com.br</div>
+        </div>
+      </div>
+      <div class="small" style="margin-top: 12px; color: #5A5A6B;">Frente · padrão light</div>
+    </div>
+  </div>
+
+  <!-- Letterhead and signature -->
+  <div style="display:grid; grid-template-columns: 1.4fr 1fr; gap: 32px; margin-top: 32px;">
+    <!-- Letterhead -->
+    <div style="background:#fff; border-radius: 4px; padding: 32px; aspect-ratio: 2.1/1; position: relative; box-shadow: 0 30px 60px -30px rgba(0,0,0,.25); overflow:hidden;">
+      <div style="display:flex; justify-content: space-between; align-items: flex-start;">
+        <img src="../assets/logo-primary.png" alt="" style="width: 100px;">
+        <div class="mono" style="color: #5A5A6B; text-align: right;">UP AGÊNCIA<br>R. AUGUSTA, 1234 · SP<br>UPAGENCIA.COM.BR</div>
+      </div>
+      <div style="margin-top: 28px;">
+        <div class="mono" style="color: var(--brand);">↗ Proposta · Cliente XYZ</div>
+        <div class="h3" style="margin-top: 12px; color:#0A0A0F; font-size: 24px;">Sistema de marca · 2026</div>
+        <div class="body" style="color: #2A2A33; font-size: 14px; margin-top: 8px; max-width: 500px;">Documento de referência da operação criativa para o Q1/Q2 2026. Branding, digital e campanha em uma operação só.</div>
+      </div>
+      <div style="position: absolute; right: 32px; bottom: 32px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #5A5A6B;">PÁG 01/04 · Confidencial</div>
+    </div>
+
+    <!-- Email signature -->
+    <div style="background:#fff; border-radius: 4px; padding: 32px; box-shadow: 0 30px 60px -30px rgba(0,0,0,.25); display:flex; flex-direction: column; justify-content: space-between;">
+      <div class="mono" style="color: #5A5A6B;">Assinatura de email</div>
+      <div style="display:flex; gap: 16px; align-items: center;">
+        <div style="width: 64px; height: 64px; background: var(--brand); border-radius: 999px; display:flex; align-items:center; justify-content:center;">
+          <img src="../assets/arrow-white.png" alt="" style="width: 60%;">
+        </div>
+        <div>
+          <div class="cnm" style="color:#0A0A0F; font-size: 16px;">Henrique Silva</div>
+          <div class="cro" style="color: #5A5A6B;">Diretor de criação · UP Agência</div>
+          <div class="cct" style="color: #5A5A6B; margin-top: 8px;">henrique@upagencia.com.br · +55 11 9 9000 0000<br>upagencia.com.br</div>
+        </div>
+      </div>
+      <div style="height: 2px; background: var(--brand);"></div>
+    </div>
+  </div>
+
+  <div class="page-no" style="color: #5A5A6B;"><div>UP / Brandbook · Papelaria</div><div>14 / 22</div></div>
+</section>
+
+<!-- ============================================================
+     15 · SOCIAL & CAMPANHA
+     ============================================================ -->
+<section class="slide slide-bg-2" data-screen-label="15 Social">
+  <div class="running-head"><div>Parte 4 · Em uso</div><div class="center">Social &amp; campanha</div><div class="right">15 / 22</div></div>
+
+  <div style="padding-top: 100px;">
+    <div class="npl">13 · Social</div>
+    <div class="h1" style="margin-top: 16px;">Feed que se reconhece a 1 metro.</div>
+  </div>
+
+  <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 56px;">
+    <!-- 8 posts forming a feed -->
+    <div class="ig-post" style="background:#050507; color:#fff;">
+      <div class="ig-tag">Manifesto · 01</div>
+      <div>
+        <div class="ig-tit">Marca não é decoração.</div>
+        <div class="ig-sub" style="margin-top: 12px;">↗ UP</div>
+      </div>
+    </div>
+
+    <div class="ig-post" style="background: var(--brand); color:#fff;">
+      <div style="position:absolute; right: -40px; top: -40px; width: 280px; height: 280px;">
+        <img src="../assets/arrow-white.png" alt="" style="width:100%; height:100%; object-fit:contain;">
+      </div>
+      <div class="ig-tag" style="position: relative; z-index: 2;">Tese · 02</div>
+      <div style="position: relative; z-index: 2;">
+        <div class="ig-tit">Marca move<br>receita.</div>
+        <div class="ig-sub" style="margin-top: 12px;">↗ UP</div>
+      </div>
+    </div>
+
+    <div class="ig-post" style="background: #F0F0F4; color: #0A0A0F;">
+      <div class="ig-tag" style="color: #5A5A6B;">Serviço · 03</div>
+      <div>
+        <div class="ig-tit" style="color:#0A0A0F;">Branding<br>+ digital<br>+ campanha.</div>
+        <div class="ig-sub" style="margin-top: 12px; color: var(--brand);">↗ UP</div>
+      </div>
+    </div>
+
+    <div class="ig-post" style="background:#050507; color:#fff;">
+      <div class="ig-tag">Case · 04</div>
+      <div style="display:grid; grid-template-rows: auto 1fr; gap: 16px;">
+        <div style="font-family: var(--font-heading); font-weight: 800; font-size: 96px; line-height: 1; color: var(--brand-hover); letter-spacing: -0.04em;">+312%</div>
+        <div class="body" style="color: rgba(255,255,255,.85); font-size: 14px;">Crescimento de pipeline em 6 meses · Cliente Acme</div>
+      </div>
+    </div>
+
+    <div class="ig-post" style="background: #1B1F8C; color:#fff;">
+      <div class="ig-tag" style="color: rgba(255,255,255,.7);">Manifesto · 05</div>
+      <div>
+        <div class="ig-tit" style="font-size: 44px;">Quem precisa<br>de muito floreio<br>não tem o que dizer.</div>
+        <div class="ig-sub" style="margin-top: 12px; color: rgba(255,255,255,.7);">↗ UP</div>
+      </div>
+    </div>
+
+    <div class="ig-post" style="background: #F0F0F4; color: #0A0A0F; padding: 0; overflow: hidden;">
+      <div style="position: relative; height: 100%; padding: 32px; background-image: repeating-linear-gradient(45deg, transparent 0 24px, rgba(49,60,240,.08) 24px 25px); display:flex; flex-direction: column; justify-content: space-between;">
+        <div class="ig-tag" style="color: #5A5A6B;">Padrão · 06</div>
+        <img src="../assets/logo-primary.png" alt="" style="width: 140px; align-self: center;">
+        <div class="ig-sub" style="color: #5A5A6B;">↗ Listras 45°</div>
+      </div>
+    </div>
+
+    <div class="ig-post" style="background: var(--brand); color:#fff;">
+      <div class="ig-tag">Recrutamento · 07</div>
+      <div>
+        <div class="ig-tit" style="font-size: 44px;">Procuramos<br>quem tem<br>coisa pra<br>dizer.</div>
+        <div class="ig-sub" style="margin-top: 12px;">↗ Vagas abertas</div>
+      </div>
+    </div>
+
+    <div class="ig-post" style="background:#050507; color:#fff; display:flex; align-items:center; justify-content:center;">
+      <div style="width: 50%;">
+        <img src="../assets/logo-up-white.png" alt="" style="width: 100%;">
+      </div>
+    </div>
+  </div>
+
+  <div class="page-no"><div>UP / Brandbook · Social</div><div>15 / 22</div></div>
+</section>
+
+<!-- ============================================================
+     16 · WEB & PRODUTO
+     ============================================================ -->
+<section class="slide" data-screen-label="16 Web">
+  <div class="running-head"><div>Parte 4 · Em uso</div><div class="center">Web &amp; produto</div><div class="right">16 / 22</div></div>
+
+  <div style="padding-top: 100px;">
+    <div class="npl">14 · Web</div>
+    <div class="h1" style="margin-top: 16px;">upagencia.com.br</div>
+  </div>
+
+  <div style="margin-top: 48px;">
+    <div class="browser">
+      <div class="bar">
+        <i></i><i></i><i></i>
+        <div class="url">↗ upagencia.com.br</div>
+        <div class="mono" style="color: var(--text-muted);">Hero · 16:9</div>
+      </div>
+      <div style="background: var(--bg); padding: 0; position: relative; overflow: hidden;">
+        <!-- 45° decoration -->
+        <div style="position: absolute; right: 0; top: 0; width: 60%; height: 100%; background-image: repeating-linear-gradient(45deg, transparent 0 80px, rgba(49,60,240,.06) 80px 81px); pointer-events: none;"></div>
+
+        <!-- top nav -->
+        <div style="display:flex; align-items:center; justify-content: space-between; padding: 32px 56px; border-bottom: 1px solid var(--border-1);">
+          <img src="../assets/logo-allwhite.png" alt="" style="width: 80px;">
+          <div style="display:flex; gap: 32px;" class="mono">
+            <span style="color: var(--text-strong);">Trabalhos</span>
+            <span style="color: var(--text-muted);">Serviços</span>
+            <span style="color: var(--text-muted);">Sobre</span>
+            <span style="color: var(--text-muted);">Contato</span>
+          </div>
+          <button style="background: var(--brand); color:#fff; border: 0; padding: 12px 24px; border-radius: 999px; font-family: var(--font-heading); font-weight: 600; font-size: 14px;">Começar projeto ↗</button>
+        </div>
+
+        <!-- hero -->
+        <div style="padding: 80px 56px; display:grid; grid-template-columns: 1.6fr 1fr; gap: 56px; align-items: center; position:relative; z-index: 2;">
+          <div>
+            <div class="mono">↗ Brand · Digital · Campanha</div>
+            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 144px; line-height: 0.92; letter-spacing: -0.045em; color: var(--text-strong); margin-top: 24px;">Marca move<br>receita.</div>
+            <div class="lead" style="margin-top: 24px; max-width: 600px;">Operação criativa fim-a-fim para marcas em fase de tração. Estratégia, identidade, experiência e campanha numa equipe só.</div>
+            <div style="margin-top: 32px; display:flex; gap: 16px;">
+              <button style="background: var(--brand); color:#fff; border: 0; padding: 18px 28px; border-radius: 999px; font-family: var(--font-heading); font-weight: 600; font-size: 15px;">Começar projeto ↗</button>
+              <button style="background: transparent; color: var(--text-strong); border: 1px solid var(--border-2); padding: 18px 28px; border-radius: 999px; font-family: var(--font-heading); font-weight: 600; font-size: 15px;">Ver trabalhos</button>
+            </div>
+          </div>
+          <div style="position: relative; height: 360px;">
+            <img src="../assets/arrow-blue.png" alt="" class="drift" style="position: absolute; right: 0; top: 0; width: 100%; height: 100%; object-fit: contain;">
+          </div>
+        </div>
+
+        <!-- proof strip -->
+        <div style="border-top: 1px solid var(--border-1); padding: 24px 56px; display:flex; justify-content: space-between; align-items: center;">
+          <div class="mono" style="color: var(--text-muted);">Construímos +120 marcas em 8 anos ↗</div>
+          <div style="display:flex; gap: 32px;" class="mono">
+            <span style="color: var(--text-muted);">Acme</span>
+            <span style="color: var(--text-muted);">Linear</span>
+            <span style="color: var(--text-muted);">Stripe</span>
+            <span style="color: var(--text-muted);">Notion</span>
+            <span style="color: var(--text-muted);">Figma</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-no"><div>UP / Brandbook · Web</div><div>16 / 22</div></div>
+</section>
+
+<!-- ============================================================
+     17 · OOH & AMBIENTE
+     ============================================================ -->
+<section class="slide slide-bg-ink" data-screen-label="17 OOH">
+  <div class="running-head"><div>Parte 4 · Em uso</div><div class="center">OOH &amp; ambiente</div><div class="right">17 / 22</div></div>
+
+  <div style="padding-top: 100px;">
+    <div class="npl" style="color: var(--brand-hover);">15 · OOH</div>
+    <div class="h1" style="margin-top: 16px;">A marca grita.</div>
+  </div>
+
+  <!-- Strip -->
+  <div class="strip" style="margin-top: 32px; color: var(--brand-hover);">
+    <div class="marquee">
+      <div class="item" style="color: var(--brand-hover);">UP</div>
+      <div class="item" style="color: var(--brand-hover);">RECEITA</div>
+      <div class="item" style="color: var(--brand-hover);">MARCA</div>
+      <div class="item" style="color: var(--brand-hover);">CONSTRUÍMOS</div>
+      <div class="item" style="color: var(--brand-hover);">UP</div>
+      <div class="item" style="color: var(--brand-hover);">RECEITA</div>
+      <div class="item" style="color: var(--brand-hover);">MARCA</div>
+      <div class="item" style="color: var(--brand-hover);">CONSTRUÍMOS</div>
+    </div>
+  </div>
+
+  <div class="grid g2" style="margin-top: 32px;">
+    <!-- Outdoor 1 -->
+    <div style="background:#0A0A0F; border-radius: 4px; padding: 56px; min-height: 380px; display:flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; border: 1px solid var(--border-1);">
+      <div style="position: absolute; left: -100px; bottom: -100px; width: 400px; height: 400px; opacity: .12;">
+        <img src="../assets/arrow-blue.png" alt="" style="width:100%; height:100%; object-fit: contain;">
+      </div>
+      <div style="display:flex; justify-content: space-between; position: relative;">
+        <img src="../assets/logo-allwhite.png" alt="" style="width: 100px;">
+        <div class="mono" style="color: rgba(255,255,255,.5);">↗ Outdoor 9 × 3 m</div>
+      </div>
+      <div style="position: relative;">
+        <div style="font-family: var(--font-heading); font-weight: 800; font-size: 96px; line-height: 0.92; letter-spacing:-0.04em; color: #fff;">Construímos<br>marcas que <span style="color: var(--brand-hover);">crescem.</span></div>
+      </div>
+    </div>
+
+    <!-- Busdoor brand -->
+    <div style="background: var(--brand); border-radius: 4px; padding: 56px; min-height: 380px; display:flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden;">
+      <div style="position: absolute; right: -60px; top: -60px; width: 300px; height: 300px;">
+        <img src="../assets/arrow-white.png" alt="" style="width:100%; height:100%; object-fit: contain;">
+      </div>
+      <div style="display:flex; justify-content: space-between; position: relative; z-index:2;">
+        <img src="../assets/logo-allwhite.png" alt="" style="width: 100px;">
+        <div class="mono" style="color: rgba(255,255,255,.7);">Busdoor · 2026</div>
+      </div>
+      <div style="position: relative; z-index: 2;">
+        <div style="font-family: var(--font-heading); font-weight: 800; font-size: 96px; line-height: 0.92; letter-spacing:-0.04em; color: #fff;">Pra quem<br>tem coisa<br>pra dizer.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-no" style="color: rgba(255,255,255,.5);"><div>UP / Brandbook · OOH</div><div>17 / 22</div></div>
+</section>
+
+<!-- ============================================================
+     18 · MOTION
+     ============================================================ -->
+<section class="slide slide-bg-deep" data-screen-label="18 Motion">
+  <div class="running-head"><div>Parte 4 · Em uso</div><div class="center">Motion</div><div class="right">18 / 22</div></div>
+
+  <div style="padding-top: 100px;">
+    <div class="npl" style="color: var(--brand-hover);">16 · Motion</div>
+    <div class="h1" style="margin-top: 16px;">Tudo se move <span style="color: var(--brand-hover);">↗</span> em diagonal.</div>
+  </div>
+
+  <div class="grid g3" style="margin-top: 56px;">
+    <div style="background: rgba(255,255,255,.04); border-radius: 4px; padding: 32px; border: 1px solid rgba(255,255,255,.08);">
+      <div class="mono" style="color: var(--brand-hover);">A · Entrada</div>
+      <div class="h3" style="margin-top: 12px; color:#fff;">Diagonal slide-up</div>
+
+      <div style="margin: 24px 0; height: 80px; position: relative; background: rgba(255,255,255,.03); border-radius: 4px; overflow: hidden;">
+        <div style="position: absolute; left: 0; bottom: 0; right: 0; height: 4px; background: rgba(255,255,255,.1);"></div>
+        <div style="position: absolute; left: 0; bottom: 0; height: 4px; background: var(--brand-hover); width: 70%;"></div>
+        <div class="up-arrow drift" style="position: absolute; left: 16px; top: 16px; width: 36px; height: 28px;">
+          <img src="../assets/arrow-white.png" alt="" style="width:100%; height: 100%; object-fit: contain;">
+        </div>
+      </div>
+
+      <div class="small">320 ms · cubic-bezier(.2, .8, .2, 1)<br>Elementos sobem da base em diagonal. Headlines stagger 80 ms.</div>
+    </div>
+
+    <div style="background: rgba(255,255,255,.04); border-radius: 4px; padding: 32px; border: 1px solid rgba(255,255,255,.08);">
+      <div class="mono" style="color: var(--brand-hover);">B · Loop</div>
+      <div class="h3" style="margin-top: 12px; color:#fff;">Arrow drift</div>
+
+      <div style="margin: 24px 0; height: 80px; position: relative; background: rgba(255,255,255,.03); border-radius: 4px; overflow: hidden; display:flex; align-items:center; justify-content:center;">
+        <div class="drift" style="width: 60px; height: 48px;">
+          <img src="../assets/arrow-blue-alt.png" alt="" style="width:100%; height: 100%; object-fit: contain;" onerror="this.src='../assets/arrow-blue.png'">
+        </div>
+      </div>
+
+      <div class="small">5000 ms · ease-in-out · ∞<br>Símbolo respira em diagonal: sobe 12px, anda 8px à direita, retorna.</div>
+    </div>
+
+    <div style="background: rgba(255,255,255,.04); border-radius: 4px; padding: 32px; border: 1px solid rgba(255,255,255,.08); position: relative; overflow:hidden;">
+      <div class="mono" style="color: var(--brand-hover);">C · Marquee</div>
+      <div class="h3" style="margin-top: 12px; color:#fff;">Ticker contínuo</div>
+
+      <div style="margin: 24px 0; height: 80px; background: var(--brand); border-radius: 4px; overflow: hidden; display:flex; align-items:center;">
+        <div class="marquee" style="font-family: var(--font-heading); font-weight: 800; font-size: 28px; letter-spacing:-0.02em; color:#fff; gap: 24px;">
+          <span>↗ UP · UP · UP · UP · UP · UP ·</span>
+          <span>↗ UP · UP · UP · UP · UP · UP ·</span>
+        </div>
+      </div>
+
+      <div class="small">24 s · linear · ∞<br>Texto contínuo. Entre seções, divisores, reveals de prova social.</div>
+    </div>
+  </div>
+
+  <!-- Principles strip -->
+  <div style="position: absolute; left: 96px; right: 96px; bottom: 96px;">
+    <div class="rule" style="background:#fff; opacity: .2;"></div>
+    <div style="display:flex; justify-content: space-between; align-items: center; margin-top: 24px;">
+      <div class="mono" style="color: rgba(255,255,255,.55);">Princípios · motion</div>
+      <div style="display:flex; gap: 14px; flex-wrap: wrap;">
+        <span class="pill">↗ Diagonal</span>
+        <span class="pill">Sem bounce</span>
+        <span class="pill">Sem fade lento</span>
+        <span class="pill">Easing custom</span>
+        <span class="pill">Stagger 80ms</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-no" style="color: rgba(255,255,255,.5);"><div>UP / Brandbook · Motion</div><div>18 / 22</div></div>
+</section>
+
+<!-- ============================================================
+     19 · GOVERNANÇA
+     ============================================================ -->
+<section class="slide slide-bg-2" data-screen-label="19 Governança">
+  <div class="running-head"><div>Parte 4 · Em uso</div><div class="center">Governança</div><div class="right">19 / 22</div></div>
+
+  <div style="padding-top: 100px;">
+    <div class="npl">17 · Governança</div>
+    <div class="h1" style="margin-top: 16px;">Quem decide o quê.</div>
+  </div>
+
+  <div class="grid g3" style="margin-top: 56px;">
+    <div style="background: var(--bg); border-radius: 4px; padding: 32px; border-top: 4px solid #3CCB7F;">
+      <div class="mono" style="color: #3CCB7F;">VERDE · LIVRE</div>
+      <div class="h3" style="margin-top: 12px;">Time interno aplica direto</div>
+      <div class="rule" style="background: var(--text-strong); margin: 20px 0;"></div>
+      <ul class="body" style="padding-left: 18px; margin: 0;"><li>Posts em template</li><li>Apresentações comerciais</li><li>Assinatura de email</li><li>Documentos internos</li><li>Mockups de proposta</li></ul>
+    </div>
+    <div style="background: var(--bg); border-radius: 4px; padding: 32px; border-top: 4px solid #FFB73C;">
+      <div class="mono" style="color: #FFB73C;">AMARELO · REVIEW</div>
+      <div class="h3" style="margin-top: 12px;">Aprovação do diretor de marca</div>
+      <div class="rule" style="background: var(--text-strong); margin: 20px 0;"></div>
+      <ul class="body" style="padding-left: 18px; margin: 0;"><li>Campanhas de mídia paga</li><li>Cases de portfolio</li><li>Assets de evento</li><li>Material para imprensa</li><li>Co-marketing</li></ul>
+    </div>
+    <div style="background: var(--bg); border-radius: 4px; padding: 32px; border-top: 4px solid #FF4F4F;">
+      <div class="mono" style="color: #FF4F4F;">VERMELHO · PROIBIDO</div>
+      <div class="h3" style="margin-top: 12px;">Nunca, em nenhum caso</div>
+      <div class="rule" style="background: var(--text-strong); margin: 20px 0;"></div>
+      <ul class="body" style="padding-left: 18px; margin: 0;"><li>Logo distorcido / rotacionado</li><li>Cores fora da paleta</li><li>Tipografia diferente</li><li>Slogan derivado / paráfrase</li><li>Símbolo com gradiente</li></ul>
+    </div>
+  </div>
+
+  <!-- bottom: contact -->
+  <div style="position: absolute; left: 96px; right: 96px; bottom: 96px;">
+    <div class="rule-hard"></div>
+    <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; margin-top: 24px;">
+      <div>
+        <div class="eyebrow">Brand custodian</div>
+        <div class="h3" style="margin-top: 8px;">Direção de marca</div>
+        <div class="small" style="margin-top: 4px;">marca@upagencia.com.br</div>
+      </div>
+      <div>
+        <div class="eyebrow">Asset hub</div>
+        <div class="h3" style="margin-top: 8px;">brand.upagencia.com.br</div>
+        <div class="small" style="margin-top: 4px;">Logos, fontes, templates, mockups</div>
+      </div>
+      <div>
+        <div class="eyebrow">Versão</div>
+        <div class="h3" style="margin-top: 8px;">v 1.0 · Q1 2026</div>
+        <div class="small" style="margin-top: 4px;">Próxima revisão: Q1 2027</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-no"><div>UP / Brandbook · Governança</div><div>19 / 22</div></div>
+</section>
+
+<!-- ============================================================
+     20 · CHECKLIST
+     ============================================================ -->
+<section class="slide" data-screen-label="20 Checklist">
+  <div class="running-head"><div>Parte 4 · Em uso</div><div class="center">Checklist</div><div class="right">20 / 22</div></div>
+
+  <div style="padding-top: 100px;">
+    <div class="npl">18 · Checklist</div>
+    <div class="h1" style="margin-top: 16px;">Antes de publicar.</div>
+  </div>
+
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 56px;">
+    <div>
+      <div class="eyebrow">Identidade</div>
+      <div style="margin-top: 16px;">
+        <div class="check"><span class="b"></span><span>O logo está numa das 4 versões oficiais?</span></div>
+        <div class="check"><span class="b"></span><span>Tem ≥ 1× a altura do "U" de respiro?</span></div>
+        <div class="check"><span class="b"></span><span>Tamanho ≥ 96px (digital) ou 24mm (print)?</span></div>
+        <div class="check"><span class="b"></span><span>A seta tá na direção certa (45° ↗)?</span></div>
+        <div class="check"><span class="b"></span><span>Cores são da paleta oficial?</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="eyebrow">Conteúdo</div>
+      <div style="margin-top: 16px;">
+        <div class="check"><span class="b"></span><span>Frase curta. Verbo no presente.</span></div>
+        <div class="check"><span class="b"></span><span>Sem "talvez", "basicamente", "meio que"?</span></div>
+        <div class="check"><span class="b"></span><span>Argumento, não adjetivo?</span></div>
+        <div class="check"><span class="b"></span><span>Léxico UP (construir, crescer, sistema)?</span></div>
+        <div class="check"><span class="b"></span><span>Evitou solução, jornada, sinergia?</span></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="eyebrow">Layout</div>
+      <div style="margin-top: 16px;">
+        <div class="check"><span class="b"></span><span>Grid 12 col · gutter 96px?</span></div>
+        <div class="check"><span class="b"></span><span>Margens 96px (digital) / 24mm (print)?</span></div>
+        <div class="check"><span class="b"></span><span>Movimento sobe na diagonal ↗?</span></div>
+        <div class="check"><span class="b"></span><span>Tipografia: Montserrat + Inter?</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="eyebrow">Aprovação</div>
+      <div style="margin-top: 16px;">
+        <div class="check"><span class="b"></span><span>Verde: aplico direto.</span></div>
+        <div class="check"><span class="b"></span><span>Amarelo: enviei pra marca@?</span></div>
+        <div class="check"><span class="b"></span><span>Vermelho: nem cogitei.</span></div>
+        <div class="check"><span class="b"></span><span>Arquivo final fica no asset hub?</span></div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .check { display: grid; grid-template-columns: 24px 1fr; gap: 12px; padding: 10px 0; align-items: start; }
+    .check .b { width: 18px; height: 18px; border: 1.5px solid var(--text-strong); border-radius: 2px; margin-top: 2px; }
+    .check span:last-child { font-family: var(--font-body); font-size: 17px; line-height: 1.4; color: var(--text-body); }
+  </style>
+
+  <div class="page-no"><div>UP / Brandbook · Checklist</div><div>20 / 22</div></div>
+</section>
+
+<!-- ============================================================
+     21 · CRÉDITOS
+     ============================================================ -->
+<section class="slide slide-bg-2" data-screen-label="21 Créditos">
+  <div class="running-head"><div>Colofão</div><div class="center">Créditos</div><div class="right">21 / 22</div></div>
+
+  <div style="padding-top: 120px; display:grid; grid-template-columns: 1fr 1.5fr; gap: 80px;">
+    <div>
+      <div class="npl">19 · Colofão</div>
+      <div class="display" style="font-size: 96px; margin-top: 12px;">Quem<br>fez.</div>
+    </div>
+
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 0 56px;">
+      <div>
+        <div class="eyebrow">Direção criativa</div>
+        <div class="h3" style="margin-top: 6px; font-size: 22px;">Time UP</div>
+        <div class="small" style="margin-top: 4px;">Concepção · curadoria · revisão</div>
+
+        <div class="rule" style="background: var(--text-strong); margin: 28px 0;"></div>
+
+        <div class="eyebrow">Tipografia</div>
+        <div class="h3" style="margin-top: 6px; font-size: 22px;">Montserrat · Inter · JetBrains Mono</div>
+        <div class="small" style="margin-top: 4px;">Google Fonts · OFL livre</div>
+
+        <div class="rule" style="background: var(--text-strong); margin: 28px 0;"></div>
+
+        <div class="eyebrow">Paleta</div>
+        <div class="h3" style="margin-top: 6px; font-size: 22px;">Azul UP #313CF0</div>
+        <div class="small" style="margin-top: 4px;">Pantone 2728 C</div>
+      </div>
+      <div>
+        <div class="eyebrow">Versão</div>
+        <div class="h3" style="margin-top: 6px; font-size: 22px;">v 1.0 · 2026</div>
+        <div class="small" style="margin-top: 4px;">Substitui versões anteriores</div>
+
+        <div class="rule" style="background: var(--text-strong); margin: 28px 0;"></div>
+
+        <div class="eyebrow">Próxima revisão</div>
+        <div class="h3" style="margin-top: 6px; font-size: 22px;">Q1 · 2027</div>
+        <div class="small" style="margin-top: 4px;">Revisão anual · marca@upagencia.com.br</div>
+
+        <div class="rule" style="background: var(--text-strong); margin: 28px 0;"></div>
+
+        <div class="eyebrow">Confidencialidade</div>
+        <div class="h3" style="margin-top: 6px; font-size: 22px;">Uso interno + parceiros</div>
+        <div class="small" style="margin-top: 4px;">Não distribuir externamente sem autorização</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-no"><div>UP / Brandbook · Colofão</div><div>21 / 22</div></div>
+</section>
+
+<!-- ============================================================
+     22 · CLOSING
+     ============================================================ -->
+<section class="slide slide-bg-brand" data-screen-label="22 Fim">
+  <div class="running-head" style="color: rgba(255,255,255,.7);"><div>Fim</div><div class="center">UP · 2026</div><div class="right">22 / 22</div></div>
+
+  <div style="position: absolute; right: -100px; bottom: -100px; width: 900px; height: 900px; opacity: .3;">
+    <img src="../assets/arrow-white.png" alt="" style="width:100%; height:100%; object-fit: contain;">
+  </div>
+
+  <div style="position: relative; z-index:2; padding-top: 200px;">
+    <div class="display" style="font-size: 360px; line-height: 0.82; max-width: 1500px; color:#fff;">
+      Marca<br>move<br>receita.
+    </div>
+  </div>
+
+  <div style="position: absolute; left: 96px; right: 96px; bottom: 96px; z-index:2;">
+    <div class="rule" style="background:#fff; opacity:.3;"></div>
+    <div style="display:grid; grid-template-columns: 1fr auto 1fr; gap: 32px; margin-top: 24px; align-items: center;">
+      <img src="../assets/logo-allwhite.png" alt="" style="width: 140px;">
+      <div class="mono" style="color: rgba(255,255,255,.85); text-align: center;">↗ UP · BRANDBOOK · v 1.0 · 2026</div>
+      <div style="text-align: right; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,.85);">upagencia.com.br</div>
+    </div>
+  </div>
+</section>
+
+</deck-stage>
+
+<script src="deck-stage.js"></script>
+</body>
+</html>

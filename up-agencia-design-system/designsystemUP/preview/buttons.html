@@ -1,0 +1,75 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="card.css"></head>
+<body style="padding:28px; background:#fff;">
+  <style>
+    .btn { font-family: var(--font-body); font-weight: 600; cursor: pointer;
+           display: inline-flex; align-items: center; border: 0;
+           transition: all 200ms var(--ease-out); }
+    .btn .dot { display:inline-flex; align-items:center; justify-content:center;
+                border-radius:999px; flex:none; }
+    .btn.primary { background: var(--up-blue); color:#fff;
+                   box-shadow: 0 10px 28px rgba(49,60,240,.28); }
+    .btn.gradient { background: linear-gradient(90deg, #4BA6FF 0%, #313CF0 100%);
+                    color:#fff; box-shadow: 0 12px 32px rgba(49,60,240,.28); }
+    .btn.ghost-dark { background: var(--ink); color:#fff; }
+    .btn.outline { background: transparent; color: var(--ink);
+                   border: 1.5px solid var(--ink); }
+    .btn.outline-blue { background: transparent; color: var(--up-blue);
+                        border: 1.5px solid var(--up-blue); }
+    .btn.chip { background: linear-gradient(90deg, #5E8CFF, #313CF0);
+                color:#fff; box-shadow: 0 6px 16px rgba(49,60,240,.22); }
+  </style>
+
+  <!-- Row 1: Pill buttons with icon badge (J'JO / Snodio style) -->
+  <div class="eyebrow" style="margin-bottom:10px;">Pill · com ícone circular</div>
+  <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:22px;">
+    <button class="btn primary" style="padding:6px 6px 6px 22px; border-radius:999px; font-size:15px; gap:14px;">
+      Começar um projeto
+      <span class="dot" style="background:#fff; width:36px; height:36px;">
+        <img src="../assets/arrow-blue.png" style="height:13px;">
+      </span>
+    </button>
+    <button class="btn ghost-dark" style="padding:6px 6px 6px 22px; border-radius:999px; font-size:15px; gap:14px;">
+      Ver cases
+      <span class="dot" style="background:var(--up-blue); width:36px; height:36px;">
+        <img src="../assets/arrow-white.png" style="height:12px;">
+      </span>
+    </button>
+    <button class="btn outline" style="padding:10px 24px; border-radius:999px; font-size:14px; gap:10px;">
+      Explore mais
+      <span style="display:inline-block; transform:translateY(-1px);">→</span>
+    </button>
+  </div>
+
+  <!-- Row 2: Gradient chip (Brandmode style) -->
+  <div class="eyebrow" style="margin-bottom:10px;">Gradient chip · nav/secundário</div>
+  <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:22px;">
+    <button class="btn chip" style="padding:8px 18px; border-radius:999px; font-size:13px; gap:8px;">
+      começar um projeto →
+    </button>
+    <button class="btn gradient" style="padding:14px 32px; border-radius:999px; font-size:15px; gap:10px;">
+      Enviar
+    </button>
+    <button class="btn chip" style="padding:6px 14px; border-radius:999px; font-size:12px; gap:6px;">
+      <span style="opacity:.9;">💬</span> Contato
+    </button>
+  </div>
+
+  <!-- Row 3: Sizes -->
+  <div class="eyebrow" style="margin-bottom:10px;">Tamanhos</div>
+  <div style="display:flex; gap:12px; align-items:center;">
+    <button class="btn primary" style="padding:4px 4px 4px 14px; border-radius:999px; font-size:12px; gap:8px;">
+      Small
+      <span class="dot" style="background:#fff; width:24px; height:24px;"><img src="../assets/arrow-blue.png" style="height:9px;"></span>
+    </button>
+    <button class="btn primary" style="padding:6px 6px 6px 20px; border-radius:999px; font-size:14px; gap:12px;">
+      Default
+      <span class="dot" style="background:#fff; width:32px; height:32px;"><img src="../assets/arrow-blue.png" style="height:12px;"></span>
+    </button>
+    <button class="btn primary" style="padding:8px 8px 8px 26px; border-radius:999px; font-size:16px; gap:14px;">
+      Large
+      <span class="dot" style="background:#fff; width:42px; height:42px;"><img src="../assets/arrow-blue.png" style="height:14px;"></span>
+    </button>
+  </div>
+
+  <div class="meta" style="margin-top:18px;">Pill-shape com ícone circular é o padrão — baseado nas referências enviadas.</div>
+</body></html>

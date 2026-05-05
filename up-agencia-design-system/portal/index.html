@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UP · Portal do Cliente</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css?v=4">
+<style>
+  :root { --glass-bg: rgba(255,255,255,0.04); --glass-bd: rgba(255,255,255,0.10);
+          --glass-bg-hi: rgba(255,255,255,0.07); --glass-bd-hi: rgba(255,255,255,0.16); }
+  *,*::before,*::after { box-sizing: border-box; }
+  html, body { margin:0; padding:0; min-height:100vh; font-family: var(--font-body); color: var(--text-body); }
+  body {
+    background:
+      radial-gradient(60% 40% at 12% 10%, rgba(49,60,240,0.35) 0%, transparent 60%),
+      radial-gradient(50% 40% at 88% 110%, rgba(72,85,255,0.30) 0%, transparent 60%),
+      radial-gradient(40% 30% at 50% 60%, rgba(31,37,181,0.22) 0%, transparent 70%),
+      #050510;
+    background-attachment: fixed;
+  }
+  body::before {
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 30%, transparent 80%);
+  }
+  #root { position: relative; z-index: 1; }
+
+  .glass { background: var(--glass-bg); border: 1px solid var(--glass-bd);
+           backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%);
+           border-radius: 16px; }
+  .glass-hi { background: var(--glass-bg-hi); border-color: var(--glass-bd-hi); }
+
+  /* type */
+  .h1 { font-family: var(--font-heading); font-weight:700; font-size: 36px; letter-spacing:-0.02em; color:#fff; margin:0; line-height:1.05; }
+  .h2 { font-family: var(--font-heading); font-weight:700; font-size: 22px; letter-spacing:-0.01em; color:#fff; margin:0; }
+  .h3 { font-family: var(--font-heading); font-weight:600; font-size: 15px; color:#fff; margin:0; }
+  .lead { font-family: var(--font-body); font-size: 15px; color: rgba(255,255,255,0.72); line-height:1.5; }
+  .small { font-family: var(--font-body); font-size: 13px; color: rgba(255,255,255,0.6); }
+  .eyebrow { font-family: var(--font-body); font-weight:600; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color: rgba(255,255,255,0.55); }
+  .num { font-family: var(--font-heading); font-weight:700; font-size: 40px; color:#fff; letter-spacing:-0.02em; line-height:1; }
+
+  /* primitives */
+  .btn { all:unset; cursor:pointer; display:inline-flex; align-items:center; gap:8px; padding:10px 18px;
+         border-radius: 999px; font-family: var(--font-heading); font-weight:600; font-size:14px;
+         transition: all 200ms cubic-bezier(0.2,0.8,0.2,1); }
+  .btn-primary { background:#fff; color:#0A0A14; }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow:0 10px 30px rgba(255,255,255,0.15); }
+  .btn-glass { background: var(--glass-bg-hi); color:#fff; border:1px solid var(--glass-bd-hi); }
+  .btn-glass:hover { background: rgba(255,255,255,0.12); }
+  .btn-brand { background: var(--brand); color:#fff; }
+  .btn-brand:hover { background: var(--brand-hover); }
+  .badge { display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:999px;
+           font-family:var(--font-body); font-size:11px; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; }
+  .dot { width:6px; height:6px; border-radius:50%; }
+
+  /* status colors */
+  .st-active { background: rgba(34,197,94,0.16); color:#4ADE80; }
+  .st-active .dot { background:#22C55E; box-shadow:0 0 0 3px rgba(34,197,94,0.18); }
+  .st-review { background: rgba(245,158,11,0.16); color:#FCD34D; }
+  .st-review .dot { background:#F59E0B; }
+  .st-done { background: rgba(168,176,255,0.16); color:#A8B0FF; }
+  .st-done .dot { background:#A8B0FF; }
+  .st-blocked { background: rgba(239,68,68,0.16); color:#FCA5A5; }
+  .st-blocked .dot { background:#EF4444; }
+
+  /* layout */
+  .app { display:grid; grid-template-columns: 240px 1fr; min-height:100vh; gap:0; }
+  .sidebar { padding: 24px 18px; border-right: 1px solid rgba(255,255,255,0.06);
+             background: rgba(0,0,0,0.20); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+             position: sticky; top:0; height:100vh; display:flex; flex-direction:column; gap:6px; }
+  .nav-link { all:unset; cursor:pointer; display:flex; align-items:center; gap:12px;
+              padding:11px 14px; border-radius:10px; color: rgba(255,255,255,0.65);
+              font-size:14px; font-family:var(--font-body); font-weight:500; transition: all 160ms; }
+  .nav-link:hover { background: rgba(255,255,255,0.04); color:#fff; }
+  .nav-link.active { background: rgba(49,60,240,0.18); color:#fff; border:1px solid rgba(49,60,240,0.3); padding:10px 13px; }
+  .nav-link svg { flex-shrink:0; opacity:0.8; }
+  .nav-link.active svg { opacity:1; }
+
+  .main { padding: 32px 40px 64px; max-width: 1400px; }
+  .topbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:32px; gap:16px; }
+  .search { display:flex; align-items:center; gap:10px; padding:10px 16px; min-width: 320px;
+            border-radius:999px; background: var(--glass-bg-hi); border:1px solid var(--glass-bd);
+            backdrop-filter: blur(20px); }
+  .search input { all:unset; flex:1; color:#fff; font-size:14px; font-family:var(--font-body); }
+  .search input::placeholder { color: rgba(255,255,255,0.4); }
+
+  .grid-3 { display:grid; grid-template-columns: repeat(3, 1fr); gap:20px; }
+  .grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap:20px; }
+  .grid-asym { display:grid; grid-template-columns: 2fr 1fr; gap:20px; }
+  @media (max-width: 1100px) { .grid-3 { grid-template-columns: 1fr 1fr; } .grid-asym, .grid-2 { grid-template-columns: 1fr; } }
+
+  .card { padding: 24px; }
+  .card-pad-lg { padding: 28px 28px; }
+  .card-row { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+  .divider { height:1px; background: rgba(255,255,255,0.08); margin: 16px 0; }
+
+  /* progress */
+  .pbar { height:6px; background: rgba(255,255,255,0.08); border-radius:999px; overflow:hidden; }
+  .pbar > span { display:block; height:100%; background: linear-gradient(90deg, var(--brand), var(--brand-hover)); border-radius:999px; }
+
+  /* avatar */
+  .av { width:32px; height:32px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center;
+        font-size:12px; font-weight:700; color:#fff; background: linear-gradient(135deg, var(--brand), #6F7BFF); border:2px solid rgba(255,255,255,0.1); }
+  .av-stack { display:inline-flex; }
+  .av-stack .av { margin-left:-10px; }
+  .av-stack .av:first-child { margin-left:0; }
+
+  /* timeline */
+  .tl { display:flex; flex-direction:column; gap:0; position:relative; padding-left: 28px; }
+  .tl::before { content:''; position:absolute; left:9px; top:8px; bottom:8px; width:2px; background: rgba(255,255,255,0.08); }
+  .tl-item { display:flex; gap:16px; padding:14px 0; position:relative; }
+  .tl-dot { position:absolute; left:-23px; top:18px; width:14px; height:14px; border-radius:50%;
+            border:2px solid #050510; background: var(--brand); }
+  .tl-dot.done { background: #4ADE80; }
+  .tl-dot.next { background: rgba(255,255,255,0.2); }
+  .tl-content { flex:1; }
+
+  /* approval thumbnails */
+  .approval { aspect-ratio: 4/3; border-radius:12px; position:relative; overflow:hidden;
+              background: linear-gradient(135deg, rgba(49,60,240,0.4), rgba(168,176,255,0.2));
+              border:1px solid var(--glass-bd); }
+  .approval-overlay { position:absolute; inset:0; background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.8));
+                      display:flex; flex-direction:column; justify-content:flex-end; padding:14px; }
+
+  /* table */
+  .tbl { width:100%; border-collapse: collapse; }
+  .tbl th { text-align:left; font-family: var(--font-body); font-weight:600; font-size:11px;
+            letter-spacing:0.12em; text-transform:uppercase; color: rgba(255,255,255,0.5);
+            padding:14px 16px; border-bottom:1px solid rgba(255,255,255,0.08); }
+  .tbl td { padding:18px 16px; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px; color: rgba(255,255,255,0.85); }
+  .tbl tr:hover td { background: rgba(255,255,255,0.02); cursor:pointer; }
+
+  /* file row */
+  .file-row { display:flex; align-items:center; gap:14px; padding:14px 18px; border-radius:12px;
+              background: rgba(255,255,255,0.03); border:1px solid var(--glass-bd); transition: all 160ms; }
+  .file-row:hover { background: rgba(255,255,255,0.06); transform: translateX(2px); }
+  .file-icon { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center;
+               font-size:11px; font-weight:700; letter-spacing:0.05em; color:#fff; flex-shrink:0; }
+
+  /* logo */
+  .logo-mark { display:flex; align-items:center; gap:10px; padding: 0 4px 22px; margin-bottom: 10px;
+               border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .logo-mark .lm-dot { width:32px; height:32px; border-radius:8px; background:#fff; color:#000;
+                       display:flex; align-items:center; justify-content:center; font-family: var(--font-heading);
+                       font-weight:900; font-size:14px; letter-spacing:-0.05em; }
+
+  /* page transition */
+  .page { animation: pf 360ms cubic-bezier(0.2,0.8,0.2,1); }
+  @keyframes pf { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform: translateY(0); } }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width:8px; height:8px; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius:4px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" data-presets="env,react">
+const { useState, useMemo, useEffect } = React;
+
+// ---------- icons ----------
+const Icon = ({ name, size=18 }) => {
+  const paths = {
+    home: <path d="M3 11l9-8 9 8M5 9.5V21h14V9.5"/>,
+    folder: <path d="M3 6h6l2 3h10v10H3z"/>,
+    file: <path d="M14 3H6v18h12V7l-4-4zm0 0v4h4"/>,
+    check: <path d="M5 12l5 5L20 7"/>,
+    msg: <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>,
+    bell: <path d="M18 16v-5a6 6 0 10-12 0v5l-2 2h16zm-7 4a2 2 0 004 0"/>,
+    search: <g><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/></g>,
+    arrow: <path d="M5 19L19 5M9 5h10v10"/>,
+    plus: <path d="M12 5v14M5 12h14"/>,
+    download: <path d="M12 4v12m-5-5l5 5 5-5M4 21h16"/>,
+    eye: <g><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></g>,
+    chevron: <path d="M9 6l6 6-6 6"/>,
+    money: <g><circle cx="12" cy="12" r="9"/><path d="M9 9h6M9 15h6M12 6v12"/></g>,
+    chart: <path d="M3 21V8m6 13V3m6 18v-9m6 9V11"/>,
+  };
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">{paths[name]}</svg>
+  );
+};
+
+// ---------- mock data ----------
+const PROJECTS = [
+  { id:'p1', name:'Rebrand · Plataforma Beta', status:'active', progress: 72, deadline:'14 Mai 2026',
+    team:['MR','LF','TC'], next:'Apresentação visual final', activity:'há 2h' },
+  { id:'p2', name:'Site institucional v3', status:'review', progress: 88, deadline:'08 Mai 2026',
+    team:['LF','PV'], next:'Revisão de conteúdo · página About', activity:'há 4h' },
+  { id:'p3', name:'Campanha Q2 · Influenciadores', status:'active', progress: 35, deadline:'30 Mai 2026',
+    team:['TC','MR','PV','LF'], next:'Briefing de criadores', activity:'ontem' },
+  { id:'p4', name:'OOH · Lançamento Linha S', status:'review', progress: 95, deadline:'06 Mai 2026',
+    team:['MR','PV'], next:'Aprovação final do cliente', activity:'há 30min' },
+  { id:'p5', name:'Relatório anual 2025', status:'done', progress: 100, deadline:'concluído',
+    team:['LF','TC'], next:'—', activity:'há 12 dias' },
+];
+
+const APPROVALS = [
+  { id:'a1', project:'OOH · Lançamento Linha S', title:'Outdoor 9×3 · v3', deadline:'06 Mai', count:'4 peças', priority:true },
+  { id:'a2', project:'Site institucional v3', title:'Hero animado · home', deadline:'08 Mai', count:'2 versões', priority:false },
+  { id:'a3', project:'Rebrand · Plataforma Beta', title:'Logo lockups + aplicações', deadline:'12 Mai', count:'8 itens', priority:false },
+];
+
+const FILES = [
+  { name:'Brand_Guidelines_v3.pdf', size:'4.2 MB', type:'PDF', proj:'Rebrand · Plataforma Beta', when:'há 2h', tone:'#EF4444' },
+  { name:'Briefing_Q2_2026.docx', size:'180 KB', type:'DOC', proj:'Campanha Q2', when:'há 1d', tone:'#3B82F6' },
+  { name:'Concorrentes_research.fig', size:'12.8 MB', type:'FIG', proj:'Rebrand · Plataforma Beta', when:'há 3d', tone:'#A855F7' },
+  { name:'Apresentação_Diretoria_v2.key', size:'68 MB', type:'KEY', proj:'Site institucional v3', when:'há 4d', tone:'#F59E0B' },
+  { name:'Contrato_assinado.pdf', size:'1.1 MB', type:'PDF', proj:'OOH · Lançamento Linha S', when:'há 7d', tone:'#EF4444' },
+  { name:'Audio_locução_v1.mp3', size:'8.4 MB', type:'MP3', proj:'Campanha Q2', when:'há 9d', tone:'#22C55E' },
+];
+
+const TIMELINE = [
+  { date:'02 Mai', title:'Kickoff · Rebrand', body:'Reunião de alinhamento. Briefing aprovado pelo cliente.', state:'done' },
+  { date:'12 Mai', title:'Pesquisa & territórios', body:'Mapa concorrencial entregue. 3 territórios visuais em análise.', state:'done' },
+  { date:'24 Mai', title:'Apresentação visual', body:'Logo, paleta e sistema tipográfico. Apresentação remota agendada para 10h.', state:'now' },
+  { date:'05 Jun', title:'Aplicações & guidelines', body:'Cartões, papelaria, social, web e versão para impressão.', state:'next' },
+  { date:'18 Jun', title:'Entrega final', body:'Pacote completo + sessão de handoff com o time interno.', state:'next' },
+];
+
+// ---------- shared bits ----------
+const StatusBadge = ({ s }) => {
+  const map = { active:['st-active','Em andamento'], review:['st-review','Em revisão'], done:['st-done','Concluído'], blocked:['st-blocked','Bloqueado'] };
+  const [cls, label] = map[s] || map.active;
+  return <span className={`badge ${cls}`}><span className="dot"/>{label}</span>;
+};
+
+const Avatars = ({ list }) => (
+  <span className="av-stack">{list.map((n,i) => <span key={i} className="av">{n}</span>)}</span>
+);
+
+const Logo = () => (
+  <div className="logo-mark">
+    <div className="lm-dot">U↗</div>
+    <div>
+      <div style={{ fontFamily:'var(--font-heading)', fontWeight:700, fontSize:14, color:'#fff', lineHeight:1 }}>UP Agência</div>
+      <div style={{ fontSize:11, color:'rgba(255,255,255,0.5)', marginTop:2 }}>Portal do cliente</div>
+    </div>
+  </div>
+);
+
+// ---------- sidebar ----------
+const Sidebar = ({ page, setPage }) => {
+  const items = [
+    { id:'dash', label:'Dashboard', icon:'home' },
+    { id:'projects', label:'Projetos', icon:'folder' },
+    { id:'detail', label:'Detalhe do projeto', icon:'chart' },
+    { id:'approvals', label:'Aprovações', icon:'check', badge: 3 },
+    { id:'docs', label:'Documentos', icon:'file' },
+  ];
+  return (
+    <aside className="sidebar">
+      <Logo/>
+      {items.map(it => (
+        <button key={it.id} className={`nav-link ${page===it.id?'active':''}`} onClick={()=>setPage(it.id)}>
+          <Icon name={it.icon} size={17}/>
+          <span style={{ flex:1 }}>{it.label}</span>
+          {it.badge && <span className="badge st-review" style={{ padding:'2px 7px', fontSize:10 }}>{it.badge}</span>}
+        </button>
+      ))}
+      <div style={{ flex:1 }}/>
+      <div className="glass" style={{ padding:16, marginTop:16 }}>
+        <div style={{ display:'flex', alignItems:'center', gap:10 }}>
+          <span className="av" style={{ width:36, height:36, fontSize:13 }}>RC</span>
+          <div style={{ flex:1, minWidth:0 }}>
+            <div style={{ fontSize:13, fontWeight:600, color:'#fff', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>Rafael Costa</div>
+            <div style={{ fontSize:11, color:'rgba(255,255,255,0.5)' }}>Plataforma Beta · CMO</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  );
+};
+
+const Topbar = ({ title, subtitle, actions }) => (
+  <div className="topbar">
+    <div>
+      <div className="eyebrow" style={{ marginBottom:8 }}>{subtitle || 'Visão geral'}</div>
+      <h1 className="h1">{title}</h1>
+    </div>
+    <div style={{ display:'flex', gap:12, alignItems:'center' }}>
+      <div className="search">
+        <Icon name="search" size={16}/>
+        <input placeholder="Buscar projetos, arquivos…"/>
+        <span className="small" style={{ padding:'2px 8px', borderRadius:6, background:'rgba(255,255,255,0.08)', fontSize:11 }}>⌘K</span>
+      </div>
+      <button className="btn btn-glass" style={{ padding:10, borderRadius:10 }}><Icon name="bell" size={17}/></button>
+      {actions}
+    </div>
+  </div>
+);
+
+// ---------- DASHBOARD ----------
+const Dashboard = ({ go }) => (
+  <div className="page">
+    <Topbar title="Olá, Rafael 👋" subtitle="Bem-vindo de volta · 05 Mai 2026"
+      actions={<button className="btn btn-primary"><Icon name="plus" size={15}/> Novo briefing</button>} />
+
+    {/* KPIs */}
+    <div className="grid-3" style={{ marginBottom:24 }}>
+      {[
+        { k:'Projetos ativos', v:'4', t:'+1 esta semana', icon:'folder' },
+        { k:'Aprovações pendentes', v:'3', t:'1 vence em 24h', icon:'check', warn:true },
+        { k:'Investimento Q2', v:'R$ 184k', t:'72% do orçamento', icon:'money' },
+      ].map((kpi,i) => (
+        <div key={i} className="glass card card-pad-lg">
+          <div className="card-row" style={{ marginBottom:18 }}>
+            <span className="eyebrow">{kpi.k}</span>
+            <span style={{ width:36, height:36, borderRadius:10, background:'rgba(49,60,240,0.18)', display:'flex', alignItems:'center', justifyContent:'center', color:'#A8B0FF' }}>
+              <Icon name={kpi.icon} size={16}/>
+            </span>
+          </div>
+          <div className="num">{kpi.v}</div>
+          <div className="small" style={{ marginTop:8, color: kpi.warn ? '#FCD34D' : 'rgba(255,255,255,0.55)' }}>{kpi.t}</div>
+        </div>
+      ))}
+    </div>
+
+    <div className="grid-asym">
+      {/* Projects in progress */}
+      <div className="glass card card-pad-lg">
+        <div className="card-row" style={{ marginBottom:20 }}>
+          <h2 className="h2">Em andamento</h2>
+          <button className="btn btn-glass" onClick={()=>go('projects')} style={{ padding:'8px 14px', fontSize:13 }}>
+            Ver todos <Icon name="chevron" size={14}/>
+          </button>
+        </div>
+        <div style={{ display:'flex', flexDirection:'column', gap:14 }}>
+          {PROJECTS.filter(p=>p.status!=='done').slice(0,4).map(p => (
+            <div key={p.id} onClick={()=>go('detail')}
+                 style={{ padding:18, borderRadius:12, background:'rgba(255,255,255,0.03)', border:'1px solid var(--glass-bd)', cursor:'pointer', transition:'all 160ms' }}
+                 onMouseEnter={e=>{e.currentTarget.style.background='rgba(255,255,255,0.06)'; e.currentTarget.style.transform='translateX(2px)';}}
+                 onMouseLeave={e=>{e.currentTarget.style.background='rgba(255,255,255,0.03)'; e.currentTarget.style.transform='none';}}>
+              <div className="card-row" style={{ marginBottom:12 }}>
+                <div>
+                  <div className="h3" style={{ marginBottom:4 }}>{p.name}</div>
+                  <div className="small">Próximo: {p.next} · {p.activity}</div>
+                </div>
+                <StatusBadge s={p.status}/>
+              </div>
+              <div className="card-row">
+                <div style={{ flex:1, marginRight:18 }}>
+                  <div className="pbar"><span style={{ width:`${p.progress}%` }}/></div>
+                </div>
+                <div style={{ display:'flex', alignItems:'center', gap:14 }}>
+                  <Avatars list={p.team}/>
+                  <span className="small" style={{ minWidth:54, textAlign:'right' }}>{p.progress}%</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Right column */}
+      <div style={{ display:'flex', flexDirection:'column', gap:20 }}>
+        {/* Approvals shortcut */}
+        <div className="glass card card-pad-lg">
+          <div className="card-row" style={{ marginBottom:16 }}>
+            <h2 className="h2">Aguardando você</h2>
+            <span className="badge st-review">3</span>
+          </div>
+          <div style={{ display:'flex', flexDirection:'column', gap:10 }}>
+            {APPROVALS.slice(0,3).map(a => (
+              <div key={a.id} onClick={()=>go('approvals')}
+                   style={{ padding:'12px 14px', borderRadius:10, background:'rgba(255,255,255,0.03)', border:'1px solid var(--glass-bd)', cursor:'pointer' }}>
+                <div style={{ fontSize:13, fontWeight:600, color:'#fff', marginBottom:3 }}>{a.title}</div>
+                <div className="small" style={{ display:'flex', justifyContent:'space-between' }}>
+                  <span>{a.count}</span>
+                  <span style={{ color: a.priority ? '#FCD34D' : 'rgba(255,255,255,0.55)' }}>até {a.deadline}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Recent activity */}
+        <div className="glass card card-pad-lg">
+          <h2 className="h2" style={{ marginBottom:16 }}>Atividade</h2>
+          <div style={{ display:'flex', flexDirection:'column', gap:14 }}>
+            {[
+              { who:'Mariana R.', act:'enviou 4 outdoors para aprovação', when:'há 30min' },
+              { who:'Lucas F.', act:'comentou no hero da home', when:'há 2h' },
+              { who:'Você', act:'aprovou o briefing Q2', when:'ontem' },
+              { who:'Tomás C.', act:'subiu 2 versões da campanha', when:'ontem' },
+            ].map((a,i) => (
+              <div key={i} style={{ display:'flex', gap:12 }}>
+                <span className="av" style={{ width:28, height:28, fontSize:11, flexShrink:0 }}>{a.who[0]}</span>
+                <div style={{ fontSize:13, color:'rgba(255,255,255,0.85)', lineHeight:1.5 }}>
+                  <b style={{ color:'#fff' }}>{a.who}</b> {a.act}
+                  <div className="small" style={{ marginTop:2 }}>{a.when}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+// ---------- PROJECTS LIST ----------
+const ProjectsList = ({ go }) => {
+  const [filter, setFilter] = useState('todos');
+  const filters = ['todos','active','review','done'];
+  const labels = { todos:'Todos', active:'Em andamento', review:'Em revisão', done:'Concluídos' };
+  const list = filter==='todos' ? PROJECTS : PROJECTS.filter(p=>p.status===filter);
+  return (
+    <div className="page">
+      <Topbar title="Projetos" subtitle="5 em andamento"
+        actions={<button className="btn btn-primary"><Icon name="plus" size={15}/> Novo projeto</button>}/>
+
+      <div style={{ display:'flex', gap:8, marginBottom:24 }}>
+        {filters.map(f => (
+          <button key={f} className={`btn ${filter===f?'btn-brand':'btn-glass'}`} onClick={()=>setFilter(f)}
+                  style={{ padding:'9px 16px', fontSize:13 }}>{labels[f]}</button>
+        ))}
+      </div>
+
+      <div className="glass" style={{ padding:0, overflow:'hidden' }}>
+        <table className="tbl">
+          <thead>
+            <tr>
+              <th style={{ paddingLeft:24 }}>Projeto</th>
+              <th>Status</th>
+              <th>Progresso</th>
+              <th>Time</th>
+              <th>Prazo</th>
+              <th style={{ paddingRight:24 }}></th>
+            </tr>
+          </thead>
+          <tbody>
+            {list.map(p => (
+              <tr key={p.id} onClick={()=>go('detail')}>
+                <td style={{ paddingLeft:24 }}>
+                  <div style={{ fontWeight:600, color:'#fff' }}>{p.name}</div>
+                  <div className="small" style={{ marginTop:2 }}>{p.next}</div>
+                </td>
+                <td><StatusBadge s={p.status}/></td>
+                <td>
+                  <div style={{ display:'flex', alignItems:'center', gap:10, minWidth:140 }}>
+                    <div className="pbar" style={{ flex:1 }}><span style={{ width:`${p.progress}%` }}/></div>
+                    <span className="small" style={{ minWidth:32 }}>{p.progress}%</span>
+                  </div>
+                </td>
+                <td><Avatars list={p.team}/></td>
+                <td><span className="small">{p.deadline}</span></td>
+                <td style={{ paddingRight:24, textAlign:'right' }}><Icon name="chevron" size={16}/></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+// ---------- PROJECT DETAIL ----------
+const ProjectDetail = ({ go }) => {
+  const p = PROJECTS[0];
+  return (
+    <div className="page">
+      <button className="btn btn-glass" onClick={()=>go('projects')} style={{ marginBottom:20, padding:'8px 14px', fontSize:13 }}>
+        <span style={{ transform:'rotate(180deg)' }}><Icon name="chevron" size={14}/></span> Projetos
+      </button>
+      <div className="topbar">
+        <div>
+          <div className="eyebrow" style={{ marginBottom:8 }}>Projeto · {p.id}</div>
+          <h1 className="h1">{p.name}</h1>
+          <div style={{ display:'flex', gap:12, marginTop:14, alignItems:'center' }}>
+            <StatusBadge s={p.status}/>
+            <span className="small">Início: 02 Mai</span>
+            <span className="small">·</span>
+            <span className="small">Prazo: {p.deadline}</span>
+          </div>
+        </div>
+        <div style={{ display:'flex', gap:10 }}>
+          <button className="btn btn-glass"><Icon name="msg" size={15}/> Conversar</button>
+          <button className="btn btn-primary"><Icon name="download" size={15}/> Materiais</button>
+        </div>
+      </div>
+
+      {/* Progress + team */}
+      <div className="grid-3" style={{ marginBottom:24 }}>
+        <div className="glass card card-pad-lg" style={{ gridColumn:'span 2' }}>
+          <div className="card-row" style={{ marginBottom:14 }}>
+            <span className="eyebrow">Progresso</span>
+            <span className="num" style={{ fontSize:20 }}>{p.progress}%</span>
+          </div>
+          <div className="pbar" style={{ height:10 }}><span style={{ width:`${p.progress}%` }}/></div>
+          <div className="small" style={{ marginTop:14 }}>3 de 5 entregas concluídas. Próximo marco: <b style={{ color:'#fff' }}>Apresentação visual</b> · 24 Mai</div>
+        </div>
+        <div className="glass card card-pad-lg">
+          <div className="eyebrow" style={{ marginBottom:14 }}>Time UP</div>
+          <div style={{ display:'flex', flexDirection:'column', gap:10 }}>
+            {[['MR','Mariana R.','Direção criativa'],['LF','Lucas F.','Design'],['TC','Tomás C.','Estratégia']].map(([n,nm,r],i) => (
+              <div key={i} style={{ display:'flex', gap:10, alignItems:'center' }}>
+                <span className="av" style={{ width:30, height:30, fontSize:11 }}>{n}</span>
+                <div style={{ fontSize:13 }}>
+                  <div style={{ color:'#fff', fontWeight:600 }}>{nm}</div>
+                  <div className="small">{r}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="grid-asym">
+        {/* Timeline */}
+        <div className="glass card card-pad-lg">
+          <h2 className="h2" style={{ marginBottom:8 }}>Linha do tempo</h2>
+          <div className="small" style={{ marginBottom:24 }}>5 marcos · 3 concluídos</div>
+          <div className="tl">
+            {TIMELINE.map((t,i) => (
+              <div key={i} className="tl-item">
+                <span className={`tl-dot ${t.state}`}/>
+                <div className="tl-content">
+                  <div style={{ display:'flex', justifyContent:'space-between', marginBottom:4 }}>
+                    <span className="h3">{t.title}</span>
+                    <span className="small" style={{ fontFamily:'var(--font-mono, monospace)', fontSize:12 }}>{t.date}</span>
+                  </div>
+                  <div className="lead" style={{ fontSize:13 }}>{t.body}</div>
+                  {t.state==='now' && (
+                    <div style={{ marginTop:10, display:'flex', gap:8 }}>
+                      <button className="btn btn-brand" style={{ padding:'7px 14px', fontSize:12 }}>Ver materiais</button>
+                      <button className="btn btn-glass" style={{ padding:'7px 14px', fontSize:12 }}>Reagendar</button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Side info */}
+        <div style={{ display:'flex', flexDirection:'column', gap:20 }}>
+          <div className="glass card card-pad-lg">
+            <div className="eyebrow" style={{ marginBottom:14 }}>Próxima entrega</div>
+            <div className="h2" style={{ marginBottom:8, fontSize:18 }}>Apresentação visual</div>
+            <div className="small" style={{ marginBottom:18 }}>Logo, paleta, sistema tipográfico</div>
+            <div className="divider"/>
+            <div style={{ display:'flex', justifyContent:'space-between', fontSize:13 }}>
+              <span className="small">24 Mai · 10:00</span>
+              <span style={{ color:'#FCD34D', fontWeight:600 }}>Em 19 dias</span>
+            </div>
+          </div>
+
+          <div className="glass card card-pad-lg">
+            <div className="eyebrow" style={{ marginBottom:14 }}>Investimento</div>
+            <div className="num" style={{ fontSize:28, marginBottom:6 }}>R$ 78.500</div>
+            <div className="small" style={{ marginBottom:18 }}>Pago · contrato fechado</div>
+            <div className="divider"/>
+            <div style={{ display:'flex', justifyContent:'space-between', fontSize:13 }}>
+              <span className="small">Próxima fatura</span>
+              <span style={{ color:'#fff', fontWeight:600 }}>—</span>
+            </div>
+          </div>
+
+          <div className="glass card card-pad-lg">
+            <div className="eyebrow" style={{ marginBottom:14 }}>Materiais recentes</div>
+            <div style={{ display:'flex', flexDirection:'column', gap:8 }}>
+              {FILES.slice(0,3).map((f,i) => (
+                <div key={i} style={{ display:'flex', gap:10, alignItems:'center', padding:'8px 0' }}>
+                  <span className="file-icon" style={{ width:32, height:32, background:f.tone, fontSize:9 }}>{f.type}</span>
+                  <div style={{ flex:1, minWidth:0 }}>
+                    <div style={{ fontSize:13, color:'#fff', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{f.name}</div>
+                    <div className="small">{f.size}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ---------- APPROVALS ----------
+const Approvals = () => {
+  const [active, setActive] = useState(0);
+  const items = APPROVALS;
+  const item = items[active];
+
+  // Mock approval thumbs
+  const versions = [
+    { v:'v3', label:'Outdoor 9×3 · azul', current:true, gradient:'linear-gradient(135deg, #313CF0 0%, #1F25B5 100%)' },
+    { v:'v3', label:'Outdoor 9×3 · branco', gradient:'linear-gradient(135deg, #F0F0F4 0%, #DDDDE3 100%)' },
+    { v:'v3', label:'Lateral · 1', gradient:'linear-gradient(135deg, #1F25B5 0%, #0A0E2E 100%)' },
+    { v:'v3', label:'Lateral · 2', gradient:'linear-gradient(135deg, #4855FF 0%, #313CF0 100%)' },
+  ];
+
+  return (
+    <div className="page">
+      <Topbar title="Aprovações" subtitle="3 itens aguardando você"
+        actions={null}/>
+
+      <div className="grid-asym" style={{ alignItems:'flex-start' }}>
+        {/* Left: list */}
+        <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
+          {items.map((a,i) => (
+            <div key={a.id} onClick={()=>setActive(i)}
+                 className={`glass card ${active===i?'glass-hi':''}`}
+                 style={{ cursor:'pointer', borderColor: active===i ? 'rgba(49,60,240,0.4)' : 'var(--glass-bd)' }}>
+              <div className="card-row" style={{ marginBottom:8 }}>
+                <span className="eyebrow">{a.project}</span>
+                {a.priority && <span className="badge st-review">Urgente</span>}
+              </div>
+              <div className="h3" style={{ marginBottom:6 }}>{a.title}</div>
+              <div className="small" style={{ display:'flex', justifyContent:'space-between' }}>
+                <span>{a.count}</span>
+                <span>até {a.deadline}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Right: viewer */}
+        <div className="glass card card-pad-lg" style={{ gridColumn:'span 1' }}>
+          <div className="card-row" style={{ marginBottom:20 }}>
+            <div>
+              <span className="eyebrow">{item.project}</span>
+              <h2 className="h2" style={{ marginTop:6 }}>{item.title}</h2>
+            </div>
+            <div style={{ display:'flex', gap:8 }}>
+              <button className="btn btn-glass"><Icon name="msg" size={14}/> Comentar</button>
+              <button className="btn btn-primary" style={{ background:'#22C55E', color:'#fff' }}>
+                <Icon name="check" size={15}/> Aprovar
+              </button>
+            </div>
+          </div>
+
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(2, 1fr)', gap:16 }}>
+            {versions.map((vr,i) => (
+              <div key={i} className="approval" style={{ background: vr.gradient }}>
+                <div style={{ position:'absolute', top:14, left:14, right:14, display:'flex', justifyContent:'space-between' }}>
+                  <span className="badge" style={{ background:'rgba(0,0,0,0.4)', color:'#fff', backdropFilter:'blur(10px)' }}>{vr.v}</span>
+                  {vr.current && <span className="badge" style={{ background:'rgba(34,197,94,0.3)', color:'#fff', backdropFilter:'blur(10px)' }}>Atual</span>}
+                </div>
+                {/* Mock layout inside */}
+                <div style={{ position:'absolute', inset:'40px 30px', display:'flex', flexDirection:'column', justifyContent:'space-between', color: vr.label.includes('branco')?'#0A0A14':'#fff' }}>
+                  <div style={{ fontFamily:'var(--font-heading)', fontWeight:900, fontSize:28, letterSpacing:'-0.04em', lineHeight:0.95 }}>VAI<br/>PRA<br/>CIMA.</div>
+                  <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', fontSize:9, opacity:0.7, letterSpacing:'0.1em', textTransform:'uppercase' }}>
+                    <span>Linha S · 2026</span>
+                    <span style={{ fontWeight:900 }}>UP↗</span>
+                  </div>
+                </div>
+                <div className="approval-overlay">
+                  <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', color:'#fff' }}>
+                    <span style={{ fontSize:13, fontWeight:600 }}>{vr.label}</span>
+                    <button className="btn btn-glass" style={{ padding:'5px 10px', fontSize:11 }}>
+                      <Icon name="eye" size={13}/>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="divider" style={{ marginTop:24 }}/>
+          <div style={{ display:'flex', alignItems:'center', gap:12 }}>
+            <span className="av" style={{ width:32, height:32 }}>MR</span>
+            <div style={{ flex:1, fontSize:13 }}>
+              <b style={{ color:'#fff' }}>Mariana R.</b> <span style={{ color:'rgba(255,255,255,0.7)' }}>enviou 4 versões para aprovação</span>
+              <div className="small" style={{ marginTop:2 }}>há 30 minutos · "Apliquei o ajuste de tipografia que você sugeriu"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ---------- DOCS ----------
+const Docs = () => (
+  <div className="page">
+    <Topbar title="Documentos" subtitle="Briefings, contratos e materiais"
+      actions={<button className="btn btn-primary"><Icon name="plus" size={15}/> Enviar arquivo</button>}/>
+
+    <div className="grid-3" style={{ marginBottom:24 }}>
+      {[
+        { k:'Total', v:'68 arquivos' },
+        { k:'Espaço usado', v:'1.2 GB de 50 GB' },
+        { k:'Compartilhados', v:'14 com sua equipe' },
+      ].map((s,i) => (
+        <div key={i} className="glass card">
+          <span className="eyebrow">{s.k}</span>
+          <div className="h2" style={{ marginTop:6 }}>{s.v}</div>
+        </div>
+      ))}
+    </div>
+
+    <div className="glass card card-pad-lg">
+      <div className="card-row" style={{ marginBottom:20 }}>
+        <h2 className="h2">Recentes</h2>
+        <div style={{ display:'flex', gap:8 }}>
+          {['Todos','Contratos','Briefings','Apresentações','Mídia'].map((f,i) => (
+            <button key={i} className={`btn ${i===0?'btn-brand':'btn-glass'}`} style={{ padding:'7px 14px', fontSize:12 }}>{f}</button>
+          ))}
+        </div>
+      </div>
+      <div style={{ display:'flex', flexDirection:'column', gap:8 }}>
+        {FILES.map((f,i) => (
+          <div key={i} className="file-row">
+            <span className="file-icon" style={{ background:f.tone }}>{f.type}</span>
+            <div style={{ flex:1 }}>
+              <div style={{ fontSize:14, fontWeight:600, color:'#fff' }}>{f.name}</div>
+              <div className="small">{f.proj} · {f.size}</div>
+            </div>
+            <span className="small" style={{ minWidth:80, textAlign:'right' }}>{f.when}</span>
+            <button className="btn btn-glass" style={{ padding:8, borderRadius:8 }}><Icon name="download" size={15}/></button>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+// ---------- App ----------
+const App = () => {
+  const [page, setPage] = useState('dash');
+  useEffect(() => { document.title = 'UP · Portal · ' + page; }, [page]);
+  return (
+    <div className="app">
+      <Sidebar page={page} setPage={setPage}/>
+      <main className="main">
+        {page==='dash' && <Dashboard go={setPage}/>}
+        {page==='projects' && <ProjectsList go={setPage}/>}
+        {page==='detail' && <ProjectDetail go={setPage}/>}
+        {page==='approvals' && <Approvals/>}
+        {page==='docs' && <Docs/>}
+      </main>
+    </div>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

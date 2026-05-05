@@ -1,0 +1,66 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="card.css">
+<style>
+  @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  .ticker { display:inline-flex; gap:40px; animation: ticker 18s linear infinite; white-space:nowrap; }
+  @keyframes spin { to { transform: rotate(360deg) } }
+  .spin { animation: spin 14s linear infinite; }
+  @keyframes splitin { from{opacity:0; transform:translateY(0.4em)} to{opacity:1; transform:translateY(0)} }
+  .word { display:inline-block; opacity:0; animation: splitin 0.55s cubic-bezier(0.2,0.7,0.2,1) forwards; }
+</style>
+</head>
+<body style="padding:0; margin:0; background:#000;">
+  <div style="padding:32px 28px; color:#fff;">
+    <div class="eyebrow" style="color:rgba(255,255,255,0.55); margin-bottom:14px;">Animações · Brandcast-inspired</div>
+
+    <!-- SplitText / Word reveal -->
+    <div style="font-family:var(--font-display); font-weight:400; font-size:54px; line-height:1; letter-spacing:-0.025em; color:#fff; margin-bottom:6px;">
+      <span class="word" style="animation-delay:0.0s">Sobe</span>
+      <span class="word" style="animation-delay:0.12s">com</span>
+      <span class="word" style="animation-delay:0.24s">a</span>
+      <span class="word" style="animation-delay:0.36s" >UP.</span>
+    </div>
+    <div style="font-family:var(--font-body); font-size:13px; color:rgba(255,255,255,0.55); margin-bottom:28px;">
+      SplitText word-by-word reveal · GSAP ScrollTrigger no app real
+    </div>
+
+    <!-- Ticker -->
+    <div style="overflow:hidden; background:#313CF0; padding:14px 0; margin:0 -28px 28px; border-top:1px solid rgba(255,255,255,.1); border-bottom:1px solid rgba(255,255,255,.1);">
+      <div class="ticker" style="font-family:var(--font-display); font-weight:600; font-size:18px; letter-spacing:0.04em; text-transform:uppercase; color:#fff;">
+        <span>Branding · Digital · Campanha · Performance · Conteúdo · Estratégia ·&nbsp;</span>
+        <span>Branding · Digital · Campanha · Performance · Conteúdo · Estratégia ·&nbsp;</span>
+      </div>
+    </div>
+
+    <!-- Round spinning text + cursor demo -->
+    <div style="display:flex; gap:32px; align-items:center;">
+      <div style="position:relative; width:140px; height:140px;">
+        <svg class="spin" viewBox="0 0 140 140" style="width:100%; height:100%;">
+          <defs><path id="circ" d="M70,70 m-54,0 a54,54 0 1,1 108,0 a54,54 0 1,1 -108,0"/></defs>
+          <text font-family="Inter, sans-serif" font-size="13" font-weight="600" letter-spacing="3" fill="#fff" text-transform="uppercase">
+            <textPath href="#circ">SCROLL · DOWN · SCROLL · DOWN · </textPath>
+          </text>
+        </svg>
+        <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
+          <div style="width:32px; height:32px; border-radius:999px; background:#313CF0;"></div>
+        </div>
+      </div>
+
+      <!-- Cursor demo -->
+      <div style="position:relative; width:160px; height:140px; border:1px dashed rgba(255,255,255,.18); border-radius:8px;">
+        <div style="position:absolute; left:60px; top:55px; width:8px; height:8px; border-radius:999px; background:#fff;"></div>
+        <div style="position:absolute; left:46px; top:41px; width:36px; height:36px; border-radius:999px; border:2px solid #313CF0;"></div>
+        <div style="position:absolute; bottom:8px; left:8px; right:8px; font-family:var(--font-body); font-size:11px; color:rgba(255,255,255,.6);">
+          Cursor · inner 8px (lerp 0.25) + outer 36px (lerp 0.15)
+        </div>
+      </div>
+
+      <div style="flex:1; font-family:var(--font-body); font-size:13px; line-height:1.6; color:rgba(255,255,255,.7);">
+        <b style="color:#fff;">Stack sugerida</b><br>
+        GSAP + ScrollTrigger + SplitText pra texto.<br>
+        Lenis pra smooth-scroll.<br>
+        CSS keyframes pra ticker e ícones rotativos.<br>
+        Cursor custom em &lt;canvas&gt; ou JS lerp.
+      </div>
+    </div>
+  </div>
+</body></html>

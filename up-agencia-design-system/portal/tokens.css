@@ -1,0 +1,233 @@
+/* ================================================================
+   UP — DESIGN SYSTEM TOKENS  (Brandcast spec, paleta UP, dual theme)
+   ================================================================
+   Espelho 1:1 do spec Brandcast com substituições:
+     #8C02ED  (roxo)        →  #313CF0  (azul UP)
+     #9A6EE4  (hover lilás) →  #5A82FF  (azul UP claro)
+     #333268  (nav ativo)   →  #1B1F8C  (azul UP profundo)
+     #F2E8FF  (lilás claro) →  #E8EBFF  (azul UP claro)
+     #9B8DAD  (cinza-roxo)  →  #8D95C0  (cinza-azul)
+   Mantém escala tipográfica, espaçamentos, radii, sombras, grid e animações.
+   ================================================================ */
+
+/* ---------- DARK (default) ---------- */
+:root,
+[data-theme="dark"] {
+  --is-dark: 1;
+
+  /* 1. CORES — Primárias */
+  --brand:               #313CF0;     /* ex-#8C02ED */
+  --brand-hover:         #5A82FF;     /* ex-#9A6EE4 */
+  --brand-deep:          #1B1F8C;     /* ex-#333268  (nav ativo) */
+  --brand-soft:          #E8EBFF;     /* ex-#F2E8FF  (seções claras) */
+  --brand-muted:         #8D95C0;     /* ex-#9B8DAD  (bordas, ghost text) */
+
+  --color-secondary:     #54595F;     /* Elementor secondary */
+  --color-text-default:  #7A7A7A;     /* Elementor text default */
+
+  /* 1. CORES — Superfícies */
+  --bg:                  #000000;     /* body */
+  --bg-1:                #020202;     /* hero */
+  --bg-2:                #0C0D17;     /* cards de serviços */
+  --bg-3:                #101010;     /* seções intermediárias */
+  --bg-4:                #0D0D0D;     /* seções alternadas */
+  --bg-5:                #141414;     /* footer */
+  --surface-card:        #222222;     /* blog cards */
+  --overlay:             rgba(0,0,0,0.26);
+
+  /* 1. CORES — Texto */
+  --text-strong:         #FFFFFF;     /* headings */
+  --text-body:           #DDDDDD;     /* parágrafos */
+  --text-subtle:         #B9B9B9;     /* H3 / subtítulos */
+  --text-muted:          #7A7A7A;     /* apoio */
+  --text-card-title:     #C7C7C7;     /* blog cards */
+  --text-on-brand:       #FFFFFF;     /* sobre azul UP */
+
+  /* 1. CORES — Ghost translúcidos */
+  --ghost-1:             rgba(255,255,255,0.07);
+  --ghost-2:             rgba(255,255,255,0.12);
+  --ghost-3:             rgba(255,255,255,0.22);
+
+  /* Border tints */
+  --border-1:            rgba(255,255,255,0.08);
+  --border-2:            rgba(255,255,255,0.16);
+  --border-brand:        rgba(49,60,240,0.45);
+
+  /* CTA primário (cinza claro sobre dark) */
+  --cta-primary-bg:      rgb(209,209,209);
+  --cta-primary-fg:      #000000;
+
+  /* Cursor */
+  --cursor-inner:        #FFFFFF;
+  --cursor-outer:        var(--brand);
+
+  /* Logo recomendado */
+  --logo-src:            "../assets/logo-allwhite.png";
+}
+
+/* ---------- LIGHT ---------- */
+[data-theme="light"] {
+  --is-dark: 0;
+
+  /* 1. CORES — Primárias (mesma ID, mesmo brand) */
+  --brand:               #313CF0;
+  --brand-hover:         #1B1F8C;     /* hover mais escuro no claro */
+  --brand-deep:          #0D1066;
+  --brand-soft:          #E8EBFF;
+  --brand-muted:         #5A6299;
+
+  --color-secondary:     #54595F;
+  --color-text-default:  #5A5A6B;
+
+  /* 1. CORES — Superfícies (invertidas e ajustadas) */
+  --bg:                  #FFFFFF;     /* body */
+  --bg-1:                #FAFAFC;     /* hero */
+  --bg-2:                #F4F5FB;     /* cards de serviços (azulado claro) */
+  --bg-3:                #F1F1F4;     /* seções intermediárias */
+  --bg-4:                #F6F6F8;     /* seções alternadas */
+  --bg-5:                #EEEEF2;     /* footer */
+  --surface-card:        #FFFFFF;     /* blog cards */
+  --overlay:             rgba(255,255,255,0.62);
+
+  /* 1. CORES — Texto */
+  --text-strong:         #0A0A0F;     /* headings */
+  --text-body:           #2A2A33;     /* parágrafos */
+  --text-subtle:         #4A4A55;     /* H3 / subtítulos */
+  --text-muted:          #7A7A7A;     /* apoio */
+  --text-card-title:     #1A1A22;     /* blog cards */
+  --text-on-brand:       #FFFFFF;
+
+  /* 1. CORES — Ghost translúcidos (escuros sobre claro) */
+  --ghost-1:             rgba(10,10,15,0.05);
+  --ghost-2:             rgba(10,10,15,0.10);
+  --ghost-3:             rgba(10,10,15,0.18);
+
+  /* Border tints */
+  --border-1:            rgba(10,10,15,0.08);
+  --border-2:            rgba(10,10,15,0.16);
+  --border-brand:        rgba(49,60,240,0.35);
+
+  /* CTA primário no light = preto sólido */
+  --cta-primary-bg:      #0A0A0F;
+  --cta-primary-fg:      #FFFFFF;
+
+  /* Cursor */
+  --cursor-inner:        #0A0A0F;
+  --cursor-outer:        var(--brand);
+
+  /* Logo recomendado no claro = primary (preto + arrow azul) */
+  --logo-src:            "../assets/logo-primary.png";
+}
+
+/* ---------- TOKENS NEUTROS (compartilhados pelos dois temas) ---------- */
+:root {
+  /* 2. TIPOGRAFIA — Hierarquia UP
+     ┌──────────────────────────────────────────────────────────────────┐
+     │ Quicksans + Accurate ICG Fill  →  TÍTULOS / HEADLINES (display)  │
+     │ Montserrat                     →  SUBTÍTULOS / TÍTULOS UI        │
+     │ Inter                          →  LEGENDAS / SUBLEGENDAS         │
+     └──────────────────────────────────────────────────────────────────┘
+     Quicksans / Accurate ICG Fill são display fonts — usar pontual.
+     Montserrat carrega o peso da hierarquia (heading + subhead + body UI).
+     Inter mora nos detalhes: captions, metadados, microcópia.                      */
+  --font-display:        'Quicksans Accurate ICG Fill', 'Quicksans', 'Montserrat', system-ui, sans-serif;
+  --font-heading:        'Montserrat', system-ui, sans-serif;
+  --font-body:           'Montserrat', system-ui, sans-serif;
+  --font-caption:        'Inter', system-ui, sans-serif;
+  --font-mono:           'JetBrains Mono', ui-monospace, monospace;
+
+  /* Escala (use em px direto nos componentes) */
+  --fs-display:          75.2px;     /* H2 hero    · Inter 400 · 1em · -1.1px */
+  --fs-h2:               60px;       /* H2 seção   · Inter 400 · 1em · -1px */
+  --fs-h3:               16px;       /* H3 subtítl · DM Sans 400 · 1.2 · -0.4 */
+  --fs-body:             16px;       /* Body       · DM Sans 400 · 1.5 · -0.4 */
+  --fs-nav:              16px;       /* Nav link   · Inter 400 */
+  --fs-cta:              15px;       /* CTA        · Inter 500 */
+  --fs-badge:            16px;       /* Badge      · Inter 400 · -1px */
+  --fs-blog-title:       22px;       /* 1.4em ~22  · Inter 400 · -1px */
+  --fs-blog-body:        14px;       /* 0.9em ~14  · DM Sans 400 · -0.4 */
+
+  --ls-display:         -1.1px;
+  --ls-h2:              -1px;
+  --ls-tight:           -0.4px;
+  --ls-badge:           -1px;
+
+  /* 3. ESPAÇAMENTO */
+  --sp-xs:                5px;
+  --sp-sm:               10px;
+  --sp-md:               16px;
+  --sp-lg:               20px;
+  --sp-xl:               30px;
+  --sp-2xl:              40px;
+  --sp-3xl:              70px;
+  --sp-4xl:              80px;
+
+  /* 4. BORDER RADIUS */
+  --r-none:               0;
+  --r-min:                1px;     /* badges */
+  --r-sm:                 5px;     /* cards / imagens */
+  --r-md:                10px;     /* intermediário */
+  --r-lg:                20px;     /* flutuantes */
+  --r-xl:                40px;     /* pill nav */
+  --r-full:             100px;     /* pill CTA */
+
+  /* 5. SOMBRAS */
+  --shadow-float:        rgba(0,0,0,0.89) 0px 16px 54px -8px;
+  --shadow-card:         0 8px 28px rgba(0,0,0,0.18);
+  --shadow-brand:        0 0 32px rgba(49,60,240,0.32);
+
+  /* 6. LAYOUT & GRID */
+  --container:           min(100%, 1140px);
+  --pad-x:               20px;
+  --grid-gap:            20px;
+  --bp-mobile:          767px;
+
+  /* 7. ANIMAÇÕES */
+  --t-fast:              0.3s;     /* ícones, cores */
+  --t-med:               0.5s;     /* títulos de blog */
+  --t-slow:              0.8s;     /* reveals */
+  --ease:                cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  --lerp-cursor-inner:   0.25;
+  --lerp-cursor-outer:   0.15;
+  --ticker-duration:     20s;
+  --spin-duration:       14s;
+}
+
+/* ---------- SUPORTE: respeitar prefers-color-scheme se nada definido ---------- */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --is-dark: 0;
+    --brand-hover:         #1B1F8C;
+    --brand-deep:          #0D1066;
+    --brand-muted:         #5A6299;
+    --color-text-default:  #5A5A6B;
+    --bg: #FFFFFF; --bg-1: #FAFAFC; --bg-2: #F4F5FB; --bg-3: #F1F1F4;
+    --bg-4: #F6F6F8; --bg-5: #EEEEF2; --surface-card: #FFFFFF;
+    --overlay: rgba(255,255,255,0.62);
+    --text-strong: #0A0A0F; --text-body: #2A2A33; --text-subtle: #4A4A55;
+    --text-muted: #7A7A7A; --text-card-title: #1A1A22;
+    --ghost-1: rgba(10,10,15,0.05); --ghost-2: rgba(10,10,15,0.10);
+    --ghost-3: rgba(10,10,15,0.18);
+    --border-1: rgba(10,10,15,0.08); --border-2: rgba(10,10,15,0.16);
+    --border-brand: rgba(49,60,240,0.35);
+    --cta-primary-bg: #0A0A0F; --cta-primary-fg: #FFFFFF;
+    --cursor-inner: #0A0A0F;
+    --logo-src: "../assets/logo-primary.png";
+  }
+}
+
+/* ---------- KEYFRAMES (compartilhados) ---------- */
+@keyframes up-ticker     { from { transform: translateX(0); }   to { transform: translateX(-50%); } }
+@keyframes up-spin       { to   { transform: rotate(360deg); } }
+@keyframes up-fade-up    { from { opacity:0; transform:translateY(0.4em); } to { opacity:1; transform:translateY(0); } }
+@keyframes up-glow-pulse { 0%,100% { box-shadow: 0 0 0 rgba(49,60,240,0); }
+                           50%     { box-shadow: 0 0 32px rgba(49,60,240,0.42); } }
+
+/* ---------- BASE BODY ---------- */
+html, body {
+  background: var(--bg);
+  color: var(--text-body);
+  font-family: var(--font-body);
+  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}

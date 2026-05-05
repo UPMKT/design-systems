@@ -1,0 +1,158 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="card.css"></head>
+<body style="padding:0; margin:0; background:#fff;">
+  <div style="position:relative; padding:24px; overflow:hidden;
+              background:
+                radial-gradient(circle at 20% 25%, #8FAEFF 0%, transparent 45%),
+                radial-gradient(circle at 80% 80%, #313CF0 0%, transparent 50%),
+                linear-gradient(180deg, #EDEEFF, #C8CCFB);">
+
+    <!-- decorative blobs -->
+    <div style="position:absolute; top:20px; right:120px; width:160px; height:160px;
+                border-radius:999px; background:radial-gradient(circle,#313CF0,transparent 70%);
+                opacity:.5; filter:blur(10px);"></div>
+    <div style="position:absolute; bottom:20px; left:60px; width:120px; height:120px;
+                border-radius:999px; background:radial-gradient(circle,#5E8CFF,transparent 70%);
+                opacity:.5; filter:blur(10px);"></div>
+
+    <div style="position:relative;">
+      <div class="eyebrow" style="color:rgba(10,10,15,.6); margin-bottom:10px;">Tags</div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px;">
+        <!-- glass tag -->
+        <span style="padding:6px 14px; border-radius:999px;
+                     background:rgba(255,255,255,0.42);
+                     backdrop-filter:blur(16px) saturate(180%);
+                     -webkit-backdrop-filter:blur(16px) saturate(180%);
+                     border:1px solid rgba(255,255,255,0.6);
+                     box-shadow:inset 0 1px 0 rgba(255,255,255,0.7), 0 2px 8px rgba(10,10,40,.08);
+                     font-size:12px; font-weight:600; color:var(--ink);">
+          Branding
+        </span>
+        <span style="padding:6px 14px; border-radius:999px;
+                     background:rgba(49,60,240,0.18);
+                     backdrop-filter:blur(14px) saturate(180%);
+                     -webkit-backdrop-filter:blur(14px) saturate(180%);
+                     border:1px solid rgba(49,60,240,0.45);
+                     box-shadow:inset 0 1px 0 rgba(255,255,255,0.35);
+                     font-size:12px; font-weight:600; color:var(--up-blue-press);">
+          Digital
+        </span>
+        <span style="padding:6px 14px; border-radius:999px;
+                     background:rgba(10,10,15,0.6);
+                     backdrop-filter:blur(14px) saturate(180%);
+                     -webkit-backdrop-filter:blur(14px) saturate(180%);
+                     border:1px solid rgba(255,255,255,0.15);
+                     box-shadow:inset 0 1px 0 rgba(255,255,255,0.15);
+                     font-size:12px; font-weight:600; color:#fff;">
+          Campanha
+        </span>
+        <span style="padding:6px 4px 6px 14px; border-radius:999px;
+                     background:rgba(255,255,255,0.42);
+                     backdrop-filter:blur(14px) saturate(180%);
+                     -webkit-backdrop-filter:blur(14px) saturate(180%);
+                     border:1px solid rgba(255,255,255,0.6);
+                     box-shadow:inset 0 1px 0 rgba(255,255,255,0.7);
+                     display:inline-flex; align-items:center; gap:8px;
+                     font-size:12px; font-weight:600; color:var(--ink);">
+          Em andamento
+          <span style="width:6px; height:6px; border-radius:999px; background:var(--up-blue);
+                       box-shadow:0 0 8px var(--up-blue); margin-right:10px;"></span>
+        </span>
+        <span style="padding:6px 14px; border-radius:999px;
+                     background:rgba(15,157,88,0.18);
+                     backdrop-filter:blur(14px);
+                     -webkit-backdrop-filter:blur(14px);
+                     border:1px solid rgba(15,157,88,0.35);
+                     box-shadow:inset 0 1px 0 rgba(255,255,255,0.3);
+                     font-size:12px; font-weight:600; color:#086B3C;">
+          ✓ Entregue
+        </span>
+        <span style="padding:6px 14px; border-radius:999px;
+                     background:rgba(224,53,43,0.15);
+                     backdrop-filter:blur(14px);
+                     -webkit-backdrop-filter:blur(14px);
+                     border:1px solid rgba(224,53,43,0.32);
+                     box-shadow:inset 0 1px 0 rgba(255,255,255,0.3);
+                     font-size:12px; font-weight:600; color:#A1221A;">
+          Pausado
+        </span>
+      </div>
+
+      <div class="eyebrow" style="color:rgba(10,10,15,.6); margin-bottom:10px;">Alerts</div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <!-- Info / brand alert -->
+        <div style="padding:14px 16px; border-radius:14px;
+                    background:rgba(255,255,255,0.42);
+                    backdrop-filter:blur(22px) saturate(180%);
+                    -webkit-backdrop-filter:blur(22px) saturate(180%);
+                    border:1px solid rgba(255,255,255,0.6);
+                    box-shadow:inset 0 1px 0 rgba(255,255,255,0.7), 0 8px 24px rgba(10,10,40,.1);
+                    display:flex; align-items:center; gap:12px;">
+          <span style="width:32px; height:32px; border-radius:10px;
+                       background:linear-gradient(135deg,#5E8CFF,#313CF0);
+                       box-shadow:inset 0 1px 0 rgba(255,255,255,.4), 0 4px 12px rgba(49,60,240,.4);
+                       display:inline-flex; align-items:center; justify-content:center; flex:none;">
+            <img src="../assets/arrow-white.png" style="height:11px;">
+          </span>
+          <div style="font-size:13px; color:var(--ink); line-height:1.45;">
+            <b>Heads-up.</b> Kickoff marcado pra quinta às 10h. A gente manda o link.
+          </div>
+        </div>
+
+        <!-- Success -->
+        <div style="padding:14px 16px; border-radius:14px;
+                    background:rgba(15,157,88,0.14);
+                    backdrop-filter:blur(20px) saturate(180%);
+                    -webkit-backdrop-filter:blur(20px) saturate(180%);
+                    border:1px solid rgba(15,157,88,0.32);
+                    box-shadow:inset 0 1px 0 rgba(255,255,255,0.4), 0 8px 24px rgba(15,157,88,.08);
+                    display:flex; align-items:center; gap:12px;">
+          <span style="width:32px; height:32px; border-radius:10px; background:#0F9D58;
+                       box-shadow:inset 0 1px 0 rgba(255,255,255,.3);
+                       display:inline-flex; align-items:center; justify-content:center;
+                       color:#fff; font-weight:700; font-size:16px; flex:none;">✓</span>
+          <div style="font-size:13px; color:var(--ink); line-height:1.45;">
+            <b>Tudo certo.</b> Inscrição confirmada. Seu acesso chegou no e-mail.
+          </div>
+        </div>
+
+        <!-- Warning -->
+        <div style="padding:14px 16px; border-radius:14px;
+                    background:rgba(232,163,23,0.14);
+                    backdrop-filter:blur(20px) saturate(180%);
+                    -webkit-backdrop-filter:blur(20px) saturate(180%);
+                    border:1px solid rgba(232,163,23,0.35);
+                    box-shadow:inset 0 1px 0 rgba(255,255,255,0.4);
+                    display:flex; align-items:center; gap:12px;">
+          <span style="width:32px; height:32px; border-radius:10px; background:#E8A317;
+                       box-shadow:inset 0 1px 0 rgba(255,255,255,.3);
+                       display:inline-flex; align-items:center; justify-content:center;
+                       color:#fff; font-weight:700; font-size:14px; flex:none;">!</span>
+          <div style="font-size:13px; color:var(--ink); line-height:1.45;">
+            <b>Atenção.</b> Seu plano expira em 3 dias. <a href="#" style="color:#B77C0B; font-weight:600; border:0;">Renovar</a>
+          </div>
+        </div>
+
+        <!-- Dark glass alert -->
+        <div style="padding:14px 16px; border-radius:14px;
+                    background:rgba(10,10,40,0.55);
+                    backdrop-filter:blur(22px) saturate(180%);
+                    -webkit-backdrop-filter:blur(22px) saturate(180%);
+                    border:1px solid rgba(255,255,255,0.14);
+                    box-shadow:inset 0 1px 0 rgba(255,255,255,0.12), 0 12px 32px rgba(0,0,0,.3);
+                    color:#fff;
+                    display:flex; align-items:center; gap:12px;">
+          <span style="width:32px; height:32px; border-radius:10px;
+                       background:rgba(255,255,255,0.14);
+                       border:1px solid rgba(255,255,255,0.25);
+                       backdrop-filter:blur(6px);
+                       display:inline-flex; align-items:center; justify-content:center; flex:none;">
+            <img src="../assets/arrow-white.png" style="height:11px;">
+          </span>
+          <div style="font-size:13px; line-height:1.45;">
+            <b>Novo</b> · Liberamos o case da Skyline. <a href="#" style="color:#8FAEFF; font-weight:600; border:0;">Ver agora</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body></html>

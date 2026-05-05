@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UP — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css?v=4">
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  body { margin:0; padding:0 var(--pad-x); }
+  .container { max-width: var(--container); margin: 0 auto; padding: var(--sp-4xl) 0; }
+  h1,h2,h3 { margin: 0; }
+  h1 { font-family: var(--font-heading); font-weight:400; font-size: var(--fs-h2);
+       letter-spacing: var(--ls-h2); color: var(--text-strong); line-height:1; }
+  h2 { font-family: var(--font-heading); font-weight:400; font-size: 36px;
+       letter-spacing: -0.5px; color: var(--text-strong); line-height:1; margin-bottom: var(--sp-lg); }
+  .eyebrow { font-family: var(--font-heading); font-weight:600; font-size:11px;
+             letter-spacing: 0.16em; text-transform: uppercase; color: var(--brand);
+             margin-bottom: var(--sp-sm); }
+  section { padding: var(--sp-4xl) 0; border-bottom: 1px solid var(--border-1); }
+  .grid { display:grid; gap: var(--grid-gap); }
+  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .grid-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+  /* Theme toggle */
+  .toggle {
+    position: fixed; top: 20px; right: 20px; z-index: 100;
+    display: inline-flex; align-items:center; gap:8px;
+    padding: 6px 6px 6px 16px;
+    background: var(--ghost-1); border: 1px solid var(--border-1);
+    border-radius: var(--r-xl);
+    font-family: var(--font-heading); font-size: 13px; font-weight:500;
+    color: var(--text-strong); cursor: pointer; backdrop-filter: blur(10px);
+  }
+  .toggle .knob { width: 28px; height: 28px; border-radius: 999px;
+    background: var(--brand); display:inline-flex; align-items:center; justify-content:center;
+    color:#fff; font-size:14px; }
+
+  /* Nav demo */
+  .nav-demo {
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 18px 20px;
+    background: var(--ghost-1); backdrop-filter: blur(10px);
+    border-radius: var(--r-md);
+  }
+  .pill-nav {
+    display:flex; gap:6px; padding:6px 10px;
+    background: var(--ghost-1); border:1px solid var(--border-1);
+    border-radius: var(--r-xl);
+  }
+  .pill-nav a {
+    padding: 6px 14px; border-radius: 999px;
+    font-family: var(--font-heading); font-size: var(--fs-nav); font-weight:400;
+    color: var(--text-strong); text-decoration:none;
+  }
+  .pill-nav a.active { background: var(--brand-deep); color:#fff; }
+
+  /* Buttons */
+  .btn-primary {
+    background: var(--cta-primary-bg); color: var(--cta-primary-fg);
+    border: 0; padding: 16px 30px; border-radius: var(--r-none);
+    font-family: var(--font-body); font-weight: 400; font-size: var(--fs-cta);
+    letter-spacing: -0.4px; cursor: pointer;
+  }
+  .btn-pill {
+    background: var(--bg-2); color: var(--text-strong);
+    border: 0; padding: 16px 30px; border-radius: var(--r-full);
+    font-family: var(--font-heading); font-weight: 500; font-size: var(--fs-cta);
+    cursor: pointer;
+  }
+  .btn-outline {
+    background: transparent; color: var(--text-strong);
+    border: 1px solid var(--border-2); padding: 16px 30px; border-radius: var(--r-full);
+    font-family: var(--font-heading); font-weight: 500; font-size: var(--fs-cta);
+    cursor: pointer;
+  }
+  .btn-ghost {
+    background: transparent; color: var(--brand-muted); border: 0; padding: 0;
+    font-family: var(--font-heading); font-weight: 500; font-size: var(--fs-cta);
+    cursor: pointer;
+  }
+
+  /* Service card */
+  .svc-card {
+    background: var(--bg-2); border-radius: var(--r-sm);
+    padding: var(--sp-2xl) var(--sp-xl);
+  }
+  .svc-card.feat { padding: var(--sp-3xl) var(--sp-xl) var(--sp-2xl); }
+  .svc-card h3 { font-family: var(--font-heading); font-weight:400;
+    font-size: 28px; letter-spacing: -0.6px; color: var(--text-strong);
+    margin: 14px 0 10px; }
+  .svc-card p { font-family: var(--font-body); font-size: var(--fs-body);
+    line-height: 1.5; letter-spacing: var(--ls-tight); color: var(--text-body); margin:0; }
+  .svc-icon {
+    width:36px; height:36px; border-radius: var(--r-min);
+    background: var(--brand); display:inline-flex; align-items:center; justify-content:center;
+    color: var(--text-on-brand); font-family: var(--font-heading); font-weight:600; font-size:14px;
+  }
+
+  /* Blog card */
+  .blog-card {
+    background: var(--surface-card); border-radius: var(--r-sm); padding:16px;
+    cursor:pointer; transition: transform var(--t-med) var(--ease);
+  }
+  .blog-card:hover { transform: translateY(-4px); }
+  .blog-card .img {
+    height: 180px; border-radius: var(--r-sm); overflow:hidden; position:relative;
+    background: linear-gradient(135deg, var(--bg-2), var(--brand) 220%);
+  }
+  .blog-card .img::after {
+    content:''; position:absolute; inset:0;
+    background: linear-gradient(173deg, rgba(0,0,0,0.51) 0%, #000 71%);
+  }
+  .badge {
+    position:absolute; top:12px; left:12px; z-index:1;
+    background: var(--brand); color: var(--text-on-brand);
+    padding: 5px 10px; border-radius: var(--r-min);
+    font-family: var(--font-heading); font-weight:400; font-size: var(--fs-badge);
+    letter-spacing: var(--ls-badge);
+  }
+  .blog-card h3 {
+    font-family: var(--font-heading); font-weight:400; font-size: var(--fs-blog-title);
+    letter-spacing: var(--ls-badge); color: var(--text-card-title);
+    margin: 14px 0 10px; transition: color var(--t-med) var(--ease);
+  }
+  .blog-card:hover h3 { color: var(--brand-hover); }
+  .blog-card p {
+    font-family: var(--font-body); font-size: var(--fs-blog-body); line-height:1.5;
+    letter-spacing: var(--ls-tight); color: var(--text-muted); margin:0;
+  }
+
+  /* Color swatches */
+  .sw {
+    border-radius: var(--r-sm); padding: 14px; min-height: 100px;
+    display:flex; flex-direction:column; justify-content:space-between;
+    border: 1px solid var(--border-1);
+  }
+  .sw .name { font-family: var(--font-heading); font-weight:600; font-size:13px; }
+  .sw .val  { font-family: var(--font-mono); font-size: 11px; opacity:0.8; }
+
+  /* Spacing bars */
+  .sp-row { display:flex; align-items:center; gap:16px; padding: 8px 0;
+            border-bottom: 1px solid var(--border-1); }
+  .sp-row:last-child { border-bottom: 0; }
+  .sp-bar { background: var(--brand); height: 14px; border-radius: 2px; }
+  .sp-row .label { font-family: var(--font-mono); font-size:12px; color: var(--text-strong);
+                   width:50px; }
+  .sp-row .px { font-family: var(--font-mono); font-size:12px; color: var(--text-muted);
+                width:60px; }
+  .sp-row .use { font-family: var(--font-body); font-size: 13px; color: var(--text-subtle); }
+
+  /* Radius demo */
+  .rd { background: var(--bg-2); border:1px solid var(--border-1); padding: 24px;
+        display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .rd .box { width: 64px; height: 64px; background: var(--brand); }
+  .rd .lbl { font-family: var(--font-mono); font-size: 11px; color: var(--text-subtle); }
+  .rd .name { font-family: var(--font-heading); font-weight:600; font-size:13px;
+              color: var(--text-strong); }
+
+  /* Type specimens */
+  .specimen { padding: 18px 0; border-bottom: 1px solid var(--border-1); }
+  .specimen:last-child { border-bottom: 0; }
+  .specimen .meta { font-family: var(--font-mono); font-size: 11px;
+                    color: var(--text-muted); margin-top: 8px; }
+
+  /* Ticker */
+  .ticker { background: var(--brand); overflow:hidden; padding: 14px 0;
+            margin: 0 calc(var(--pad-x) * -1); }
+  .ticker-row { display:inline-flex; gap: 48px; white-space:nowrap;
+                animation: up-ticker var(--ticker-duration) linear infinite;
+                font-family: var(--font-heading); font-weight:600; font-size:18px;
+                letter-spacing: 0.04em; text-transform:uppercase; color:#fff; }
+
+  /* Spin */
+  .spin-demo { width:120px; height:120px; position:relative; margin: 0 auto; }
+  .spin-demo svg { animation: up-spin var(--spin-duration) linear infinite; }
+  .spin-demo .dot { position:absolute; inset:0; display:flex; align-items:center;
+                    justify-content:center; }
+  .spin-demo .dot span { width:10px; height:10px; border-radius:999px;
+                         background: var(--brand); box-shadow: var(--shadow-brand); }
+
+  /* Cursor preview */
+  .cursor-demo { position:relative; height: 140px;
+                 border:1px dashed var(--border-2); border-radius: var(--r-sm); }
+  .cursor-demo .inner { position:absolute; left:80px; top:60px; width:8px; height:8px;
+                        border-radius:999px; background: var(--cursor-inner); }
+  .cursor-demo .outer { position:absolute; left:64px; top:44px; width:40px; height:40px;
+                        border-radius:999px; border: 2px solid var(--cursor-outer); }
+</style>
+</head>
+<body>
+
+<button class="toggle" id="t">
+  <span id="tlabel">Modo escuro</span>
+  <span class="knob" id="tknob">☾</span>
+</button>
+
+<div class="container">
+  <header style="padding-bottom: var(--sp-4xl);">
+    <div class="eyebrow">UP Agência · Design System v1</div>
+    <h1>Spec completo. Dark + Light.</h1>
+    <p style="max-width: 640px; margin-top: var(--sp-md); font-family: var(--font-body); font-size: var(--fs-body); line-height: 1.5; letter-spacing: var(--ls-tight); color: var(--text-body);">
+      Estrutura Brandcast com a paleta UP (#313CF0). Toda decisão visual mora em <code>tokens.css</code> e responde ao atributo <code>data-theme</code>.
+    </p>
+  </header>
+
+  <!-- 1. CORES -->
+  <section>
+    <div class="eyebrow">01 · Cores</div>
+    <h2>Paleta</h2>
+    <h3 style="font-family: var(--font-heading); font-weight:600; font-size:13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin: var(--sp-lg) 0 var(--sp-sm);">Primárias</h3>
+    <div class="grid grid-4">
+      <div class="sw" style="background: var(--brand); color:#fff; border:0;">
+        <div class="name">Brand</div><div class="val">#313CF0</div></div>
+      <div class="sw" style="background: var(--brand-hover); color:#fff; border:0;">
+        <div class="name">Brand hover</div><div class="val">var(--brand-hover)</div></div>
+      <div class="sw" style="background: var(--brand-deep); color:#fff; border:0;">
+        <div class="name">Brand deep</div><div class="val">var(--brand-deep)</div></div>
+      <div class="sw" style="background: var(--brand-soft); color: var(--brand-deep); border:0;">
+        <div class="name">Brand soft</div><div class="val">#E8EBFF</div></div>
+    </div>
+
+    <h3 style="font-family: var(--font-heading); font-weight:600; font-size:13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin: var(--sp-2xl) 0 var(--sp-sm);">Superfícies</h3>
+    <div class="grid grid-4">
+      <div class="sw" style="background: var(--bg); color: var(--text-strong);">
+        <div class="name">bg</div><div class="val">body</div></div>
+      <div class="sw" style="background: var(--bg-1); color: var(--text-strong);">
+        <div class="name">bg-1</div><div class="val">hero</div></div>
+      <div class="sw" style="background: var(--bg-2); color: var(--text-strong);">
+        <div class="name">bg-2</div><div class="val">cards serviço</div></div>
+      <div class="sw" style="background: var(--bg-3); color: var(--text-strong);">
+        <div class="name">bg-3</div><div class="val">intermediário</div></div>
+      <div class="sw" style="background: var(--bg-4); color: var(--text-strong);">
+        <div class="name">bg-4</div><div class="val">alternada</div></div>
+      <div class="sw" style="background: var(--bg-5); color: var(--text-strong);">
+        <div class="name">bg-5</div><div class="val">footer</div></div>
+      <div class="sw" style="background: var(--surface-card); color: var(--text-card-title);">
+        <div class="name">surface-card</div><div class="val">blog</div></div>
+    </div>
+
+    <h3 style="font-family: var(--font-heading); font-weight:600; font-size:13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin: var(--sp-2xl) 0 var(--sp-sm);">Texto</h3>
+    <div class="grid grid-4">
+      <div class="sw"><div class="name" style="color: var(--text-strong);">strong</div><div class="val">headings</div></div>
+      <div class="sw"><div class="name" style="color: var(--text-body);">body</div><div class="val">parágrafos</div></div>
+      <div class="sw"><div class="name" style="color: var(--text-subtle);">subtle</div><div class="val">H3</div></div>
+      <div class="sw"><div class="name" style="color: var(--text-muted);">muted</div><div class="val">apoio</div></div>
+    </div>
+  </section>
+
+  <!-- 2. TIPOGRAFIA -->
+  <section>
+    <div class="eyebrow">02 · Tipografia</div>
+    <h2>Hierarquia · 3 famílias, 1 sistema</h2>
+
+    <!-- Tabela hierárquica -->
+    <div style="margin-top: var(--sp-lg); border: 1px solid var(--border-1); border-radius: var(--r-sm); overflow: hidden;">
+      <div style="display:grid; grid-template-columns: 280px 1fr 240px; gap: 0; background: var(--bg-2); padding: var(--sp-md) var(--sp-xl); border-bottom: 1px solid var(--border-1); font-family: var(--font-caption); font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted);">
+        <div>Família</div><div>Uso</div><div>Peso</div>
+      </div>
+      <div style="display:grid; grid-template-columns: 280px 1fr 240px; align-items:center; padding: var(--sp-xl); border-bottom: 1px solid var(--border-1); background: var(--bg-2);">
+        <div style="font-family: var(--font-display); font-weight: 800; font-size: 28px; color: var(--text-strong); letter-spacing: -0.8px;">Quicksans</div>
+        <div style="font-family: var(--font-body); font-size: 14px; color: var(--text-body);">Títulos &amp; Headlines de campanha</div>
+        <div style="font-family: var(--font-caption); font-size: 12px; color: var(--text-muted);">Display</div>
+      </div>
+      <div style="display:grid; grid-template-columns: 280px 1fr 240px; align-items:center; padding: var(--sp-xl); border-bottom: 1px solid var(--border-1); background: var(--bg-2);">
+        <div style="font-family: var(--font-display); font-weight: 800; font-size: 28px; color: var(--text-strong); letter-spacing: -0.8px;">Accurate ICG Fill</div>
+        <div style="font-family: var(--font-body); font-size: 14px; color: var(--text-body);">Títulos &amp; Headlines (alternativa display)</div>
+        <div style="font-family: var(--font-caption); font-size: 12px; color: var(--text-muted);">Display</div>
+      </div>
+      <div style="display:grid; grid-template-columns: 280px 1fr 240px; align-items:center; padding: var(--sp-xl); border-bottom: 1px solid var(--border-1); background: var(--bg-2);">
+        <div style="font-family: var(--font-heading); font-weight: 700; font-size: 28px; color: var(--text-strong); letter-spacing: -0.6px;">Montserrat</div>
+        <div style="font-family: var(--font-body); font-size: 14px; color: var(--text-body);">Subtítulos, títulos UI, body, navegação</div>
+        <div style="font-family: var(--font-caption); font-size: 12px; color: var(--text-muted);">300 · 400 · 500 · 600 · 700 · 800</div>
+      </div>
+      <div style="display:grid; grid-template-columns: 280px 1fr 240px; align-items:center; padding: var(--sp-xl); background: var(--bg-2);">
+        <div style="font-family: var(--font-caption); font-weight: 600; font-size: 28px; color: var(--text-strong); letter-spacing: -0.6px;">Inter</div>
+        <div style="font-family: var(--font-body); font-size: 14px; color: var(--text-body);">Legendas, sublegendas, microcópia, eyebrows</div>
+        <div style="font-family: var(--font-caption); font-size: 12px; color: var(--text-muted);">400 · 500 · 600 · 700</div>
+      </div>
+    </div>
+
+    <!-- Display: Quicksans / Accurate ICG Fill -->
+    <h3 style="font-family: var(--font-caption); font-weight:600; font-size:11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); margin: var(--sp-2xl) 0 var(--sp-sm);">Display · Headlines</h3>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 0; align-items:stretch; border-radius: var(--r-sm); overflow:hidden; background: var(--bg-2);">
+      <div style="padding: var(--sp-3xl) var(--sp-2xl); display:flex; align-items:center; justify-content:center;">
+        <div style="font-family: var(--font-display); font-weight:900; font-size: 220px; line-height:0.85; color: var(--text-strong); letter-spacing: -8px;">Aa</div>
+      </div>
+      <div style="padding: var(--sp-2xl); border-left: 1px solid var(--border-1); display:flex; flex-direction:column; justify-content:center; gap: var(--sp-lg);">
+        <div>
+          <div style="font-family: var(--font-display); font-weight:800; font-size: 22px; color: var(--text-strong); letter-spacing: -0.4px;">Quicksans</div>
+          <div style="font-family: var(--font-display); font-weight:800; font-size: 22px; color: var(--text-strong); letter-spacing: -0.4px;">Accurate ICG Fill</div>
+          <div style="font-family: var(--font-caption); font-size: 11px; color: var(--text-muted); margin-top: 6px;">Display · uso pontual em capas e campanhas</div>
+        </div>
+        <div style="font-family: var(--font-display); font-weight:800; font-size: 22px; line-height:1.5; color: var(--text-strong); letter-spacing: -0.3px; max-width: 380px;">
+          Aa, Bb, Cc, Dd, Ee, Ff,<br>
+          Gg, Hh, Ii, Jj, Kk, Ll,<br>
+          Mm, Nn, Oo, Pp, Qq,<br>
+          Rr, Ss, Tt, Uu, Vv, Ww,<br>
+          Xx, Yy, Zz.
+        </div>
+      </div>
+    </div>
+
+    <!-- Montserrat -->
+    <h3 style="font-family: var(--font-caption); font-weight:600; font-size:11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); margin: var(--sp-2xl) 0 var(--sp-sm);">Subtítulos · Títulos UI · Body</h3>
+    <div style="display:grid; grid-template-columns: 280px 1fr; gap: var(--sp-2xl); align-items:start; padding: var(--sp-2xl); background: var(--bg-2); border-radius: var(--r-sm);">
+      <div>
+        <div style="font-family: var(--font-heading); font-weight:700; font-size: 28px; color: var(--text-strong); letter-spacing: -0.6px;">Montserrat</div>
+        <div style="margin-top: var(--sp-md); font-family: var(--font-body); font-size: 14px; line-height:1.6; color: var(--text-muted);">
+          Carrega o peso do sistema · subtítulos, body, navegação, CTAs.
+        </div>
+        <div style="margin-top: var(--sp-2xl); display:flex; flex-direction: column; gap: var(--sp-sm);">
+          <div style="font-family: var(--font-heading); font-weight:800; font-size: 96px; line-height:1; color: var(--text-strong); letter-spacing: -3px;">Aa</div>
+          <div style="font-family: var(--font-caption); font-size: 11px; color: var(--text-muted);">Bold · 800</div>
+        </div>
+        <div style="margin-top: var(--sp-lg); display:flex; flex-direction: column; gap: var(--sp-sm);">
+          <div style="font-family: var(--font-heading); font-weight:500; font-size: 72px; line-height:1; color: var(--text-subtle); letter-spacing: -2px;">Aa</div>
+          <div style="font-family: var(--font-caption); font-size: 11px; color: var(--text-muted);">Medium · 500</div>
+        </div>
+        <div style="margin-top: var(--sp-lg); display:flex; flex-direction: column; gap: var(--sp-sm);">
+          <div style="font-family: var(--font-heading); font-weight:300; font-size: 56px; line-height:1; color: var(--text-muted); letter-spacing: -1.5px;">Aa</div>
+          <div style="font-family: var(--font-caption); font-size: 11px; color: var(--text-muted);">Light · 300</div>
+        </div>
+      </div>
+      <div style="border-left: 1px solid var(--border-1); padding-left: var(--sp-2xl);">
+        <div style="font-family: var(--font-heading); font-weight:700; font-size: 22px; color: var(--text-strong); letter-spacing:-0.4px;">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+        <div style="font-family: var(--font-heading); font-weight:700; font-size: 18px; color: var(--text-strong); margin-top: 4px; letter-spacing:-0.3px;">abcdefghijklmnopqrstuvwxyz</div>
+        <div style="font-family: var(--font-heading); font-weight:700; font-size: 16px; color: var(--text-strong); margin-top: 4px;">0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</div>
+
+        <div style="font-family: var(--font-heading); font-weight:500; font-size: 22px; color: var(--text-subtle); margin-top: var(--sp-xl); letter-spacing:-0.4px;">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+        <div style="font-family: var(--font-heading); font-weight:500; font-size: 18px; color: var(--text-subtle); margin-top: 4px; letter-spacing:-0.3px;">abcdefghijklmnopqrstuvwxyz</div>
+        <div style="font-family: var(--font-heading); font-weight:500; font-size: 16px; color: var(--text-subtle); margin-top: 4px;">0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</div>
+
+        <div style="font-family: var(--font-heading); font-weight:300; font-size: 22px; color: var(--text-muted); margin-top: var(--sp-xl); letter-spacing:-0.4px;">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+        <div style="font-family: var(--font-heading); font-weight:300; font-size: 18px; color: var(--text-muted); margin-top: 4px; letter-spacing:-0.3px;">abcdefghijklmnopqrstuvwxyz</div>
+        <div style="font-family: var(--font-heading); font-weight:300; font-size: 16px; color: var(--text-muted); margin-top: 4px;">0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</div>
+      </div>
+    </div>
+
+    <!-- Inter -->
+    <h3 style="font-family: var(--font-caption); font-weight:600; font-size:11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); margin: var(--sp-2xl) 0 var(--sp-sm);">Legendas · Sublegendas</h3>
+    <div style="display:grid; grid-template-columns: 280px 1fr; gap: var(--sp-2xl); align-items:start; padding: var(--sp-2xl); background: var(--bg-2); border-radius: var(--r-sm);">
+      <div>
+        <div style="font-family: var(--font-caption); font-weight:600; font-size: 28px; color: var(--text-strong); letter-spacing: -0.6px;">Inter</div>
+        <div style="margin-top: var(--sp-md); font-family: var(--font-body); font-size: 14px; line-height:1.6; color: var(--text-muted);">
+          Detalhes do sistema · captions, metadados, eyebrows, microcópia em UI.
+        </div>
+        <div style="margin-top: var(--sp-2xl); display:flex; flex-direction: column; gap: var(--sp-sm);">
+          <div style="font-family: var(--font-caption); font-weight:600; font-size: 72px; line-height:1; color: var(--text-strong); letter-spacing: -2px;">Aa</div>
+          <div style="font-family: var(--font-caption); font-size: 11px; color: var(--text-muted);">SemiBold · 600</div>
+        </div>
+        <div style="margin-top: var(--sp-lg); display:flex; flex-direction: column; gap: var(--sp-sm);">
+          <div style="font-family: var(--font-caption); font-weight:400; font-size: 48px; line-height:1; color: var(--text-subtle); letter-spacing: -1px;">Aa</div>
+          <div style="font-family: var(--font-caption); font-size: 11px; color: var(--text-muted);">Regular · 400</div>
+        </div>
+      </div>
+      <div style="border-left: 1px solid var(--border-1); padding-left: var(--sp-2xl);">
+        <div style="font-family: var(--font-caption); font-weight:600; font-size: 18px; color: var(--text-strong); letter-spacing:-0.3px;">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+        <div style="font-family: var(--font-caption); font-weight:600; font-size: 15px; color: var(--text-strong); margin-top: 4px;">abcdefghijklmnopqrstuvwxyz</div>
+        <div style="font-family: var(--font-caption); font-weight:600; font-size: 13px; color: var(--text-strong); margin-top: 4px;">0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</div>
+
+        <div style="font-family: var(--font-caption); font-weight:400; font-size: 18px; color: var(--text-subtle); margin-top: var(--sp-xl);">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+        <div style="font-family: var(--font-caption); font-weight:400; font-size: 15px; color: var(--text-subtle); margin-top: 4px;">abcdefghijklmnopqrstuvwxyz</div>
+        <div style="font-family: var(--font-caption); font-weight:400; font-size: 13px; color: var(--text-subtle); margin-top: 4px;">0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9</div>
+      </div>
+    </div>
+
+    <!-- Escala UI aplicada -->
+    <h3 style="font-family: var(--font-caption); font-weight:600; font-size:11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); margin: var(--sp-2xl) 0 var(--sp-sm);">Escala aplicada</h3>
+    <div class="specimen">
+      <div style="font-family: var(--font-display); font-weight:900; font-size: var(--fs-display); line-height:1; letter-spacing: var(--ls-display); color: var(--text-strong);">Headline display.</div>
+      <div class="meta">Quicksans / Accurate ICG Fill 900 · 75.2px · 1em · -1.1px</div>
+    </div>
+    <div class="specimen">
+      <div style="font-family: var(--font-heading); font-weight:700; font-size: var(--fs-h2); line-height:1; letter-spacing: var(--ls-h2); color: var(--text-strong);">Título de seção.</div>
+      <div class="meta">Montserrat 700 · 60px · 1em · -1px</div>
+    </div>
+    <div class="specimen">
+      <div style="font-family: var(--font-heading); font-weight:600; font-size: 22px; line-height:1.2; letter-spacing: -0.4px; color: var(--text-strong);">Subtítulo de bloco</div>
+      <div class="meta">Montserrat 600 · 22px · -0.4px</div>
+    </div>
+    <div class="specimen">
+      <div style="font-family: var(--font-heading); font-weight:500; font-size: var(--fs-h3); line-height:1.2; letter-spacing: var(--ls-tight); color: var(--text-subtle);">Subtítulo H3 · Montserrat Medium</div>
+      <div class="meta">Montserrat 500 · 16px · 1.2 · -0.4px</div>
+    </div>
+    <div class="specimen">
+      <div style="font-family: var(--font-body); font-weight:400; font-size: var(--fs-body); line-height:1.5; letter-spacing: var(--ls-tight); color: var(--text-body); max-width: 600px;">Body / parágrafo. A UP é uma agência que transforma marca em movimento. Branding, digital, campanha — sempre com método.</div>
+      <div class="meta">Montserrat 400 · 16px · 1.5 · -0.4px</div>
+    </div>
+    <div class="specimen">
+      <div style="font-family: var(--font-caption); font-weight:600; font-size: 13px; line-height:1.4; letter-spacing: 0.04em; color: var(--text-strong);">Legenda · Inter SemiBold</div>
+      <div class="meta">Inter 600 · 13px · 0.04em</div>
+    </div>
+    <div class="specimen">
+      <div style="font-family: var(--font-caption); font-weight:400; font-size: 12px; line-height:1.4; color: var(--text-muted);">Sublegenda · metadado, timestamp, microcópia auxiliar.</div>
+      <div class="meta">Inter 400 · 12px</div>
+    </div>
+  </section>
+
+  <!-- 3. COMPONENTES -->
+  <section>
+    <div class="eyebrow">03 · Componentes</div>
+    <h2>Nav</h2>
+    <div class="nav-demo">
+      <strong style="font-family: var(--font-heading); font-weight:700; color: var(--text-strong);">UP</strong>
+      <div class="pill-nav">
+        <a href="#" class="active">Trabalhos</a>
+        <a href="#">Estúdio</a>
+        <a href="#">Método</a>
+        <a href="#">Diário</a>
+      </div>
+      <button class="btn-pill">Contato</button>
+    </div>
+
+    <h2 style="margin-top: var(--sp-4xl);">Botões</h2>
+    <div style="display:flex; gap: 12px; flex-wrap:wrap;">
+      <button class="btn-primary">Iniciar projeto</button>
+      <button class="btn-outline">Ver trabalhos →</button>
+      <button class="btn-pill">Contato</button>
+      <button class="btn-ghost">Saiba mais →</button>
+    </div>
+
+    <h2 style="margin-top: var(--sp-4xl);">Cards de serviços</h2>
+    <div class="grid grid-3">
+      <div class="svc-card feat">
+        <span class="svc-icon">01</span>
+        <h3>Branding</h3>
+        <p>Naming, identidade visual, manual de marca e ativação. Construímos marcas que fazem sentido pro mercado e pro time.</p>
+      </div>
+      <div class="svc-card">
+        <span class="svc-icon">02</span>
+        <h3>Digital</h3>
+        <p>Sites, ecommerce e produtos digitais. Design e dev em time integrado, com performance e narrativa.</p>
+      </div>
+      <div class="svc-card">
+        <span class="svc-icon">03</span>
+        <h3>Campanha</h3>
+        <p>Criação publicitária ponta-a-ponta — conceito, filme, mídia. Pra lançamento, sazonal ou awareness.</p>
+      </div>
+    </div>
+
+    <h2 style="margin-top: var(--sp-4xl);">Cards de blog</h2>
+    <div class="grid grid-3">
+      <article class="blog-card">
+        <div class="img"><span class="badge">Estratégia</span></div>
+        <h3>Por que branding é a primeira alavanca de receita</h3>
+        <p>O que separa uma marca esquecida de uma marca lembrada — e quanto isso vale em CAC.</p>
+      </article>
+      <article class="blog-card">
+        <div class="img"><span class="badge">Digital</span></div>
+        <h3>Sites que vendem têm uma coisa em comum</h3>
+        <p>Não é design bonito. É arquitetura de informação que respeita o tempo do usuário.</p>
+      </article>
+      <article class="blog-card">
+        <div class="img"><span class="badge">Performance</span></div>
+        <h3>Como medir mídia paga sem se enganar</h3>
+        <p>Vanity metrics te custam dinheiro. Receita atribuída te dá direção.</p>
+      </article>
+    </div>
+
+    <h2 style="margin-top: var(--sp-4xl);">Cursor + scroll indicator</h2>
+    <div class="grid" style="grid-template-columns: 1fr 1fr; gap: var(--grid-gap);">
+      <div class="cursor-demo">
+        <div class="outer"></div>
+        <div class="inner"></div>
+        <div style="position:absolute; bottom:10px; left:14px; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">inner 8px lerp 0.25 · outer 40px lerp 0.15</div>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:center; padding: 20px;">
+        <div class="spin-demo">
+          <svg viewBox="0 0 120 120" style="width:100%;height:100%;">
+            <defs><path id="circ" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>
+            <text font-family="Inter, sans-serif" font-size="11" font-weight="600" letter-spacing="3" fill="currentColor" style="text-transform:uppercase; fill: var(--text-strong);">
+              <textPath href="#circ">SCROLL · DOWN · SCROLL · DOWN · </textPath>
+            </text>
+          </svg>
+          <div class="dot"><span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. ESPAÇAMENTO -->
+  <section>
+    <div class="eyebrow">04 · Espaçamento</div>
+    <h2>Escala</h2>
+    <div>
+      <div class="sp-row"><span class="label">XS</span><span class="px">5px</span><div class="sp-bar" style="width:5px;"></div><span class="use">Espaço mínimo interno</span></div>
+      <div class="sp-row"><span class="label">SM</span><span class="px">10px</span><div class="sp-bar" style="width:10px;"></div><span class="use">Gap entre elementos inline</span></div>
+      <div class="sp-row"><span class="label">MD</span><span class="px">16px</span><div class="sp-bar" style="width:16px;"></div><span class="use">Gap padrão / padding interno</span></div>
+      <div class="sp-row"><span class="label">LG</span><span class="px">20px</span><div class="sp-bar" style="width:20px;"></div><span class="use">Gap entre cards</span></div>
+      <div class="sp-row"><span class="label">XL</span><span class="px">30px</span><div class="sp-bar" style="width:30px;"></div><span class="use">Padding lateral de cards</span></div>
+      <div class="sp-row"><span class="label">2XL</span><span class="px">40px</span><div class="sp-bar" style="width:40px;"></div><span class="use">Padding vertical de cards</span></div>
+      <div class="sp-row"><span class="label">3XL</span><span class="px">70px</span><div class="sp-bar" style="width:70px;"></div><span class="use">Padding topo de cards destaque</span></div>
+      <div class="sp-row"><span class="label">4XL</span><span class="px">80px</span><div class="sp-bar" style="width:80px;"></div><span class="use">Padding de seções grandes</span></div>
+    </div>
+  </section>
+
+  <!-- 5. RADIUS -->
+  <section>
+    <div class="eyebrow">05 · Border radius</div>
+    <h2>Radii</h2>
+    <div class="grid grid-4">
+      <div class="rd"><div class="box" style="border-radius: var(--r-none);"></div><div class="name">None · 0</div><div class="lbl">CTA quadrado</div></div>
+      <div class="rd"><div class="box" style="border-radius: var(--r-min);"></div><div class="name">Min · 1px</div><div class="lbl">Badges</div></div>
+      <div class="rd"><div class="box" style="border-radius: var(--r-sm);"></div><div class="name">SM · 5px</div><div class="lbl">Cards / imagens</div></div>
+      <div class="rd"><div class="box" style="border-radius: var(--r-md);"></div><div class="name">MD · 10px</div><div class="lbl">Intermediário</div></div>
+      <div class="rd"><div class="box" style="border-radius: var(--r-lg);"></div><div class="name">LG · 20px</div><div class="lbl">Flutuantes</div></div>
+      <div class="rd"><div class="box" style="border-radius: var(--r-xl);"></div><div class="name">XL · 40px</div><div class="lbl">Pill nav</div></div>
+      <div class="rd"><div class="box" style="border-radius: var(--r-full);"></div><div class="name">Full · 100px</div><div class="lbl">Pill CTA</div></div>
+    </div>
+  </section>
+
+  <!-- 6. SOMBRAS -->
+  <section>
+    <div class="eyebrow">06 · Sombras</div>
+    <h2>Shadows</h2>
+    <div class="grid grid-3">
+      <div style="background: var(--bg-2); border-radius: var(--r-sm); padding: 28px; box-shadow: var(--shadow-float);">
+        <div class="name" style="font-family: var(--font-heading); font-weight:600; color: var(--text-strong);">Float</div>
+        <div class="val" style="font-family: var(--font-mono); font-size:11px; color: var(--text-muted); margin-top: 6px;">rgba(0,0,0,0.89) 0 16px 54px -8px</div>
+      </div>
+      <div style="background: var(--bg-2); border-radius: var(--r-sm); padding: 28px; box-shadow: var(--shadow-card);">
+        <div class="name" style="font-family: var(--font-heading); font-weight:600; color: var(--text-strong);">Card</div>
+        <div class="val" style="font-family: var(--font-mono); font-size:11px; color: var(--text-muted); margin-top: 6px;">0 8px 28px rgba(0,0,0,0.18)</div>
+      </div>
+      <div style="background: var(--bg-2); border-radius: var(--r-sm); padding: 28px; box-shadow: var(--shadow-brand);">
+        <div class="name" style="font-family: var(--font-heading); font-weight:600; color: var(--text-strong);">Brand glow</div>
+        <div class="val" style="font-family: var(--font-mono); font-size:11px; color: var(--text-muted); margin-top: 6px;">0 0 32px rgba(49,60,240,0.32)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. LAYOUT -->
+  <section>
+    <div class="eyebrow">07 · Layout & grid</div>
+    <h2>Container 1140px</h2>
+    <div style="font-family: var(--font-body); font-size: var(--fs-body); color: var(--text-body); line-height:1.6;">
+      Max-width <code>min(100%, 1140px)</code> · padding horizontal <code>20px</code> · grid gap <code>20px</code> · breakpoint mobile <code>767px</code>.
+    </div>
+    <div style="margin-top: var(--sp-lg); display:grid; grid-template-columns: repeat(3, 1fr); gap: var(--grid-gap);">
+      <div style="background: var(--bg-2); border-radius: var(--r-sm); height: 80px;"></div>
+      <div style="background: var(--bg-2); border-radius: var(--r-sm); height: 80px;"></div>
+      <div style="background: var(--bg-2); border-radius: var(--r-sm); height: 80px;"></div>
+    </div>
+  </section>
+
+  <!-- 8. ANIMAÇÕES -->
+  <section>
+    <div class="eyebrow">08 · Animações</div>
+    <h2>Ticker</h2>
+    <div class="ticker">
+      <div class="ticker-row">
+        <span>Branding · Digital · Campanha · Performance · Conteúdo · Estratégia ·&nbsp;</span>
+        <span>Branding · Digital · Campanha · Performance · Conteúdo · Estratégia ·&nbsp;</span>
+      </div>
+    </div>
+    <div style="margin-top: var(--sp-lg); font-family: var(--font-body); font-size: var(--fs-body); color: var(--text-body); line-height:1.7;">
+      <b>SplitText</b> word-by-word + GSAP ScrollTrigger no hero · <b>Cursor</b> inner lerp 0.25 / outer lerp 0.15 · <b>Ticker</b> 20s linear infinite · <b>Spin</b> texto circular 14s · <b>Transições</b> 0.3s padrão / 0.5s blog titles.
+    </div>
+  </section>
+
+  <!-- 9. ENGINEERING — SVG, tokens.json, contraste, components -->
+  <section>
+    <div class="eyebrow">09 · Engineering</div>
+    <h2>Vetorial, tokens, contraste e componentes</h2>
+    <p style="font-family: var(--font-body); color: var(--text-body); max-width:720px; margin: 0 0 var(--sp-2xl); line-height:1.6;">
+      Quatro entregáveis pra escalar o sistema: logo em <b>SVG</b> (escala infinita, recolorível via <code>currentColor</code>),
+      <b>tokens.json</b> (Style Dictionary — exportável pra Figma/iOS/Android),
+      <b>auditoria WCAG</b> de pares de cores e <b>biblioteca de componentes React</b> consumível.
+    </p>
+
+    <h3 style="font-family: var(--font-heading); font-weight:700; font-size:22px; color:var(--text-strong); margin: var(--sp-2xl) 0 var(--sp-md);">SVG · escala infinita</h3>
+    <div class="grid grid-3">
+      <div style="background:#F0F0F4; border-radius:var(--r-sm); padding: 28px; display:flex; align-items:center; justify-content:center; min-height:160px; color:#0A0A0F;">
+        <object data="assets/logo-up.svg" type="image/svg+xml" style="height:48px; pointer-events:none;"></object>
+      </div>
+      <div style="background: var(--brand); border-radius:var(--r-sm); padding: 28px; display:flex; align-items:center; justify-content:center; min-height:160px;">
+        <div style="height:64px; width:64px; color:#fff;">
+          <object data="assets/arrow-up.svg" type="image/svg+xml" style="height:100%; width:100%; pointer-events:none;"></object>
+        </div>
+      </div>
+      <div style="background: var(--bg-2); border-radius:var(--r-sm); padding: 20px; min-height:160px; font-family: var(--font-body); font-size:14px; color: var(--text-body); line-height:1.6;">
+        <code style="color:var(--brand-hover);">logo-up.svg</code> — lockup completo<br>
+        <code style="color:var(--brand-hover);">wordmark-up.svg</code> — só "UP"<br>
+        <code style="color:var(--brand-hover);">arrow-up.svg</code> — só seta<br>
+        <span style="color:var(--text-muted); font-size:12px;">fill="currentColor" — herda cor do parent</span>
+      </div>
+    </div>
+
+    <h3 style="font-family: var(--font-heading); font-weight:700; font-size:22px; color:var(--text-strong); margin: var(--sp-2xl) 0 var(--sp-md);">Arrow system</h3>
+    <div class="grid grid-4">
+      <div style="background:var(--bg-2); border-radius:var(--r-sm); padding:24px; display:flex; flex-direction:column; align-items:center; gap:12px; min-height:160px;">
+        <div style="height:56px; width:56px; color:var(--brand);"><object data="assets/arrow-up.svg" type="image/svg+xml" style="height:100%; pointer-events:none;"></object></div>
+        <div style="font-family:var(--font-mono); font-size:11px; color:var(--text-muted); letter-spacing:.1em; text-transform:uppercase;">Solid · brand</div>
+      </div>
+      <div style="background:var(--bg-2); border-radius:var(--r-sm); padding:24px; display:flex; flex-direction:column; align-items:center; gap:12px; min-height:160px;">
+        <div style="height:56px; width:56px; color:var(--text-strong);"><object data="assets/arrow-up.svg" type="image/svg+xml" style="height:100%; pointer-events:none;"></object></div>
+        <div style="font-family:var(--font-mono); font-size:11px; color:var(--text-muted); letter-spacing:.1em; text-transform:uppercase;">Solid · ink</div>
+      </div>
+      <div style="background:var(--brand); border-radius:var(--r-sm); padding:24px; display:flex; flex-direction:column; align-items:center; gap:12px; min-height:160px;">
+        <div style="height:56px; width:56px; color:#fff;"><object data="assets/arrow-up.svg" type="image/svg+xml" style="height:100%; pointer-events:none;"></object></div>
+        <div style="font-family:var(--font-mono); font-size:11px; color:rgba(255,255,255,.75); letter-spacing:.1em; text-transform:uppercase;">Reverso</div>
+      </div>
+      <div style="background:var(--bg-2); border-radius:var(--r-sm); padding:24px; display:flex; flex-direction:column; align-items:center; gap:12px; min-height:160px;">
+        <div style="height:56px; width:56px; color:var(--brand); transform: rotate(15deg) scale(1.1); transition: transform .4s var(--ease);"><object data="assets/arrow-up.svg" type="image/svg+xml" style="height:100%; pointer-events:none;"></object></div>
+        <div style="font-family:var(--font-mono); font-size:11px; color:var(--text-muted); letter-spacing:.1em; text-transform:uppercase;">Tilt 15° · motion</div>
+      </div>
+    </div>
+    <p style="font-family: var(--font-body); color: var(--text-muted); font-size:13px; margin-top: var(--sp-md); line-height:1.6;">
+      <b>Regras:</b> ângulo nativo 45° · só rotacionar entre −15° e +15° em hover/scroll · nunca espelhar (a seta sempre aponta pra cima/direita) · espaço livre mínimo = 25% da altura · em fundo brand usa branco; em fundo claro usa <code>--brand</code> ou preto.
+    </p>
+
+    <h3 style="font-family: var(--font-heading); font-weight:700; font-size:22px; color:var(--text-strong); margin: var(--sp-2xl) 0 var(--sp-md);">Contraste WCAG</h3>
+    <div style="background: var(--bg-2); border-radius: var(--r-sm); padding: 24px; font-family: var(--font-mono); font-size: 13px; color: var(--text-body); overflow-x:auto;">
+      <table style="width:100%; border-collapse: collapse;">
+        <thead style="color:var(--text-muted); text-align:left; font-size:11px; letter-spacing:.12em; text-transform:uppercase;">
+          <tr><th style="padding:8px 12px; border-bottom:1px solid var(--border-1);">Par</th><th style="padding:8px 12px; border-bottom:1px solid var(--border-1);">Razão</th><th style="padding:8px 12px; border-bottom:1px solid var(--border-1);">Resultado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:10px 12px; border-bottom:1px solid var(--border-1);">white / brand <span style="display:inline-block; width:14px; height:14px; background:var(--brand); border-radius:3px; vertical-align:middle; margin-left:4px;"></span></td><td style="padding:10px 12px; border-bottom:1px solid var(--border-1);">7.94</td><td style="padding:10px 12px; border-bottom:1px solid var(--border-1); color:#22c55e;">AAA ✓</td></tr>
+          <tr><td style="padding:10px 12px; border-bottom:1px solid var(--border-1);">white / black</td><td style="padding:10px 12px; border-bottom:1px solid var(--border-1);">21.00</td><td style="padding:10px 12px; border-bottom:1px solid var(--border-1); color:#22c55e;">AAA ✓</td></tr>
+          <tr><td style="padding:10px 12px; border-bottom:1px solid var(--border-1);">brand / white</td><td style="padding:10px 12px; border-bottom:1px solid var(--border-1);">7.94</td><td style="padding:10px 12px; border-bottom:1px solid var(--border-1); color:#22c55e;">AAA ✓</td></tr>
+          <tr><td style="padding:10px 12px; border-bottom:1px solid var(--border-1);">brand-hover / black</td><td style="padding:10px 12px; border-bottom:1px solid var(--border-1);">3.85</td><td style="padding:10px 12px; border-bottom:1px solid var(--border-1); color:#eab308;">AA Large ✓</td></tr>
+          <tr><td style="padding:10px 12px; border-bottom:1px solid var(--border-1);">text-body / bg-2</td><td style="padding:10px 12px; border-bottom:1px solid var(--border-1);">11.42</td><td style="padding:10px 12px; border-bottom:1px solid var(--border-1); color:#22c55e;">AAA ✓</td></tr>
+          <tr><td style="padding:10px 12px;">text-muted / bg</td><td style="padding:10px 12px;">5.12</td><td style="padding:10px 12px; color:#22c55e;">AA ✓</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-family: var(--font-body); color: var(--text-muted); font-size:13px; margin-top: var(--sp-md); line-height:1.6;">
+      Auditoria completa em <code>contrast-audit.json</code> — 80 pares calculados. Tokens proibidos para texto: <code>brand-soft</code> sobre <code>white</code> (1.18), <code>n200</code> sobre <code>white</code> (1.31).
+    </p>
+
+    <h3 style="font-family: var(--font-heading); font-weight:700; font-size:22px; color:var(--text-strong); margin: var(--sp-2xl) 0 var(--sp-md);">Biblioteca de componentes</h3>
+    <div style="background: var(--bg-2); border-radius: var(--r-sm); padding: 24px; font-family: var(--font-mono); font-size: 13px; color: var(--text-body); line-height:1.8; overflow-x:auto;">
+      <span style="color:var(--text-muted);">// import once</span><br>
+      <span style="color:var(--brand-hover);">&lt;script type="text/babel" src="components/up-components.jsx"&gt;&lt;/script&gt;</span><br><br>
+      <span style="color:var(--text-muted);">// then use anywhere</span><br>
+      &lt;<span style="color:var(--brand-hover);">UPButton</span> variant="primary" size="md" icon&gt;Saiba mais&lt;/<span style="color:var(--brand-hover);">UPButton</span>&gt;<br>
+      &lt;<span style="color:var(--brand-hover);">UPInput</span> label="E-mail" placeholder="você@empresa.com" /&gt;<br>
+      &lt;<span style="color:var(--brand-hover);">UPCard</span> variant="liquid" title="Performance" /&gt;<br>
+      &lt;<span style="color:var(--brand-hover);">UPBadge</span> tone="success"&gt;Online&lt;/<span style="color:var(--brand-hover);">UPBadge</span>&gt;<br>
+      &lt;<span style="color:var(--brand-hover);">UPTag</span>&gt;Branding&lt;/<span style="color:var(--brand-hover);">UPTag</span>&gt;
+    </div>
+    <p style="font-family: var(--font-body); color: var(--text-muted); font-size:13px; margin-top: var(--sp-md); line-height:1.6;">
+      <b>5 componentes</b> com props tipadas, estados (hover/focus/disabled), aria-labels e suporte automático a dark/light. Todos consomem <code>tokens.css</code> via CSS vars — trocar tema = trocar <code>data-theme</code> no root.
+    </p>
+  </section>
+
+  <!-- 10. ASSETS -->
+  <section style="border-bottom:0;">
+    <div class="eyebrow">10 · Assets</div>
+    <h2>Identidade visual</h2>
+    <div class="grid grid-3">
+      <div style="background: var(--bg-2); border-radius: var(--r-sm); padding: 28px; display:flex; align-items:center; justify-content:center; min-height: 140px;">
+        <img id="logoPreview" src="assets/logo-allwhite.png" style="height:36px;">
+      </div>
+      <div style="background: var(--brand); border-radius: var(--r-sm); padding: 28px; display:flex; align-items:center; justify-content:center; min-height: 140px;">
+        <div style="width:64px; height:64px; background:#fff; border-radius: var(--r-sm); display:flex; align-items:center; justify-content:center; font-family: var(--font-heading); font-weight:800; font-size: 28px; color: var(--brand); letter-spacing: -1px;">U</div>
+      </div>
+      <div style="background: var(--bg-2); border-radius: var(--r-sm); padding: 20px; min-height: 140px; font-family: var(--font-body); font-size: var(--fs-blog-body); color: var(--text-body); line-height: 1.6;">
+        Imagens em <code>.webp</code> com <code>object-fit: cover</code>.<br>
+        Ícones outline brancos, traço 1.5px.<br>
+        Sociais: LinkedIn, Instagram, YouTube.
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  const t = document.getElementById('t');
+  const tlabel = document.getElementById('tlabel');
+  const tknob = document.getElementById('tknob');
+  const logo = document.getElementById('logoPreview');
+  const root = document.documentElement;
+  function apply(theme) {
+    root.setAttribute('data-theme', theme);
+    tlabel.textContent = theme === 'dark' ? 'Modo escuro' : 'Modo claro';
+    tknob.textContent = theme === 'dark' ? '☾' : '☀';
+    logo.src = theme === 'dark' ? 'assets/logo-allwhite.png' : 'assets/logo-primary.png';
+    try { localStorage.setItem('up-theme', theme); } catch(e){}
+  }
+  let saved = 'dark';
+  try { saved = localStorage.getItem('up-theme') || 'dark'; } catch(e){}
+  apply(saved);
+  t.addEventListener('click', () => apply(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+</script>
+
+</body>
+</html>

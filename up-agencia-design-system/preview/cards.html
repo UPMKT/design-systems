@@ -1,0 +1,124 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="card.css"></head>
+<body style="padding:0; margin:0; background:#fff;">
+  <!-- Liquid-glass cards need a rich background to show the effect -->
+  <div style="position:relative; padding:28px; overflow:hidden;
+              background:
+                radial-gradient(circle at 15% 20%, #8FAEFF 0%, transparent 45%),
+                radial-gradient(circle at 85% 75%, #313CF0 0%, transparent 55%),
+                radial-gradient(circle at 50% 110%, #C8CCFB 0%, transparent 50%),
+                linear-gradient(180deg, #EDEEFF 0%, #C8CCFB 100%);">
+
+    <!-- Floating decorative blobs to make the blur meaningful -->
+    <div style="position:absolute; top:40px; right:80px; width:180px; height:180px;
+                border-radius:999px; background:radial-gradient(circle, #313CF0, transparent 70%);
+                opacity:.55; filter:blur(12px);"></div>
+    <div style="position:absolute; bottom:30px; left:40px; width:140px; height:140px;
+                border-radius:999px; background:radial-gradient(circle, #5E8CFF, transparent 70%);
+                opacity:.55; filter:blur(10px);"></div>
+
+    <div style="position:relative; display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+
+      <!-- Glass card — primary -->
+      <div style="position:relative;
+                  background: rgba(255,255,255,0.32);
+                  backdrop-filter: blur(24px) saturate(180%);
+                  -webkit-backdrop-filter: blur(24px) saturate(180%);
+                  border: 1px solid rgba(255,255,255,0.55);
+                  border-radius: 20px;
+                  padding: 20px;
+                  box-shadow: inset 0 1px 0 rgba(255,255,255,0.65),
+                              0 12px 32px rgba(10,10,40,0.12);
+                  display:flex; flex-direction:column; gap:10px;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div style="width:34px; height:34px; border-radius:10px;
+                      background: linear-gradient(135deg, #5E8CFF, #313CF0);
+                      box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 6px 16px rgba(49,60,240,.4);
+                      display:flex; align-items:center; justify-content:center;">
+            <img src="../assets/arrow-white.png" style="height:12px;">
+          </div>
+          <span class="eyebrow" style="color:var(--up-blue-press);">Branding</span>
+        </div>
+        <div style="font-family:var(--font-display); font-weight:600; font-size:22px;
+                    line-height:1.15; letter-spacing:-0.02em; color:var(--ink);">
+          Skyline · Identidade visual
+        </div>
+        <div style="font-size:13px; color:rgba(10,10,15,.7); line-height:1.5;">
+          Reposicionamento da marca para o lançamento de 2026.
+        </div>
+      </div>
+
+      <!-- Glass card — dark variant -->
+      <div style="position:relative;
+                  background: rgba(10,10,40,0.32);
+                  backdrop-filter: blur(24px) saturate(180%);
+                  -webkit-backdrop-filter: blur(24px) saturate(180%);
+                  border: 1px solid rgba(255,255,255,0.18);
+                  border-radius: 20px;
+                  padding: 20px;
+                  box-shadow: inset 0 1px 0 rgba(255,255,255,0.18),
+                              0 16px 40px rgba(10,10,40,0.25);
+                  display:flex; flex-direction:column; gap:12px; justify-content:space-between;
+                  color:#fff;">
+        <span class="eyebrow" style="color:rgba(255,255,255,.75);">Convite</span>
+        <div style="font-family:var(--font-display); font-weight:700; font-size:26px;
+                    line-height:1.05; letter-spacing:-0.025em;">
+          Vamos fazer juntos?
+        </div>
+        <div style="display:inline-flex; align-items:center; gap:10px; font-weight:600; font-size:14px;">
+          <span style="display:inline-flex; align-items:center; justify-content:center;
+                       width:32px; height:32px; border-radius:999px;
+                       background: rgba(255,255,255,0.2);
+                       border: 1px solid rgba(255,255,255,0.35);
+                       backdrop-filter: blur(8px);">
+            <img src="../assets/arrow-white.png" style="height:12px;">
+          </span>
+          Começar
+        </div>
+      </div>
+
+      <!-- Glass feature-tile -->
+      <div style="position:relative;
+                  background: rgba(255,255,255,0.42);
+                  backdrop-filter: blur(20px) saturate(180%);
+                  -webkit-backdrop-filter: blur(20px) saturate(180%);
+                  border: 1px solid rgba(255,255,255,0.6);
+                  border-radius: 16px;
+                  padding: 16px;
+                  box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), 0 8px 24px rgba(10,10,40,.08);
+                  display:flex; align-items:center; gap:12px;">
+        <div style="width:40px; height:40px; border-radius:12px;
+                    background: linear-gradient(135deg, #8FAEFF, #313CF0);
+                    box-shadow: inset 0 1px 0 rgba(255,255,255,.5);
+                    display:flex; align-items:center; justify-content:center; flex:none;">
+          <img src="../assets/arrow-white.png" style="height:14px;">
+        </div>
+        <div style="display:flex; flex-direction:column; gap:2px;">
+          <div style="font-weight:600; font-size:14px; color:var(--ink);">Digital-first</div>
+          <div style="font-size:12px; color:rgba(10,10,15,.65);">Produtos feitos pra escalar</div>
+        </div>
+      </div>
+
+      <!-- Glass stats -->
+      <div style="position:relative;
+                  background: rgba(255,255,255,0.32);
+                  backdrop-filter: blur(24px) saturate(180%);
+                  -webkit-backdrop-filter: blur(24px) saturate(180%);
+                  border: 1px solid rgba(255,255,255,0.55);
+                  border-radius: 16px;
+                  padding: 16px 18px;
+                  box-shadow: inset 0 1px 0 rgba(255,255,255,0.65), 0 8px 24px rgba(10,10,40,.08);
+                  display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-family:var(--font-display); font-weight:700; font-size:32px;
+                      letter-spacing:-0.02em; color:var(--ink); line-height:1;">90M+</div>
+          <div style="font-size:11px; color:rgba(10,10,15,.6); margin-top:4px;">Entregas nos últimos 5 anos</div>
+        </div>
+        <a href="#" style="font-size:12px; font-weight:600; color:var(--up-blue); border:0;
+                           display:inline-flex; align-items:center; gap:6px;">
+          Ver stats →
+        </a>
+      </div>
+
+    </div>
+  </div>
+</body></html>

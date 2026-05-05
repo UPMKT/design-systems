@@ -1,0 +1,482 @@
+[
+  {
+    "fg": "brand",
+    "bg": "black",
+    "ratio": "3.04",
+    "level": "AA Large"
+  },
+  {
+    "fg": "brand",
+    "bg": "n900",
+    "ratio": "2.80",
+    "level": "FAIL"
+  },
+  {
+    "fg": "brand",
+    "bg": "n800",
+    "ratio": "2.46",
+    "level": "FAIL"
+  },
+  {
+    "fg": "brand",
+    "bg": "white",
+    "ratio": "6.92",
+    "level": "AA"
+  },
+  {
+    "fg": "brand",
+    "bg": "n50",
+    "ratio": "6.64",
+    "level": "AA"
+  },
+  {
+    "fg": "brand",
+    "bg": "n100",
+    "ratio": "6.09",
+    "level": "AA"
+  },
+  {
+    "fg": "brand",
+    "bg": "brand",
+    "ratio": "1.00",
+    "level": "FAIL"
+  },
+  {
+    "fg": "brand",
+    "bg": "deep",
+    "ratio": "1.53",
+    "level": "FAIL"
+  },
+  {
+    "fg": "hover",
+    "bg": "black",
+    "ratio": "4.02",
+    "level": "AA Large"
+  },
+  {
+    "fg": "hover",
+    "bg": "n900",
+    "ratio": "3.70",
+    "level": "AA Large"
+  },
+  {
+    "fg": "hover",
+    "bg": "n800",
+    "ratio": "3.26",
+    "level": "AA Large"
+  },
+  {
+    "fg": "hover",
+    "bg": "white",
+    "ratio": "5.23",
+    "level": "AA"
+  },
+  {
+    "fg": "hover",
+    "bg": "n50",
+    "ratio": "5.01",
+    "level": "AA"
+  },
+  {
+    "fg": "hover",
+    "bg": "n100",
+    "ratio": "4.60",
+    "level": "AA"
+  },
+  {
+    "fg": "hover",
+    "bg": "brand",
+    "ratio": "1.32",
+    "level": "FAIL"
+  },
+  {
+    "fg": "hover",
+    "bg": "deep",
+    "ratio": "2.02",
+    "level": "FAIL"
+  },
+  {
+    "fg": "deep",
+    "bg": "black",
+    "ratio": "1.99",
+    "level": "FAIL"
+  },
+  {
+    "fg": "deep",
+    "bg": "n900",
+    "ratio": "1.83",
+    "level": "FAIL"
+  },
+  {
+    "fg": "deep",
+    "bg": "n800",
+    "ratio": "1.62",
+    "level": "FAIL"
+  },
+  {
+    "fg": "deep",
+    "bg": "white",
+    "ratio": "10.55",
+    "level": "AAA"
+  },
+  {
+    "fg": "deep",
+    "bg": "n50",
+    "ratio": "10.12",
+    "level": "AAA"
+  },
+  {
+    "fg": "deep",
+    "bg": "n100",
+    "ratio": "9.28",
+    "level": "AAA"
+  },
+  {
+    "fg": "deep",
+    "bg": "brand",
+    "ratio": "1.53",
+    "level": "FAIL"
+  },
+  {
+    "fg": "deep",
+    "bg": "deep",
+    "ratio": "1.00",
+    "level": "FAIL"
+  },
+  {
+    "fg": "soft",
+    "bg": "black",
+    "ratio": "10.32",
+    "level": "AAA"
+  },
+  {
+    "fg": "soft",
+    "bg": "n900",
+    "ratio": "9.51",
+    "level": "AAA"
+  },
+  {
+    "fg": "soft",
+    "bg": "n800",
+    "ratio": "8.38",
+    "level": "AAA"
+  },
+  {
+    "fg": "soft",
+    "bg": "white",
+    "ratio": "2.04",
+    "level": "FAIL"
+  },
+  {
+    "fg": "soft",
+    "bg": "n50",
+    "ratio": "1.95",
+    "level": "FAIL"
+  },
+  {
+    "fg": "soft",
+    "bg": "n100",
+    "ratio": "1.79",
+    "level": "FAIL"
+  },
+  {
+    "fg": "soft",
+    "bg": "brand",
+    "ratio": "3.40",
+    "level": "AA Large"
+  },
+  {
+    "fg": "soft",
+    "bg": "deep",
+    "ratio": "5.19",
+    "level": "AA"
+  },
+  {
+    "fg": "white",
+    "bg": "black",
+    "ratio": "21.00",
+    "level": "AAA"
+  },
+  {
+    "fg": "white",
+    "bg": "n900",
+    "ratio": "19.34",
+    "level": "AAA"
+  },
+  {
+    "fg": "white",
+    "bg": "n800",
+    "ratio": "17.05",
+    "level": "AAA"
+  },
+  {
+    "fg": "white",
+    "bg": "white",
+    "ratio": "1.00",
+    "level": "FAIL"
+  },
+  {
+    "fg": "white",
+    "bg": "n50",
+    "ratio": "1.04",
+    "level": "FAIL"
+  },
+  {
+    "fg": "white",
+    "bg": "n100",
+    "ratio": "1.14",
+    "level": "FAIL"
+  },
+  {
+    "fg": "white",
+    "bg": "brand",
+    "ratio": "6.92",
+    "level": "AA"
+  },
+  {
+    "fg": "white",
+    "bg": "deep",
+    "ratio": "10.55",
+    "level": "AAA"
+  },
+  {
+    "fg": "ink",
+    "bg": "black",
+    "ratio": "1.12",
+    "level": "FAIL"
+  },
+  {
+    "fg": "ink",
+    "bg": "n900",
+    "ratio": "1.03",
+    "level": "FAIL"
+  },
+  {
+    "fg": "ink",
+    "bg": "n800",
+    "ratio": "1.10",
+    "level": "FAIL"
+  },
+  {
+    "fg": "ink",
+    "bg": "white",
+    "ratio": "18.83",
+    "level": "AAA"
+  },
+  {
+    "fg": "ink",
+    "bg": "n50",
+    "ratio": "18.06",
+    "level": "AAA"
+  },
+  {
+    "fg": "ink",
+    "bg": "n100",
+    "ratio": "16.57",
+    "level": "AAA"
+  },
+  {
+    "fg": "ink",
+    "bg": "brand",
+    "ratio": "2.72",
+    "level": "FAIL"
+  },
+  {
+    "fg": "ink",
+    "bg": "deep",
+    "ratio": "1.78",
+    "level": "FAIL"
+  },
+  {
+    "fg": "n200",
+    "bg": "black",
+    "ratio": "15.53",
+    "level": "AAA"
+  },
+  {
+    "fg": "n200",
+    "bg": "n900",
+    "ratio": "14.30",
+    "level": "AAA"
+  },
+  {
+    "fg": "n200",
+    "bg": "n800",
+    "ratio": "12.61",
+    "level": "AAA"
+  },
+  {
+    "fg": "n200",
+    "bg": "white",
+    "ratio": "1.35",
+    "level": "FAIL"
+  },
+  {
+    "fg": "n200",
+    "bg": "n50",
+    "ratio": "1.30",
+    "level": "FAIL"
+  },
+  {
+    "fg": "n200",
+    "bg": "n100",
+    "ratio": "1.19",
+    "level": "FAIL"
+  },
+  {
+    "fg": "n200",
+    "bg": "brand",
+    "ratio": "5.12",
+    "level": "AA"
+  },
+  {
+    "fg": "n200",
+    "bg": "deep",
+    "ratio": "7.80",
+    "level": "AAA"
+  },
+  {
+    "fg": "n400",
+    "bg": "black",
+    "ratio": "4.98",
+    "level": "AA"
+  },
+  {
+    "fg": "n400",
+    "bg": "n900",
+    "ratio": "4.59",
+    "level": "AA"
+  },
+  {
+    "fg": "n400",
+    "bg": "n800",
+    "ratio": "4.04",
+    "level": "AA Large"
+  },
+  {
+    "fg": "n400",
+    "bg": "white",
+    "ratio": "4.22",
+    "level": "AA Large"
+  },
+  {
+    "fg": "n400",
+    "bg": "n50",
+    "ratio": "4.05",
+    "level": "AA Large"
+  },
+  {
+    "fg": "n400",
+    "bg": "n100",
+    "ratio": "3.71",
+    "level": "AA Large"
+  },
+  {
+    "fg": "n400",
+    "bg": "brand",
+    "ratio": "1.64",
+    "level": "FAIL"
+  },
+  {
+    "fg": "n400",
+    "bg": "deep",
+    "ratio": "2.50",
+    "level": "FAIL"
+  },
+  {
+    "fg": "n500",
+    "bg": "black",
+    "ratio": "3.11",
+    "level": "AA Large"
+  },
+  {
+    "fg": "n500",
+    "bg": "n900",
+    "ratio": "2.86",
+    "level": "FAIL"
+  },
+  {
+    "fg": "n500",
+    "bg": "n800",
+    "ratio": "2.53",
+    "level": "FAIL"
+  },
+  {
+    "fg": "n500",
+    "bg": "white",
+    "ratio": "6.75",
+    "level": "AA"
+  },
+  {
+    "fg": "n500",
+    "bg": "n50",
+    "ratio": "6.48",
+    "level": "AA"
+  },
+  {
+    "fg": "n500",
+    "bg": "n100",
+    "ratio": "5.94",
+    "level": "AA"
+  },
+  {
+    "fg": "n500",
+    "bg": "brand",
+    "ratio": "1.02",
+    "level": "FAIL"
+  },
+  {
+    "fg": "n500",
+    "bg": "deep",
+    "ratio": "1.56",
+    "level": "FAIL"
+  },
+  {
+    "fg": "n700",
+    "bg": "black",
+    "ratio": "1.48",
+    "level": "FAIL"
+  },
+  {
+    "fg": "n700",
+    "bg": "n900",
+    "ratio": "1.36",
+    "level": "FAIL"
+  },
+  {
+    "fg": "n700",
+    "bg": "n800",
+    "ratio": "1.20",
+    "level": "FAIL"
+  },
+  {
+    "fg": "n700",
+    "bg": "white",
+    "ratio": "14.21",
+    "level": "AAA"
+  },
+  {
+    "fg": "n700",
+    "bg": "n50",
+    "ratio": "13.63",
+    "level": "AAA"
+  },
+  {
+    "fg": "n700",
+    "bg": "n100",
+    "ratio": "12.51",
+    "level": "AAA"
+  },
+  {
+    "fg": "n700",
+    "bg": "brand",
+    "ratio": "2.05",
+    "level": "FAIL"
+  },
+  {
+    "fg": "n700",
+    "bg": "deep",
+    "ratio": "1.35",
+    "level": "FAIL"
+  }
+]

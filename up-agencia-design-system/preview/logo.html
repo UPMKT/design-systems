@@ -1,0 +1,66 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="card.css"></head>
+<body style="padding:24px; background:#fff;">
+  <div class="eyebrow" style="margin-bottom:14px;">Aplicação do logotipo</div>
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;">
+
+    <!-- Primary: full color on white -->
+    <div style="background:#fff; border:1px solid var(--line); border-radius:8px; padding:24px; display:flex; flex-direction:column; gap:14px; align-items:flex-start; min-height:170px; justify-content:space-between;">
+      <img src="../assets/logo-up-black-wide.png" style="width:180px; height:auto;">
+      <div>
+        <div style="font-size:12px; font-weight:600; color:var(--ink);">Principal</div>
+        <div style="font-size:11px; color:var(--fg-3);">Preto + azul sobre branco</div>
+      </div>
+    </div>
+
+    <!-- Monochrome black on light -->
+    <div style="background:var(--bone); border:1px solid var(--line); border-radius:8px; padding:24px; display:flex; flex-direction:column; gap:14px; align-items:flex-start; min-height:170px; justify-content:space-between;">
+      <img src="../assets/logo-up-black.png" style="width:180px; height:auto;">
+      <div>
+        <div style="font-size:12px; font-weight:600; color:var(--ink);">Monocromática</div>
+        <div style="font-size:11px; color:var(--fg-3);">Preto sobre claro</div>
+      </div>
+    </div>
+
+    <!-- White on ink -->
+    <div style="background:var(--ink); border-radius:8px; padding:24px; display:flex; flex-direction:column; gap:14px; align-items:flex-start; min-height:170px; justify-content:space-between;">
+      <img src="../assets/logo-up-white.png" style="width:180px; height:auto;">
+      <div>
+        <div style="font-size:12px; font-weight:600; color:#fff;">Reversa</div>
+        <div style="font-size:11px; color:rgba(255,255,255,.6);">Branco sobre fundo escuro</div>
+      </div>
+    </div>
+
+    <!-- White on brand blue -->
+    <div style="background:var(--up-blue); border-radius:8px; padding:24px; display:flex; flex-direction:column; gap:14px; align-items:flex-start; min-height:170px; justify-content:space-between;">
+      <img src="../assets/logo-up-white.png" style="width:180px; height:auto;">
+      <div>
+        <div style="font-size:12px; font-weight:600; color:#fff;">Sobre a marca</div>
+        <div style="font-size:11px; color:rgba(255,255,255,.75);">Branco sobre azul UP</div>
+      </div>
+    </div>
+
+    <!-- DO NOT: black on black -->
+    <div style="background:var(--ink); border-radius:8px; padding:24px; display:flex; flex-direction:column; gap:14px; align-items:flex-start; min-height:170px; justify-content:space-between; position:relative;">
+      <img src="../assets/logo-up-black.png" style="width:180px; height:auto; opacity:0.4;">
+      <div style="position:absolute; top:10px; right:10px; background:var(--danger); color:#fff; font-size:10px; font-weight:700; padding:3px 8px; border-radius:999px; letter-spacing:0.08em;">NÃO</div>
+      <div>
+        <div style="font-size:12px; font-weight:600; color:#fff;">Sem contraste</div>
+        <div style="font-size:11px; color:rgba(255,255,255,.6);">Nunca preto sobre escuro</div>
+      </div>
+    </div>
+
+    <!-- DO NOT: blue on blue -->
+    <div style="background:var(--up-blue); border-radius:8px; padding:24px; display:flex; flex-direction:column; gap:14px; align-items:flex-start; min-height:170px; justify-content:space-between; position:relative;">
+      <img src="../assets/logo-up-blue.png" style="width:180px; height:auto; opacity:0.55;">
+      <div style="position:absolute; top:10px; right:10px; background:var(--danger); color:#fff; font-size:10px; font-weight:700; padding:3px 8px; border-radius:999px; letter-spacing:0.08em;">NÃO</div>
+      <div>
+        <div style="font-size:12px; font-weight:600; color:#fff;">Conflito de cor</div>
+        <div style="font-size:11px; color:rgba(255,255,255,.75);">Nunca a versão azul sobre azul UP</div>
+      </div>
+    </div>
+
+  </div>
+  <div style="margin-top:14px; font-size:11px; color:var(--fg-3); line-height:1.5;">
+    Área de respiro mínima em torno do logotipo = altura da letra "U". Tamanho mínimo: 80&thinsp;px em tela · 20&thinsp;mm em impresso.
+  </div>
+</body></html>

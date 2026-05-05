@@ -1,0 +1,32 @@
+/* Shared styles for preview cards. Each card targets 700×<var> px. */
+@import url('../colors_and_type.css');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  width: 700px;
+  background: var(--bg-1);
+  color: var(--fg-1);
+  font-family: var(--font-body);
+  overflow: hidden;
+}
+body { padding: 24px; }
+
+.card-row { display: flex; gap: 12px; align-items: stretch; flex-wrap: wrap; }
+.card-col { display: flex; flex-direction: column; gap: 12px; }
+
+.swatch {
+  border-radius: var(--r-3);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 90px;
+  font-family: var(--font-body);
+}
+.swatch .name { font-weight: 600; font-size: 14px; letter-spacing: -0.01em; }
+.swatch .val  { font-family: var(--font-mono); font-size: 11px; opacity: 0.7; }
+
+.mono { font-family: var(--font-mono); }
+.meta { color: var(--fg-3); font-size: 12px; letter-spacing: 0.01em; }
+.eyebrow { font-family: var(--font-body); font-weight: 600; font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-2); }

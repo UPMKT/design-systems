@@ -1,0 +1,83 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<title>UP · Aplicação da logo</title>
+<link rel="stylesheet" href="card.css">
+<style>
+  @page { size: A4 portrait; margin: 1.2cm; }
+  html, body {
+    width: auto !important;
+    overflow: visible !important;
+    background: #fff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body { padding: 0 !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @media print {
+    .page-break-safe { break-inside: avoid; }
+  }
+</style>
+</head>
+<body style="padding:0; background:#fff;">
+  <div style="padding:8mm;">
+    <div class="eyebrow" style="margin-bottom:14px;">Aplicação da logo · regra de contraste</div>
+
+    <!-- Fundo claro: primary OU preta mono -->
+    <div class="page-break-safe" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+      <div style="background:#fff; border:1px solid var(--line); border-radius:10px; padding:36px 24px; display:flex; align-items:center; justify-content:center; min-height:140px;">
+        <img src="../assets/logo-primary.png" style="height:44px;">
+      </div>
+      <div style="background:#fff; border:1px solid var(--line); border-radius:10px; padding:36px 24px; display:flex; align-items:center; justify-content:center; min-height:140px;">
+        <img src="../assets/logo-allblack.png" style="height:44px;">
+      </div>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:6px; font-size:11px; color:var(--fg-3);">
+      <div style="text-align:center;">Primary · sobre fundo claro</div>
+      <div style="text-align:center;">Preta mono · sobre fundo claro</div>
+    </div>
+
+    <!-- Fundo escuro/azul -->
+    <div class="page-break-safe" style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:18px;">
+      <div style="background:var(--ink); border-radius:10px; padding:36px 24px; display:flex; align-items:center; justify-content:center; min-height:140px;">
+        <img src="../assets/logo-allwhite.png" style="height:44px;">
+      </div>
+      <div style="background:var(--up-blue); border-radius:10px; padding:36px 24px; display:flex; align-items:center; justify-content:center; min-height:140px;">
+        <img src="../assets/logo-allwhite.png" style="height:44px;">
+      </div>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:6px; font-size:11px; color:var(--fg-3);">
+      <div style="text-align:center;">Branca full · sobre ink</div>
+      <div style="text-align:center;">Branca full · sobre azul UP</div>
+    </div>
+
+    <!-- NÃO -->
+    <div class="page-break-safe" style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:22px;">
+      <div style="background:var(--ink); border-radius:10px; padding:36px 24px; display:flex; align-items:center; justify-content:center; min-height:140px; position:relative;">
+        <img src="../assets/logo-allblack.png" style="height:44px; opacity:.4;">
+        <span style="position:absolute; top:8px; right:8px; background:var(--danger); color:#fff; font-size:9px; font-weight:700; padding:2px 8px; border-radius:999px; letter-spacing:0.08em;">NÃO</span>
+      </div>
+      <div style="background:var(--up-blue); border-radius:10px; padding:36px 24px; display:flex; align-items:center; justify-content:center; min-height:140px; position:relative;">
+        <img src="../assets/logo-primary.png" style="height:44px; opacity:.6;">
+        <span style="position:absolute; top:8px; right:8px; background:var(--danger); color:#fff; font-size:9px; font-weight:700; padding:2px 8px; border-radius:999px; letter-spacing:0.08em;">NÃO</span>
+      </div>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:6px; font-size:11px; color:var(--fg-3);">
+      <div style="text-align:center;">Preta sobre escuro</div>
+      <div style="text-align:center;">Primary sobre azul UP</div>
+    </div>
+
+    <div style="margin-top:18px; font-size:12px; color:var(--fg-2); line-height:1.6;">
+      <b>Regra.</b> Fundo claro → <b>primary</b> (preto + arrow azul) ou <b>preta mono</b>.
+      Fundo escuro ou azul UP → <b>branca full</b>. Sempre contraste máximo.
+    </div>
+  </div>
+
+  <script>
+    (async () => {
+      if (document.fonts && document.fonts.ready) { try { await document.fonts.ready; } catch(e){} }
+      // wait for all images to load
+      const imgs = [...document.images];
+      await Promise.all(imgs.map(img => img.complete ? null : new Promise(r => { img.onload = img.onerror = r; })));
+      setTimeout(() => window.print(), 500);
+    })();
+  </script>
+</body></html>

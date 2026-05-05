@@ -1,0 +1,59 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="card.css"></head>
+<body style="padding:24px;">
+  <div class="eyebrow" style="margin-bottom:12px;">Estados semânticos · todas as variações</div>
+
+  <!-- Solid chips -->
+  <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:14px;">
+    <div class="swatch" style="background:#0F9D58; color:#fff; min-height:76px;"><div><div class="name">Success</div></div><div class="val">#0F9D58</div></div>
+    <div class="swatch" style="background:#E8A317; color:#fff; min-height:76px;"><div><div class="name">Warning</div></div><div class="val">#E8A317</div></div>
+    <div class="swatch" style="background:#E0352B; color:#fff; min-height:76px;"><div><div class="name">Danger</div></div><div class="val">#E0352B</div></div>
+    <div class="swatch" style="background:var(--up-blue); color:#fff; min-height:76px;"><div><div class="name">Info / Brand</div></div><div class="val">#313CF0</div></div>
+  </div>
+
+  <!-- Subtle / tinted versions -->
+  <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:18px;">
+    <div style="background:rgba(15,157,88,.12); color:#0F9D58; border:1px solid rgba(15,157,88,.3); border-radius:8px; padding:12px 14px; min-height:68px; display:flex; flex-direction:column; justify-content:space-between;">
+      <div style="font-weight:600; font-size:13px;">✓ Entregue</div>
+      <div style="font-family:var(--font-mono); font-size:10px; opacity:.8;">tint 12%</div>
+    </div>
+    <div style="background:rgba(232,163,23,.14); color:#B77C0B; border:1px solid rgba(232,163,23,.35); border-radius:8px; padding:12px 14px; min-height:68px; display:flex; flex-direction:column; justify-content:space-between;">
+      <div style="font-weight:600; font-size:13px;">⚠ Pendente</div>
+      <div style="font-family:var(--font-mono); font-size:10px; opacity:.8;">tint 14%</div>
+    </div>
+    <div style="background:rgba(224,53,43,.10); color:#C02A22; border:1px solid rgba(224,53,43,.32); border-radius:8px; padding:12px 14px; min-height:68px; display:flex; flex-direction:column; justify-content:space-between;">
+      <div style="font-weight:600; font-size:13px;">✕ Erro</div>
+      <div style="font-family:var(--font-mono); font-size:10px; opacity:.8;">tint 10%</div>
+    </div>
+    <div style="background:var(--up-blue-tint); color:var(--up-blue-press); border:1px solid rgba(49,60,240,.32); border-radius:8px; padding:12px 14px; min-height:68px; display:flex; flex-direction:column; justify-content:space-between;">
+      <div style="font-weight:600; font-size:13px;">ℹ Aviso</div>
+      <div style="font-family:var(--font-mono); font-size:10px; opacity:.8;">tint 8%</div>
+    </div>
+  </div>
+
+  <!-- Alert banners -->
+  <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:14px;">
+    <div style="padding:10px 14px; border-radius:8px; background:rgba(15,157,88,.08); border-left:3px solid #0F9D58; font-size:13px; color:var(--ink);">
+      <b>Tudo certo.</b> Seu projeto foi salvo. <span style="color:var(--fg-3);">há 2 minutos</span>
+    </div>
+    <div style="padding:10px 14px; border-radius:8px; background:rgba(232,163,23,.10); border-left:3px solid #E8A317; font-size:13px; color:var(--ink);">
+      <b>Atenção.</b> Seu plano expira em 3 dias.
+    </div>
+    <div style="padding:10px 14px; border-radius:8px; background:rgba(224,53,43,.08); border-left:3px solid #E0352B; font-size:13px; color:var(--ink);">
+      <b>Falha.</b> Não foi possível enviar. <a href="#" style="color:#E0352B; border:0; font-weight:600;">Tentar de novo</a>
+    </div>
+    <div style="padding:10px 14px; border-radius:8px; background:var(--up-blue-tint); border-left:3px solid var(--up-blue); font-size:13px; color:var(--ink);">
+      <b>Heads-up.</b> Kickoff na quinta, 10h.
+    </div>
+  </div>
+
+  <!-- Dots / inline indicators -->
+  <div style="display:flex; gap:20px; flex-wrap:wrap; font-size:12px; color:var(--fg-2);">
+    <span><span style="display:inline-block; width:8px; height:8px; border-radius:999px; background:#0F9D58; box-shadow:0 0 8px #0F9D58; margin-right:6px;"></span>Online</span>
+    <span><span style="display:inline-block; width:8px; height:8px; border-radius:999px; background:#E8A317; margin-right:6px;"></span>Ocioso</span>
+    <span><span style="display:inline-block; width:8px; height:8px; border-radius:999px; background:#E0352B; margin-right:6px;"></span>Offline</span>
+    <span><span style="display:inline-block; width:8px; height:8px; border-radius:999px; background:var(--up-blue); box-shadow:0 0 8px var(--up-blue); margin-right:6px;"></span>Ao vivo</span>
+    <span><span style="display:inline-block; width:8px; height:8px; border-radius:999px; background:var(--mute); margin-right:6px;"></span>Pausado</span>
+  </div>
+
+  <div style="margin-top:14px; font-size:11px; color:var(--fg-3);">Três níveis: sólido (badges/botões) · tinted (cards/banners) · inline dot (status).</div>
+</body></html>
